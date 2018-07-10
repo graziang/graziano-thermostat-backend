@@ -34,12 +34,12 @@ public class ThermostatRestController {
     ThermostatService thermostatService;
 
 
-    @PostMapping("/initialize")
+    @PostMapping("initialize")
     public Thermostat initializeThermostat(){
         return this.thermostatService.initialize();
     }
 
-    @PostMapping("addSensor")
+    @PostMapping("sensor")
     public ResponseEntity<Object> addSensor(@RequestBody Sensor s, @RequestParam(value = "thermostat_id", required = true) Long id) {
 
         try {
@@ -63,7 +63,7 @@ public class ThermostatRestController {
         return  new ResponseEntity<>(this.thermostatService.getSensors(id), HttpStatus.OK);
     }
 
-    @PostMapping("sensorState")
+    @PostMapping("sensor_state")
     public ResponseEntity<Object> postSensorState (@RequestParam(value = "sensor_id", required = true) Long id, @RequestParam(value = "state", required = true) boolean state){
 
         try {
@@ -76,7 +76,7 @@ public class ThermostatRestController {
 
     }
 
-    @PostMapping("thermostatOnOff")
+    @PostMapping("thermostat_on")
     public ResponseEntity<Object> postThermostatOnOff (@RequestParam(value = "thermostat_id", required = true) Long id, @RequestParam(value = "ok", required = true) boolean state){
 
 
@@ -90,7 +90,7 @@ public class ThermostatRestController {
     }
 
 
-    @GetMapping("lastMeasurements")
+    @GetMapping("last_measurements")
     public ResponseEntity<Object> getMeasurements(@RequestParam(value = "sensor_id", required = true) Long id) {
 
         try {
@@ -102,8 +102,8 @@ public class ThermostatRestController {
     }
 
 
-    @GetMapping("measurementsStats")
-    public ResponseEntity<Object> getMeasurementsStats(@RequestParam(value = "dateStart", required = false) String dateStart, @RequestParam(value = "dateEnd", required = false) String dateEnd, @RequestParam(value = "sensor_id", required = true) Long id) {
+    @GetMapping("measurements_stats")
+    public ResponseEntity<Object> getMeasurementsStats(@RequestParam(value = "date_start", required = false) String dateStart, @RequestParam(value = "date_end", required = false) String dateEnd, @RequestParam(value = "sensor_id", required = true) Long id) {
 
         SensorStats sensorStats = this.thermostatService.getMeasurementsStats(dateStart, dateEnd, id);
 
@@ -115,7 +115,7 @@ public class ThermostatRestController {
     }
 
     @GetMapping("measurements")
-    public ResponseEntity<List<Measurement>> getMeasurements (@RequestParam(value = "dateStart", required = false) String dateStart, @RequestParam(value = "dateEnd", required = false) String dateEnd) {
+    public ResponseEntity<List<Measurement>> getMeasurements (@RequestParam(value = "date_start", required = false) String dateStart, @RequestParam(value = "date_end", required = false) String dateEnd) {
 
         List<Measurement> measurements = this.thermostatService.getMeasurements(dateStart, dateEnd);
 
@@ -132,13 +132,13 @@ public class ThermostatRestController {
 
     }
 
-    @DeleteMapping("dropMeasurement")
+    @DeleteMapping("drop_measurement")
     public  ResponseEntity<Object> deleteMeasurement(){
 
         return new ResponseEntity<>(this.thermostatService.cleanMeasurements(), HttpStatus.OK);
     }
 
-    @DeleteMapping("/dropAll")
+    @DeleteMapping("/drop_all")
     public  ResponseEntity<Object> deleteAll(){
 
         return new ResponseEntity<>(this.thermostatService.cleanAllTable(), HttpStatus.OK);
