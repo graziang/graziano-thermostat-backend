@@ -58,6 +58,17 @@ public class ThermostatRestController {
         return  new ResponseEntity<>(this.thermostatService.getThermostats(), HttpStatus.OK);
     }
 
+    @GetMapping("thermostat")
+    public ResponseEntity<Object> getThermostat(@RequestParam(value = "thermostat_id", required = true) Long id){
+        try {
+            Thermostat thermostat = this.thermostatService.getThermostat(id);
+            return new ResponseEntity<>(thermostat, HttpStatus.OK);
+        }
+        catch (NotFoundException e){
+            return getError(e.getMessage(), HttpStatus.BAD_REQUEST);
+        }
+    }
+
     @GetMapping("sensors")
     public ResponseEntity<Object>  getSensors (@RequestParam(value = "thermostat_id", required = false) Long id){
         return  new ResponseEntity<>(this.thermostatService.getSensors(id), HttpStatus.OK);
@@ -94,13 +105,27 @@ public class ThermostatRestController {
 
 
         try {
-            Thermostat thermostat = this.thermostatService.getThermostatOn(id);
+            Thermostat thermostat = this.thermostatService.getThermostat(id);
             return new ResponseEntity<>(thermostat.isStateOn(), HttpStatus.OK);
         }
         catch (NotFoundException e){
             return getError(e.getMessage(), HttpStatus.BAD_REQUEST);
         }
     }
+
+    @PostMapping("thermostat_temperature")
+    public ResponseEntity<Object> postThermostatTemperature(@RequestParam(value = "thermostat_id", required = true) Long id, @RequestParam(value = "temperature", required = true) float temperature){
+
+
+        try {
+            Thermostat thermostat = this.thermostatService.setThermostatTemperature(id, temperature);
+            return new ResponseEntity<>(thermostat, HttpStatus.OK);
+        }
+        catch (NotFoundException e){
+            return getError(e.getMessage(), HttpStatus.BAD_REQUEST);
+        }
+    }
+
 
 
     @GetMapping("last_measurements")

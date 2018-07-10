@@ -79,6 +79,20 @@ public class ThermostatService {
         return thermostatRepository.findAll();
     }
 
+    public Thermostat getThermostat(Long id)  throws NotFoundException {
+
+        Thermostat thermostat = this.thermostatRepository.findThermostatById(id);
+
+        if(thermostat == null){
+            String errorMessage = "Thermostat id not found: [id: " + id + "]";
+            log.error(errorMessage);
+            throw new NotFoundException(errorMessage);
+        }
+
+        return thermostat;
+
+    }
+
     public List<Sensor> getSensors(Long id){
 
 
@@ -106,26 +120,23 @@ public class ThermostatService {
 
     public Thermostat turnThermostatOnOff(Long id, boolean state)  throws NotFoundException {
 
-        Thermostat thermostat = getThermostatOn(id);
+        Thermostat thermostat = getThermostat(id);
         thermostat.setStateOn(state);
         this.thermostatRepository.save(thermostat);
         return thermostat;
 
     }
 
-    public Thermostat getThermostatOn(Long id)  throws NotFoundException {
+    public Thermostat setThermostatTemperature(Long id, float temperature)  throws NotFoundException {
 
-        Thermostat thermostat = this.thermostatRepository.findThermostatById(id);
-
-        if(thermostat == null){
-            String errorMessage = "Thermostat id not found: [id: " + id + "]";
-            log.error(errorMessage);
-            throw new NotFoundException(errorMessage);
-        }
-
+        Thermostat thermostat = getThermostat(id);
+        thermostat.setTemperature(temperature);
+        this.thermostatRepository.save(thermostat);
         return thermostat;
 
     }
+
+
 
     public Measurement getLastMeasurements(Long id) throws NotFoundException{
 

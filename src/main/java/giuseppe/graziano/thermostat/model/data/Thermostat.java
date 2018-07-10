@@ -25,6 +25,7 @@ public class Thermostat {
 
     private Date lastMeasurement;
 
+    private float temperature;
 
 
     @OneToMany(mappedBy = "thermostat", cascade = CascadeType.ALL,  fetch = FetchType.LAZY)
@@ -87,6 +88,13 @@ public class Thermostat {
         this.lastMeasurement = lastMeasurement;
     }
 
+    public float getTemperature() {
+        return temperature;
+    }
+
+    public void setTemperature(float temperature) {
+        this.temperature = temperature;
+    }
 
     public Set<Sensor> getSensors() {
         return sensors;
