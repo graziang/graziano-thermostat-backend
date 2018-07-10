@@ -2,12 +2,14 @@ package giuseppe.graziano.thermostat.controller;
 
 
 
+import giuseppe.graziano.thermostat.exception.NotFoundException;
 import giuseppe.graziano.thermostat.model.data.SensorStats;
 import giuseppe.graziano.thermostat.model.data.Measurement;
 import giuseppe.graziano.thermostat.model.data.Sensor;
 import giuseppe.graziano.thermostat.model.data.Thermostat;
 import giuseppe.graziano.thermostat.service.ThermostatService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -40,13 +42,14 @@ public class ThermostatRestController {
     @PostMapping("addSensor")
     public ResponseEntity<Object> addSensor(@RequestBody Sensor s, @RequestParam(value = "thermostat_id", required = true) Long id) {
 
-        Sensor sensor = this.thermostatService.addSensor(id, s);
-
-        if(sensor == null){
-            return new ResponseEntity<>(null, HttpStatus.BAD_REQUEST);
+        try {
+            Sensor sensor = this.thermostatService.addSensor(id, s);
+            return new ResponseEntity<>(sensor, HttpStatus.OK);
+        }
+        catch (NotFoundException e){
+            return new ResponseEntity<>(e.getMessage(), HttpStatus.BAD_REQUEST);
         }
 
-        return new ResponseEntity<>(sensor, HttpStatus.OK);
     }
 
 
@@ -63,27 +66,27 @@ public class ThermostatRestController {
     @PostMapping("sensorState")
     public ResponseEntity<Object> postSensorState (@RequestParam(value = "sensor_id", required = true) Long id, @RequestParam(value = "state", required = true) boolean state){
 
-        Sensor sensor = this.thermostatService.setSensorState(id, state);
-
-        if(sensor == null){
-            return new ResponseEntity<>(null, HttpStatus.BAD_REQUEST);
+        try {
+            Sensor sensor = this.thermostatService.setSensorState(id, state);
+            return new ResponseEntity<>(sensor, HttpStatus.OK);
         }
-
-        return new ResponseEntity<>(sensor, HttpStatus.OK);
+        catch (NotFoundException e){
+            return new ResponseEntity<>(e.getMessage(), HttpStatus.BAD_REQUEST);
+        }
 
     }
 
     @PostMapping("thermostatOnOff")
     public ResponseEntity<Object> postThermostatOnOff (@RequestParam(value = "thermostat_id", required = true) Long id, @RequestParam(value = "ok", required = true) boolean state){
 
-        Thermostat thermostat = this.thermostatService.tournThermostatOnOff(id, state);
 
-        if(thermostat == null){
-            return new ResponseEntity<>(null, HttpStatus.BAD_REQUEST);
+        try {
+            Thermostat thermostat = this.thermostatService.turnThermostatOnOff(id, state);
+            return new ResponseEntity<>(thermostat, HttpStatus.OK);
         }
-
-        return new ResponseEntity<>(thermostat, HttpStatus.OK);
-
+        catch (NotFoundException e){
+            return new ResponseEntity<>(e.getMessage(), HttpStatus.BAD_REQUEST);
+        }
     }
 
 
@@ -144,6 +147,16 @@ public class ThermostatRestController {
     public  ResponseEntity<Object> deleteAll(){
 
         return new ResponseEntity<>(this.thermostatService.cleanAllTable(), HttpStatus.OK);
+    }
+
+    public ResponseEntity getError(String error, HttpStatus status, String className){
+
+        HttpHeaders responseHeaders = new HttpHeaders();
+        responseHeaders.set("classname", className);
+
+        Map responsError = new HashMap();
+        responsError.put("error", error);
+        return new ResponseEntity<>(responsError, responseHeaders, status);
     }
 
 

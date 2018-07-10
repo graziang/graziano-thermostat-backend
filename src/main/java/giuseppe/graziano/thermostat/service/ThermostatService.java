@@ -1,5 +1,6 @@
 package giuseppe.graziano.thermostat.service;
 
+import giuseppe.graziano.thermostat.exception.NotFoundException;
 import giuseppe.graziano.thermostat.model.data.SensorStats;
 import giuseppe.graziano.thermostat.model.data.Measurement;
 import giuseppe.graziano.thermostat.model.data.Sensor;
@@ -56,13 +57,14 @@ public class ThermostatService {
         return td;
     }
 
-    public Sensor addSensor(Long id, Sensor sensor){
+    public Sensor addSensor(Long id, Sensor sensor) throws NotFoundException {
 
         Thermostat thermostat = thermostatRepository.findThermostatById(id);
 
         if(thermostat == null){
-            log.error("Wrong thermostat ID: " + id);
-            return null;
+            String errorMessage = "Thermostat id not found: [id: " + id + "]";
+            log.error(errorMessage);
+            throw new NotFoundException(errorMessage);
         }
 
         thermostat.getSensors().add(sensor);
@@ -77,7 +79,7 @@ public class ThermostatService {
         return thermostatRepository.findAll();
     }
 
-    public List<Sensor> getSensors (Long id){
+    public List<Sensor> getSensors(Long id){
 
 
         if(id == null){
@@ -87,28 +89,29 @@ public class ThermostatService {
         return this.sensorRepository.findSensorsByThermostatId(id);
     }
 
-    public Sensor setSensorState(Long id, boolean state){
+    public Sensor setSensorState(Long id, boolean state) throws NotFoundException {
 
         Sensor sensor = this.sensorRepository.findSensorById(id);
 
-        if(sensor == null){
-            log.error("Wrong sensor ID: " + id);
-            return null;
+        if (sensor == null) {
+            String errorMessage = "Sensor id not found: [id: " + id + "]";
+            log.error(errorMessage);
+            throw new NotFoundException(errorMessage);
         }
 
         sensor.setActive(state);
         this.sensorRepository.save(sensor);
         return sensor;
-
     }
 
-    public Thermostat tournThermostatOnOff(Long id, boolean state) {
+    public Thermostat turnThermostatOnOff(Long id, boolean state)  throws NotFoundException {
 
         Thermostat thermostat = this.thermostatRepository.findThermostatById(id);
 
         if(thermostat == null){
-            log.error("Wrong sensor ID: " + id);
-            return null;
+            String errorMessage = "Sensor id not found: [id: " + id + "]";
+            log.error(errorMessage);
+            throw new NotFoundException(errorMessage);
         }
 
         thermostat.setStateOn(state);
@@ -120,41 +123,15 @@ public class ThermostatService {
     public Measurement getLastMeasurements(Long id) {
 
 
-        for(Measurement m: this.recentMeasurements){
-            if(m.getSensor().getId() == id){
+        for (Measurement m: this.recentMeasurements) {
+            if (m.getSensor().getId() == id) {
                 return m;
 
             }
         }
         return null;
-
-
-      /*  List<Measurement> measurements = new ArrayList<>();
-
-        if(id == null) {
-            List<Sensor> sensors = this.sensorRepository.findAll();
-
-
-            for (Sensor s: sensors){
-                Measurement measurement = this.measurementRepository.findFirstBySensorIdOrderByDateDesc(s.getId());
-                if(measurement != null && s.isActive()) {
-                    measurements.add(measurement);
-                }
-            }
-
-            return measurements;
-        }
-        else {
-            Measurement measurement = this.measurementRepository.findFirstBySensorIdOrderByDateDesc(id);
-
-            if(measurement == null){
-                log.error("Wrong sensor ID: " + id);
-                return null;
-            }
-            measurements.add(measurement);
-            return measurements;
-        }*/
     }
+
 
     public List<Measurement> getMeasurements (String dateStart, String dateEnd) {
 
