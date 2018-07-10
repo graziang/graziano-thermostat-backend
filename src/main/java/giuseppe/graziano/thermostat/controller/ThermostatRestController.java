@@ -95,7 +95,7 @@ public class ThermostatRestController {
 
         try {
             Thermostat thermostat = this.thermostatService.getThermostatOn(id);
-            return new ResponseEntity<>(thermostat, HttpStatus.OK);
+            return new ResponseEntity<>(thermostat.isStateOn(), HttpStatus.OK);
         }
         catch (NotFoundException e){
             return getError(e.getMessage(), HttpStatus.BAD_REQUEST);
