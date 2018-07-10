@@ -47,7 +47,7 @@ public class ThermostatRestController {
             return new ResponseEntity<>(sensor, HttpStatus.OK);
         }
         catch (NotFoundException e){
-            return new ResponseEntity<>(e.getMessage(), HttpStatus.BAD_REQUEST);
+            return getError(e.getMessage(), HttpStatus.BAD_REQUEST);
         }
 
     }
@@ -71,7 +71,7 @@ public class ThermostatRestController {
             return new ResponseEntity<>(sensor, HttpStatus.OK);
         }
         catch (NotFoundException e){
-            return new ResponseEntity<>(e.getMessage(), HttpStatus.BAD_REQUEST);
+            return getError(e.getMessage(), HttpStatus.BAD_REQUEST);
         }
 
     }
@@ -85,7 +85,7 @@ public class ThermostatRestController {
             return new ResponseEntity<>(thermostat, HttpStatus.OK);
         }
         catch (NotFoundException e){
-            return new ResponseEntity<>(e.getMessage(), HttpStatus.BAD_REQUEST);
+            return getError(e.getMessage(), HttpStatus.BAD_REQUEST);
         }
     }
 
@@ -97,7 +97,7 @@ public class ThermostatRestController {
             Measurement measurement = this.thermostatService.getLastMeasurements(id);
             return new ResponseEntity<>(measurement, HttpStatus.OK);
         } catch (NotFoundException e) {
-            return new ResponseEntity<>(e.getMessage(), HttpStatus.BAD_REQUEST);
+            return getError(e.getMessage(), HttpStatus.BAD_REQUEST);
         }
     }
 
@@ -108,7 +108,7 @@ public class ThermostatRestController {
         SensorStats sensorStats = this.thermostatService.getMeasurementsStats(dateStart, dateEnd, id);
 
         if(sensorStats == null){
-            return new ResponseEntity<>(null, HttpStatus.BAD_REQUEST);
+            getError("", HttpStatus.BAD_REQUEST);
         }
 
         return new ResponseEntity<>(sensorStats, HttpStatus.OK);
@@ -125,10 +125,6 @@ public class ThermostatRestController {
 
     @PostMapping( "measurements")
     public ResponseEntity<List<Measurement>> postMeasurement(@RequestBody Map<String, Float> measurement) {
-
-        if(measurement == null){
-            return new ResponseEntity<>((List<Measurement>) null, HttpStatus.BAD_REQUEST);
-        }
 
         List<Measurement> measurements = this.thermostatService.addMeasurement(measurement);
 
@@ -148,10 +144,10 @@ public class ThermostatRestController {
         return new ResponseEntity<>(this.thermostatService.cleanAllTable(), HttpStatus.OK);
     }
 
-    public ResponseEntity getError(String error, HttpStatus status, String className){
+    public ResponseEntity getError(String error, HttpStatus status){
 
         HttpHeaders responseHeaders = new HttpHeaders();
-        responseHeaders.set("classname", className);
+        //responseHeaders.set("classname", className);
 
         Map responsError = new HashMap();
         responsError.put("error", error);
