@@ -21,6 +21,8 @@ public class Thermostat {
 
     private boolean active;
 
+    private boolean stateOn;
+
     private Date lastMeasurement;
 
 
@@ -69,6 +71,13 @@ public class Thermostat {
         this.active = active;
     }
 
+    public boolean isStateOn() {
+        return stateOn;
+    }
+
+    public void setStateOn(boolean stateOn) {
+        this.stateOn = stateOn;
+    }
 
     public Date getLastMeasurement() {
         return lastMeasurement;
