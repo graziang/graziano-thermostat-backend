@@ -21,8 +21,6 @@ public class Thermostat {
 
     private boolean active;
 
-    private boolean on;
-
     private Date lastMeasurement;
 
 
@@ -71,13 +69,6 @@ public class Thermostat {
         this.active = active;
     }
 
-    public boolean isOn() {
-        return on;
-    }
-
-    public void setOn(boolean on) {
-        on = on;
-    }
 
     public Date getLastMeasurement() {
         return lastMeasurement;

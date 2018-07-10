@@ -111,7 +111,7 @@ public class ThermostatService {
             return null;
         }
 
-        thermostat.setOn(state);
+      //  thermostat.setOn(state);
         this.thermostatRepository.save(thermostat);
         return thermostat;
 
