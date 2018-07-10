@@ -120,7 +120,7 @@ public class ThermostatService {
 
     }
 
-    public Measurement getLastMeasurements(Long id) {
+    public Measurement getLastMeasurements(Long id) throws NotFoundException{
 
 
         for (Measurement m: this.recentMeasurements) {
@@ -129,7 +129,10 @@ public class ThermostatService {
 
             }
         }
-        return null;
+
+        String errorMessage = "No recent measurements for sensor: [id: " + id + "]";
+        log.error(errorMessage);
+        throw new NotFoundException(errorMessage);
     }
 
 
