@@ -77,11 +77,24 @@ public class ThermostatRestController {
     }
 
     @PostMapping("thermostat_on")
-    public ResponseEntity<Object> postThermostatOnOff (@RequestParam(value = "thermostat_id", required = true) Long id, @RequestParam(value = "ok", required = true) boolean state){
+    public ResponseEntity<Object> postThermostatOnOff (@RequestParam(value = "thermostat_id", required = true) Long id, @RequestParam(value = "on", required = true) boolean state){
 
 
         try {
             Thermostat thermostat = this.thermostatService.turnThermostatOnOff(id, state);
+            return new ResponseEntity<>(thermostat, HttpStatus.OK);
+        }
+        catch (NotFoundException e){
+            return getError(e.getMessage(), HttpStatus.BAD_REQUEST);
+        }
+    }
+
+    @GetMapping("thermostat_on")
+    public ResponseEntity<Object> getThermostatOnOff (@RequestParam(value = "thermostat_id", required = true) Long id){
+
+
+        try {
+            Thermostat thermostat = this.thermostatService.getThermostatOn(id);
             return new ResponseEntity<>(thermostat, HttpStatus.OK);
         }
         catch (NotFoundException e){
@@ -115,7 +128,7 @@ public class ThermostatRestController {
     }
 
     @GetMapping("measurements")
-    public ResponseEntity<List<Measurement>> getMeasurements (@RequestParam(value = "date_start", required = false) String dateStart, @RequestParam(value = "date_end", required = false) String dateEnd) {
+    public ResponseEntity<List<Measurement>> getMeasurements(@RequestParam(value = "date_start", required = false) String dateStart, @RequestParam(value = "date_end", required = false) String dateEnd) {
 
         List<Measurement> measurements = this.thermostatService.getMeasurements(dateStart, dateEnd);
 

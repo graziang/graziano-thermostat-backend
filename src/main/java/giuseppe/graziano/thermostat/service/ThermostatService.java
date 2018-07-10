@@ -106,16 +106,23 @@ public class ThermostatService {
 
     public Thermostat turnThermostatOnOff(Long id, boolean state)  throws NotFoundException {
 
+        Thermostat thermostat = getThermostatOn(id);
+        thermostat.setStateOn(state);
+        this.thermostatRepository.save(thermostat);
+        return thermostat;
+
+    }
+
+    public Thermostat getThermostatOn(Long id)  throws NotFoundException {
+
         Thermostat thermostat = this.thermostatRepository.findThermostatById(id);
 
         if(thermostat == null){
-            String errorMessage = "Sensor id not found: [id: " + id + "]";
+            String errorMessage = "Thermostat id not found: [id: " + id + "]";
             log.error(errorMessage);
             throw new NotFoundException(errorMessage);
         }
 
-        thermostat.setStateOn(state);
-        this.thermostatRepository.save(thermostat);
         return thermostat;
 
     }
