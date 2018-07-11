@@ -69,6 +69,17 @@ public class ThermostatRestController {
         }
     }
 
+    @PostMapping("thermostat/state")
+    public ResponseEntity<Object> setThermostatState(@RequestParam(value = "thermostat_id") Long id, @RequestParam(value = "state") boolean state){
+        try {
+            Thermostat thermostat = this.thermostatService.setThermostatState(id, state);
+            return new ResponseEntity<>(thermostat, HttpStatus.OK);
+        }
+        catch (NotFoundException e){
+            return getError(e.getMessage(), HttpStatus.BAD_REQUEST);
+        }
+    }
+
     @GetMapping("sensors")
     public ResponseEntity<Object>  getSensors (@RequestParam(value = "thermostat_id", required = false) Long id){
         return  new ResponseEntity<>(this.thermostatService.getSensors(id), HttpStatus.OK);

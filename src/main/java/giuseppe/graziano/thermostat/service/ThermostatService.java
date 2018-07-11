@@ -90,6 +90,19 @@ public class ThermostatService {
 
     }
 
+    public Thermostat setThermostatState(Long id, boolean state) throws NotFoundException {
+
+        Thermostat thermostat = getThermostat(id);
+        thermostat.setActive(state);
+
+        if(!thermostat.isActive()){
+            thermostat.setStateOn(false);
+        }
+
+        this.thermostatRepository.save(thermostat);
+        return thermostat;
+    }
+
     public List<Sensor> getSensors(Long id){
 
 
@@ -259,7 +272,7 @@ public class ThermostatService {
 
         this.recentMeasurements.put(id, measurements);
 
-       // this.calculate();
+        this.calculate();
 
         Calendar calendar = Calendar.getInstance();
         calendar.setTime(date);
@@ -324,7 +337,7 @@ public class ThermostatService {
 
             ManualMode manualMode = thermostat.getManualMode();
             if(thermostat.getMode().equals(Thermostat.MANUAL_MODE)){
-              //  if(thermostat.isActive()){
+                if(thermostat.isActive()){
 
                     List<Measurement> measurements = new ArrayList<>();
 
@@ -353,7 +366,7 @@ public class ThermostatService {
                         thermostat.setStateOn(sensorTemperature < thermostat.getTemperature());
                     }
 
-               // }
+                }
             }
             this.thermostatRepository.save(thermostat);
         }
