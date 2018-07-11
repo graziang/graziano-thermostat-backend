@@ -359,6 +359,10 @@ public class ThermostatService {
 
                     avgTemperature = avgTemperature / measurements.size();
 
+
+                    if(measurements.size() == 0){
+                        thermostat.setStateOn(false);
+                    }
                     if(manualMode.isAvg()){
                         thermostat.setStateOn(avgTemperature < thermostat.getTemperature());
                     }
