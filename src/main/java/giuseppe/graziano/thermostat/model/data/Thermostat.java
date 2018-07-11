@@ -48,7 +48,6 @@ public class Thermostat {
         this.name = name;
         this.description = description;
         this.mode = Thermostat.MANUAL_MODE;
-        this.manualMode = new ManualMode();
     }
 
     public long getId() {
