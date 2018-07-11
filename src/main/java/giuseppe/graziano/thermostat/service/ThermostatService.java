@@ -258,7 +258,7 @@ public class ThermostatService {
 
         this.recentMeasurements.put(id, measurements);
 
-    //    this.calculate();
+        this.calculate();
 
         Calendar calendar = Calendar.getInstance();
         calendar.setTime(date);
@@ -313,7 +313,7 @@ public class ThermostatService {
     }
 
 
-    @Scheduled(fixedRate = 60 * 1000)
+   // @Scheduled(fixedRate = 60 * 1000)
     private void calculate(){
 
         List<Thermostat> thermostats = getThermostats();
