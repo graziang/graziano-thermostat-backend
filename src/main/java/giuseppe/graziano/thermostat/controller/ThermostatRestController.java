@@ -155,11 +155,11 @@ public class ThermostatRestController {
 
 
     @GetMapping("measurements/last")
-    public ResponseEntity<Object> getMeasurements(@RequestParam(value = "sensor_id") Long id) {
+    public ResponseEntity<Object> getMeasurements(@RequestParam(value = "thermostat_id") Long id) {
 
         try {
-            Measurement measurement = this.thermostatService.getLastMeasurements(id);
-            return new ResponseEntity<>(measurement, HttpStatus.OK);
+            List<Measurement> measurements = this.thermostatService.getLastMeasurements(id);
+            return new ResponseEntity<>(measurements, HttpStatus.OK);
         } catch (NotFoundException e) {
             return getError(e.getMessage(), HttpStatus.BAD_REQUEST);
         }

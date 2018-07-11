@@ -140,17 +140,17 @@ public class ThermostatService {
 
 
 
-    public Measurement getLastMeasurements(Long id) throws NotFoundException{
+    public List<Measurement> getLastMeasurements(Long id) throws NotFoundException{
 
+        Thermostat thermostat = getThermostat(id);
 
-        for (Measurement m: this.recentMeasurements.get(id)) {
-            if (m.getSensor().getId() == id) {
-                return m;
+        List<Measurement> measurements = new ArrayList<>();
 
-            }
+        if(this.recentMeasurements.containsKey(thermostat.getId())){
+           return this.recentMeasurements.get(thermostat.getId());
         }
 
-        String errorMessage = "No recent measurements for sensor: [id: " + id + "]";
+        String errorMessage = "No recent measurements for thermostat: [id: " + id + "]";
         log.error(errorMessage);
         throw new NotFoundException(errorMessage);
     }
