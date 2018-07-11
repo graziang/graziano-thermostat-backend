@@ -31,7 +31,7 @@ public class Thermostat {
 
     private String mode;
 
-    @OneToOne(fetch = FetchType.LAZY)
+    @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     @JoinColumn(name = "manual_mode_id")
     private ManualMode manualMode;
 
