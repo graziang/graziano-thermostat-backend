@@ -350,7 +350,7 @@ public class ThermostatService {
                         thermostat.setStateOn(avgTemperature < thermostat.getTemperature());
                     }
                     else {
-                        thermostat.setStateOn(sensorTemperature < thermostat.getTemperature());
+                        thermostat.setStateOn(true);
                     }
 
                // }
