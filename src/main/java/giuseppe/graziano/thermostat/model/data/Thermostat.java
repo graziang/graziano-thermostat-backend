@@ -33,7 +33,6 @@ public class Thermostat {
 
     @OneToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "manual_mode_id")
-    @JsonIgnore
     private ManualMode manualMode;
 
 

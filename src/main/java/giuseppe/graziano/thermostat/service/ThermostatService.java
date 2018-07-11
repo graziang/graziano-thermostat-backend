@@ -31,7 +31,6 @@ public class ThermostatService {
 
     public Thermostat initialize(){
         Thermostat td = new Thermostat("Piano superiore", "Piano con camere");
-        td.setManualMode(new ManualMode());
         Sensor s1 = new Sensor("Mamma e Papà", "mamma desc");
         Sensor s2 = new Sensor("Lorenza", "loo desc");
         Sensor s3 = new Sensor("Giuseppe", "loo desc");
@@ -49,6 +48,8 @@ public class ThermostatService {
         td.getSensors().add(s3);
         td.getSensors().add(s4);
         td.getSensors().add(s5);
+
+
 
         thermostatRepository.save(td);
 

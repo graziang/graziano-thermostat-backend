@@ -6,7 +6,7 @@ import javax.persistence.*;
 import java.io.Serializable;
 
 @Entity
-public class ManualMode {
+public class ManualMode implements Serializable {
 
     @JsonIgnore
     public static long AVG_ID = -1;
@@ -23,7 +23,6 @@ public class ManualMode {
 
     @OneToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "thermostat_id")
-    @JsonIgnore
     private Thermostat thermostat;
 
     private long sensorId;
