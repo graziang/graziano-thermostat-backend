@@ -50,7 +50,7 @@ public class ThermostatService {
         td.getSensors().add(s5);
 
 
-
+        td.setManualMode(new ManualMode());
         thermostatRepository.save(td);
 
         return td;
