@@ -74,7 +74,7 @@ public class ThermostatRestController {
         return  new ResponseEntity<>(this.thermostatService.getSensors(id), HttpStatus.OK);
     }
 
-    @PostMapping("sensor_state")
+    @PostMapping("sensor/state")
     public ResponseEntity<Object> postSensorState (@RequestParam(value = "sensor_id") Long id, @RequestParam(value = "state") boolean state){
 
         try {
@@ -87,7 +87,7 @@ public class ThermostatRestController {
 
     }
 
-    @PostMapping("thermostat_on")
+    @PostMapping("thermostat/on")
     public ResponseEntity<Object> postThermostatOnOff (@RequestParam(value = "thermostat_id") Long id, @RequestParam(value = "on") boolean state){
 
 
@@ -100,7 +100,7 @@ public class ThermostatRestController {
         }
     }
 
-    @GetMapping("thermostat_on")
+    @GetMapping("thermostat/on")
     public ResponseEntity<Object> getThermostatOnOff (@RequestParam(value = "thermostat_id") Long id){
 
 
@@ -113,7 +113,7 @@ public class ThermostatRestController {
         }
     }
 
-    @PostMapping("thermostat_temperature")
+    @PostMapping("thermostat/temperature")
     public ResponseEntity<Object> postThermostatTemperature(@RequestParam(value = "thermostat_id") Long id, @RequestParam(value = "temperature") float temperature){
 
 
@@ -127,7 +127,7 @@ public class ThermostatRestController {
     }
 
 
-    @PostMapping("thermostat_mode")
+    @PostMapping("thermostat/mode")
     public ResponseEntity<Object> postThermostatMode (@RequestParam(value = "thermostat_id") Long id, @RequestParam(value = "mode") String mode){
 
 
@@ -140,8 +140,8 @@ public class ThermostatRestController {
         }
     }
 
-    @PostMapping("thermostat_mode/manual")
-    public ResponseEntity<Object> postThermostatModeManualCalculateSensor(@RequestParam(value = "thermostat_id") Long id, @RequestParam(value = "avg", required = false) boolean avg, @RequestParam(value = "mode") Long sensorId){
+    @PostMapping("thermostat/mode/manual")
+    public ResponseEntity<Object> postThermostatModeManualCalculateSensor(@RequestParam(value = "thermostat_id") Long id, @RequestParam(value = "avg", required = false) boolean avg, @RequestParam(value = "sensor_id") Long sensorId){
 
 
         try {
@@ -154,7 +154,7 @@ public class ThermostatRestController {
     }
 
 
-    @GetMapping("last_measurements")
+    @GetMapping("measurements/last")
     public ResponseEntity<Object> getMeasurements(@RequestParam(value = "sensor_id") Long id) {
 
         try {
@@ -166,7 +166,7 @@ public class ThermostatRestController {
     }
 
 
-    @GetMapping("measurements_stats")
+    @GetMapping("measurements/stats")
     public ResponseEntity<Object> getMeasurementsStats(@RequestParam(value = "date_start", required = false) String dateStart, @RequestParam(value = "date_end", required = false) String dateEnd, @RequestParam(value = "sensor_id") Long id) {
 
         SensorStats sensorStats = this.thermostatService.getMeasurementsStats(dateStart, dateEnd, id);
@@ -187,7 +187,7 @@ public class ThermostatRestController {
     }
 
 
-    @PostMapping( "measurements")
+    @PostMapping("measurements")
     public ResponseEntity<List<Measurement>> postMeasurement(@RequestBody Map<String, Float> measurement) {
 
         List<Measurement> measurements = this.thermostatService.addMeasurement(measurement);
@@ -196,13 +196,13 @@ public class ThermostatRestController {
 
     }
 
-    @DeleteMapping("drop_measurement")
+    @DeleteMapping("measurements/drop")
     public  ResponseEntity<Object> deleteMeasurement(){
 
         return new ResponseEntity<>(this.thermostatService.cleanMeasurements(), HttpStatus.OK);
     }
 
-    @DeleteMapping("/drop_all")
+    @DeleteMapping("drop_all")
     public  ResponseEntity<Object> deleteAll(){
 
         return new ResponseEntity<>(this.thermostatService.cleanAllTable(), HttpStatus.OK);

@@ -23,6 +23,7 @@ public class ManualMode implements Serializable {
 
     @OneToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "thermostat_id")
+    @JsonIgnore
     private Thermostat thermostat;
 
     private long sensorId;
