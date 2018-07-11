@@ -313,7 +313,7 @@ public class ThermostatService {
     }
 
 
-    @Scheduled(fixedDelay = 60 * 1000)
+    @Scheduled(fixedRate = 60 * 1000)
     private void calculate(){
 
         List<Thermostat> thermostats = getThermostats();
