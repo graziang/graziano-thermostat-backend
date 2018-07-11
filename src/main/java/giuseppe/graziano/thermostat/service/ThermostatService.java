@@ -1,11 +1,13 @@
 package giuseppe.graziano.thermostat.service;
 
+import giuseppe.graziano.thermostat.GrazianoThermostatApplication;
 import giuseppe.graziano.thermostat.exception.NotFoundException;
 import giuseppe.graziano.thermostat.model.data.*;
 import giuseppe.graziano.thermostat.model.repository.MeasurementRepository;
 import giuseppe.graziano.thermostat.model.repository.SensorRepository;
 import giuseppe.graziano.thermostat.model.repository.ThermostatRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.SpringApplication;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
 
@@ -310,8 +312,7 @@ public class ThermostatService {
         return thermostat;
     }
 
-
-    @Scheduled(fixedDelay = 60 * 1000)
+    
     private void calculate(){
 
         List<Thermostat> thermostats = getThermostats();
