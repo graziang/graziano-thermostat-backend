@@ -143,7 +143,7 @@ public class ThermostatService {
     public List<Measurement> getLastMeasurements(Long id) throws NotFoundException{
 
         Thermostat thermostat = getThermostat(id);
-        
+
         if(this.recentMeasurements.containsKey(thermostat.getId())){
            return this.recentMeasurements.get(thermostat.getId());
         }
@@ -320,7 +320,7 @@ public class ThermostatService {
 
             ManualMode manualMode = thermostat.getManualMode();
             if(manualMode.equals(Thermostat.MANUAL_MODE)){
-                if(thermostat.isActive()){
+              //  if(thermostat.isActive()){
 
                     List<Measurement> measurements = new ArrayList<>();
 
@@ -349,7 +349,7 @@ public class ThermostatService {
                         thermostat.setStateOn(sensorTemperature < thermostat.getTemperature());
                     }
 
-                }
+               // }
             }
             this.thermostatRepository.save(thermostat);
         }
