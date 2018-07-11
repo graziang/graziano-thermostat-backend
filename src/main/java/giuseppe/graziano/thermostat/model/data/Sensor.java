@@ -9,10 +9,7 @@ import java.util.HashSet;
 import java.util.Set;
 
 @Entity
-public class Sensor implements Serializable {
-
-    private static final long serialVersionUID = -3009157732242241606L;
-
+public class Sensor {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)

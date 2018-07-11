@@ -1,10 +1,7 @@
 package giuseppe.graziano.thermostat.service;
 
 import giuseppe.graziano.thermostat.exception.NotFoundException;
-import giuseppe.graziano.thermostat.model.data.SensorStats;
-import giuseppe.graziano.thermostat.model.data.Measurement;
-import giuseppe.graziano.thermostat.model.data.Sensor;
-import giuseppe.graziano.thermostat.model.data.Thermostat;
+import giuseppe.graziano.thermostat.model.data.*;
 import giuseppe.graziano.thermostat.model.repository.MeasurementRepository;
 import giuseppe.graziano.thermostat.model.repository.SensorRepository;
 import giuseppe.graziano.thermostat.model.repository.ThermostatRepository;
@@ -59,13 +56,7 @@ public class ThermostatService {
 
     public Sensor addSensor(Long id, Sensor sensor) throws NotFoundException {
 
-        Thermostat thermostat = thermostatRepository.findThermostatById(id);
-
-        if(thermostat == null){
-            String errorMessage = "Thermostat id not found: [id: " + id + "]";
-            log.error(errorMessage);
-            throw new NotFoundException(errorMessage);
-        }
+        Thermostat thermostat = this.getThermostat(id);
 
         thermostat.getSensors().add(sensor);
         sensor.setThermostat(thermostat);
@@ -103,7 +94,9 @@ public class ThermostatService {
         return this.sensorRepository.findSensorsByThermostatId(id);
     }
 
-    public Sensor setSensorState(Long id, boolean state) throws NotFoundException {
+
+    public Sensor getSensor(Long id) throws NotFoundException {
+
 
         Sensor sensor = this.sensorRepository.findSensorById(id);
 
@@ -113,6 +106,12 @@ public class ThermostatService {
             throw new NotFoundException(errorMessage);
         }
 
+        return sensor;
+    }
+
+    public Sensor setSensorState(Long id, boolean state) throws NotFoundException {
+
+        Sensor sensor = getSensor(id);
         sensor.setActive(state);
         this.sensorRepository.save(sensor);
         return sensor;
@@ -286,6 +285,29 @@ public class ThermostatService {
         return thermostatRepository.findAll();
     }
 
+    public Thermostat setThermostatMode(Long id, String mode) throws NotFoundException{
 
+        Thermostat thermostat = this.getThermostat(id);
+        if(Thermostat.MANUAL_MODE.equals(mode)){
+            thermostat.setMode(Thermostat.MANUAL_MODE);
+        }
+
+        this.thermostatRepository.save(thermostat);
+        return thermostat;
+    }
+
+    public Thermostat setThermostatCalulateSensor(Long id, boolean avg, Long sensorId) throws NotFoundException{
+
+        Thermostat thermostat = this.getThermostat(id);
+        if(avg){
+            thermostat.getManualMode().setSensorId(ManualMode.AVG_ID);
+        }
+        else {
+            Sensor sensor = this.getSensor(sensorId);
+            thermostat.getManualMode().setSensorId(sensor.getId());
+        }
+        this.thermostatRepository.save(thermostat);
+        return thermostat;
+    }
 
 }

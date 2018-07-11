@@ -1,4 +1,6 @@
 package giuseppe.graziano.thermostat.model.data;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.*;
 
 import java.util.Date;
@@ -8,8 +10,8 @@ import java.util.Set;
 @Entity
 public class Thermostat {
 
-
-    private static final long serialVersionUID = -3009157732242241606L;
+    @JsonIgnore
+    public static String MANUAL_MODE = "manual_mode";
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -27,6 +29,13 @@ public class Thermostat {
 
     private float temperature;
 
+    private String mode;
+
+    @OneToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "manual_mode_id")
+    @JsonIgnore
+    private ManualMode manualMode;
+
 
     @OneToMany(mappedBy = "thermostat", cascade = CascadeType.ALL,  fetch = FetchType.LAZY)
     private Set<Sensor> sensors = new HashSet<>();
@@ -38,6 +47,7 @@ public class Thermostat {
     public Thermostat(String name, String description) {
         this.name = name;
         this.description = description;
+        this.mode = Thermostat.MANUAL_MODE;
     }
 
     public long getId() {
@@ -102,6 +112,22 @@ public class Thermostat {
 
     public void setSensors(Set<Sensor> sensors) {
         this.sensors = sensors;
+    }
+
+    public String getMode() {
+        return mode;
+    }
+
+    public void setMode(String mode) {
+        this.mode = mode;
+    }
+
+    public ManualMode getManualMode() {
+        return manualMode;
+    }
+
+    public void setManualMode(ManualMode manualMode) {
+        this.manualMode = manualMode;
     }
 }
 
