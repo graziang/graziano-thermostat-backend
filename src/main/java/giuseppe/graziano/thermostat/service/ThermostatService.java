@@ -316,7 +316,7 @@ public class ThermostatService {
 
     @Transactional
     @Scheduled(fixedRate = 10 * 1000)
-    private void calculate(){
+    public void calculate(){
 
         List<Thermostat> thermostats = getThermostats();
 
