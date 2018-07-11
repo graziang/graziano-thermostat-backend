@@ -256,7 +256,7 @@ public class ThermostatService {
 
         this.recentMeasurements.put(id, measurements);
 
-
+        this.calculate();
 
         Calendar calendar = Calendar.getInstance();
         calendar.setTime(date);
