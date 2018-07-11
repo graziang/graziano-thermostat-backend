@@ -11,6 +11,7 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
 
+import javax.transaction.Transactional;
 import java.util.*;
 
 @Service
@@ -313,7 +314,8 @@ public class ThermostatService {
     }
 
 
-   // @Scheduled(fixedRate = 60 * 1000)
+    @Transactional
+    @Scheduled(fixedRate = 10 * 1000)
     private void calculate(){
 
         List<Thermostat> thermostats = getThermostats();
