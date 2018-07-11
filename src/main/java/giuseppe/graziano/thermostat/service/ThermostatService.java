@@ -143,9 +143,7 @@ public class ThermostatService {
     public List<Measurement> getLastMeasurements(Long id) throws NotFoundException{
 
         Thermostat thermostat = getThermostat(id);
-
-        List<Measurement> measurements = new ArrayList<>();
-
+        
         if(this.recentMeasurements.containsKey(thermostat.getId())){
            return this.recentMeasurements.get(thermostat.getId());
         }
