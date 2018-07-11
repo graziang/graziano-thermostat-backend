@@ -258,7 +258,7 @@ public class ThermostatService {
 
         this.recentMeasurements.put(id, measurements);
 
-        this.calculate();
+    //    this.calculate();
 
         Calendar calendar = Calendar.getInstance();
         calendar.setTime(date);
@@ -312,7 +312,8 @@ public class ThermostatService {
         return thermostat;
     }
 
-    
+
+    @Scheduled(fixedDelay = 60 * 1000)
     private void calculate(){
 
         List<Thermostat> thermostats = getThermostats();
@@ -320,7 +321,7 @@ public class ThermostatService {
         for (Thermostat thermostat: thermostats){
 
             ManualMode manualMode = thermostat.getManualMode();
-            if(manualMode.equals(Thermostat.MANUAL_MODE)){
+            if(thermostat.getMode().equals(Thermostat.MANUAL_MODE)){
               //  if(thermostat.isActive()){
 
                     List<Measurement> measurements = new ArrayList<>();
