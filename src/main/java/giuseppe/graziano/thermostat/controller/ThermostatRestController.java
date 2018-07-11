@@ -188,12 +188,15 @@ public class ThermostatRestController {
 
 
     @PostMapping("measurements")
-    public ResponseEntity<List<Measurement>> postMeasurement(@RequestBody Map<String, Float> measurement) {
+    public ResponseEntity<List<Measurement>> postMeasurement(@RequestParam(value = "thermostat_id") Long id, @RequestBody Map<String, Float> measurement) {
 
-        List<Measurement> measurements = this.thermostatService.addMeasurement(measurement);
-
-        return new ResponseEntity<>(measurements, HttpStatus.OK);
-
+        try {
+            List<Measurement> measurements = this.thermostatService.addMeasurement(id, measurement);
+            return new ResponseEntity<>(measurements, HttpStatus.OK);
+        }
+        catch (NotFoundException e){
+            return getError(e.getMessage(), HttpStatus.BAD_REQUEST);
+        }
     }
 
     @DeleteMapping("measurements/drop")

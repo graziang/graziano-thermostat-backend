@@ -6,6 +6,7 @@ import giuseppe.graziano.thermostat.model.repository.MeasurementRepository;
 import giuseppe.graziano.thermostat.model.repository.SensorRepository;
 import giuseppe.graziano.thermostat.model.repository.ThermostatRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
 
 import java.util.*;
@@ -26,7 +27,7 @@ public class ThermostatService {
     MeasurementRepository measurementRepository;
 
 
-    private List<Measurement> recentMeasurements = new ArrayList<>();
+    private Map<Long, List<Measurement>> recentMeasurements = new HashMap<>();
 
 
     public Thermostat initialize(){
@@ -142,7 +143,7 @@ public class ThermostatService {
     public Measurement getLastMeasurements(Long id) throws NotFoundException{
 
 
-        for (Measurement m: this.recentMeasurements) {
+        for (Measurement m: this.recentMeasurements.get(id)) {
             if (m.getSensor().getId() == id) {
                 return m;
 
@@ -232,11 +233,12 @@ public class ThermostatService {
         return stats;
     }
 
-    public List<Measurement> addMeasurement(Map<String, Float> measurement) {
+    public List<Measurement> addMeasurement(Long id, Map<String, Float> measurement) throws NotFoundException {
 
+        Thermostat thermostat = getThermostat(id);
 
         Date date = new Date();
-        List<Sensor> sensors = this.sensorRepository.findAll();
+        Set<Sensor> sensors = thermostat.getSensors();
 
         List<Measurement> measurements = new ArrayList<>();
 
@@ -254,7 +256,7 @@ public class ThermostatService {
             }
         }
 
-        this.recentMeasurements = measurements;
+        this.recentMeasurements.put(id, measurements);
 
 
 
@@ -301,15 +303,59 @@ public class ThermostatService {
     public Thermostat setThermostatCalulateSensor(Long id, boolean avg, Long sensorId) throws NotFoundException{
 
         Thermostat thermostat = this.getThermostat(id);
-        if(avg){
-            thermostat.getManualMode().setSensorId(ManualMode.AVG_ID);
-        }
-        else {
-            Sensor sensor = this.getSensor(sensorId);
-            thermostat.getManualMode().setSensorId(sensor.getId());
-        }
+        thermostat.getManualMode().setAvg(avg);
+
+        Sensor sensor = this.getSensor(sensorId);
+        thermostat.getManualMode().setSensorId(sensor.getId());
+
         this.thermostatRepository.save(thermostat);
         return thermostat;
+    }
+
+
+    @Scheduled(fixedDelay = 60 * 1000)
+    private void calculate(){
+
+        List<Thermostat> thermostats = getThermostats();
+
+        for (Thermostat thermostat: thermostats){
+
+            ManualMode manualMode = thermostat.getManualMode();
+            if(manualMode.equals(Thermostat.MANUAL_MODE)){
+                if(thermostat.isActive()){
+
+                    List<Measurement> measurements = new ArrayList<>();
+
+                    if(this.recentMeasurements.containsKey(thermostat.getId())){
+                        measurements = this.recentMeasurements.get(thermostat.getId());
+                    }
+
+                    float avgTemperature = 0;
+                    float sensorTemperature = 0;
+                    for (Measurement measurement: measurements) {
+
+                        if(measurement.getSensor().getId() == manualMode.getSensorId()){
+                            sensorTemperature = measurement.getTemperature();
+                        }
+
+                        avgTemperature += measurement.getTemperature();
+
+                    }
+
+                    avgTemperature = avgTemperature / measurements.size();
+
+                    if(manualMode.isAvg()){
+                        thermostat.setStateOn(avgTemperature < thermostat.getTemperature());
+                    }
+                    else {
+                        thermostat.setStateOn(sensorTemperature < thermostat.getTemperature());
+                    }
+
+                }
+            }
+            this.thermostatRepository.save(thermostat);
+        }
+
     }
 
 }

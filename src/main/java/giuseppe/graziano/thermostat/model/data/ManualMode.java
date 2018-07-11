@@ -8,9 +8,6 @@ import java.io.Serializable;
 @Entity
 public class ManualMode implements Serializable {
 
-    @JsonIgnore
-    public static long AVG_ID = -1;
-
     public ManualMode(){
         this.sensorId = -1;
     }
@@ -27,6 +24,8 @@ public class ManualMode implements Serializable {
     private Thermostat thermostat;
 
     private long sensorId;
+
+    private boolean avg;
 
     public long getId() {
         return id;
@@ -58,5 +57,13 @@ public class ManualMode implements Serializable {
 
     public void setSensorId(long sensorId) {
         this.sensorId = sensorId;
+    }
+
+    public boolean isAvg() {
+        return avg;
+    }
+
+    public void setAvg(boolean avg) {
+        this.avg = avg;
     }
 }
