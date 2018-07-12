@@ -357,8 +357,7 @@ public class ThermostatService {
 
                     }
 
-                    avgTemperature = avgTemperature /((float) measurements.size());
-
+                    avgTemperature = avgTemperature / ((float) measurements.size());
 
                     if(measurements.size() == 0){
                         thermostat.setStateOn(false);
