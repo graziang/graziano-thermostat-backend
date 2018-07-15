@@ -64,7 +64,12 @@ public class MySecurityExpressionRoot implements MethodSecurityExpressionOperati
 
     @Override
     public final boolean hasRole(String role) {
-        return hasAnyRole(role);
+
+        final User user = ((MyUserPrincipal) this.getPrincipal()).getUser();
+        if(role.equals("ADMIN")) {
+            return user.isAdmin();
+        }
+        return false;
     }
 
     @Override

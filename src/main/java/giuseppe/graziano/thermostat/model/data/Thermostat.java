@@ -5,6 +5,7 @@ import javax.persistence.*;
 
 import java.util.Date;
 import java.util.HashSet;
+import java.util.Objects;
 import java.util.Set;
 
 @Entity
@@ -128,6 +129,15 @@ public class Thermostat {
     public void setManualMode(ManualMode manualMode) {
         this.manualMode = manualMode;
     }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Thermostat that = (Thermostat) o;
+        return id == that.id;
+    }
+
 }
 
 

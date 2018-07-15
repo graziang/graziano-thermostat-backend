@@ -1,7 +1,8 @@
-package giuseppe.graziano.thermostat.security;
+package giuseppe.graziano.thermostat.service;
 
 import giuseppe.graziano.thermostat.model.data.User;
 import giuseppe.graziano.thermostat.model.repository.UserRepository;
+import giuseppe.graziano.thermostat.security.MyUserPrincipal;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;

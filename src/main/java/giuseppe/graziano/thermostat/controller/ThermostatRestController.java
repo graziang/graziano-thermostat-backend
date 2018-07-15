@@ -3,15 +3,13 @@ package giuseppe.graziano.thermostat.controller;
 
 
 import giuseppe.graziano.thermostat.exception.NotFoundException;
-import giuseppe.graziano.thermostat.model.data.SensorStats;
-import giuseppe.graziano.thermostat.model.data.Measurement;
-import giuseppe.graziano.thermostat.model.data.Sensor;
-import giuseppe.graziano.thermostat.model.data.Thermostat;
+import giuseppe.graziano.thermostat.model.data.*;
 import giuseppe.graziano.thermostat.service.ThermostatService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.*;
@@ -33,12 +31,38 @@ public class ThermostatRestController {
     @Autowired
     ThermostatService thermostatService;
 
+    @PreAuthorize("hasRole('ADMIN')")
+    @PostMapping("user/create")
+    public ResponseEntity<Object> createUser(@RequestBody User user){
+        try {
+            user = this.thermostatService.createUser(user);
+            return new ResponseEntity<>(user, HttpStatus.OK);
+        }
+        catch (Exception e){
+            return getError(e.getMessage(), HttpStatus.BAD_REQUEST);
+        }
+    }
 
+    @PreAuthorize("hasRole('ADMIN')")
+    @PostMapping("user/thermostat")
+    public ResponseEntity<Object> createUser( @RequestParam(value = "thermostat_id") Long id,  @RequestParam(value = "username") String username){
+        try {
+            User user = this.thermostatService.addThermostatToUser(username, id);
+            return new ResponseEntity<>(user, HttpStatus.OK);
+        }
+        catch (Exception e){
+            return getError(e.getMessage(), HttpStatus.BAD_REQUEST);
+        }
+    }
+
+
+    @PreAuthorize("hasRole('ADMIN')")
     @PostMapping("initialize")
     public Thermostat initializeThermostat(){
         return this.thermostatService.initialize();
     }
 
+    @PreAuthorize("hasAuthority(#id)")
     @PostMapping("sensor")
     public ResponseEntity<Object> addSensor(@RequestBody Sensor s, @RequestParam(value = "thermostat_id") Long id) {
 
@@ -58,6 +82,7 @@ public class ThermostatRestController {
         return  new ResponseEntity<>(this.thermostatService.getThermostats(), HttpStatus.OK);
     }
 
+    @PreAuthorize("hasAuthority(#id)")
     @GetMapping("thermostat")
     public ResponseEntity<Object> getThermostat(@RequestParam(value = "thermostat_id") Long id){
         try {

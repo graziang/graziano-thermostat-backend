@@ -28,6 +28,8 @@ public class User {
 
     private String password;
 
+    private boolean isAdmin;
+
     @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(name = "users_thermostats", joinColumns = @JoinColumn(name = "user_id", referencedColumnName = "id"), inverseJoinColumns = @JoinColumn(name = "thermostat_id", referencedColumnName = "id"))
     private Set<Thermostat> thermostats;
@@ -56,6 +58,14 @@ public class User {
 
     public String getPassword() {
         return password;
+    }
+
+    public boolean isAdmin() {
+        return isAdmin;
+    }
+
+    public void setAdmin(boolean admin) {
+        isAdmin = admin;
     }
 
     public void setPassword(String password) {

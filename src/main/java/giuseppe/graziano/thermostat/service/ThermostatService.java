@@ -1,16 +1,18 @@
 package giuseppe.graziano.thermostat.service;
 
-import giuseppe.graziano.thermostat.GrazianoThermostatApplication;
 import giuseppe.graziano.thermostat.exception.NotFoundException;
 import giuseppe.graziano.thermostat.model.data.*;
 import giuseppe.graziano.thermostat.model.repository.MeasurementRepository;
 import giuseppe.graziano.thermostat.model.repository.SensorRepository;
 import giuseppe.graziano.thermostat.model.repository.ThermostatRepository;
+import giuseppe.graziano.thermostat.model.repository.UserRepository;
+import giuseppe.graziano.thermostat.security.MyUserPrincipal;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.SpringApplication;
 import org.springframework.scheduling.annotation.Scheduled;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
+import javax.annotation.PostConstruct;
 import javax.transaction.Transactional;
 import java.util.*;
 
@@ -29,10 +31,18 @@ public class ThermostatService {
     @Autowired
     MeasurementRepository measurementRepository;
 
+    @Autowired
+    UserRepository userRepository;
+
+    @Autowired
+    MyUserDetailsService userDetailsService;
+
+
 
     private Map<Long, List<Measurement>> recentMeasurements = new HashMap<>();
 
 
+    @PostConstruct
     public Thermostat initialize(){
         Thermostat td = new Thermostat("Piano superiore", "Piano con camere");
         Sensor s1 = new Sensor("Mamma e Papà", "mamma desc");
@@ -57,8 +67,34 @@ public class ThermostatService {
         td.setManualMode(new ManualMode());
         thermostatRepository.save(td);
 
+        User user = new User();
+        user.setUsername("admin");
+        user.setPassword("ciaociao");
+        user.setAdmin(true);
         return td;
     }
+
+    public User createUser(User user){
+
+        User userOld = userRepository.findByUsername(user.getUsername());
+
+        if(userOld != null){
+            throw new UsernameNotFoundException("User already exist");
+        }
+
+        return userRepository.save(user);
+    }
+
+    public User addThermostatToUser(String username, Long id) throws NotFoundException {
+
+        MyUserPrincipal userPrincipal = (MyUserPrincipal) this.userDetailsService.loadUserByUsername(username);
+        Thermostat thermostat = this.getThermostat(id);
+        User user =  userPrincipal.getUser();
+        user.getThermostats().add(thermostat);
+        userRepository.save(user);
+        return user;
+    }
+
 
     public Sensor addSensor(Long id, Sensor sensor) throws NotFoundException {
 
