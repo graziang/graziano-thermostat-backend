@@ -1,6 +1,5 @@
 package giuseppe.graziano.thermostat.service;
 
-import com.sun.tools.javac.util.ArrayUtils;
 import giuseppe.graziano.thermostat.exception.NotFoundException;
 import giuseppe.graziano.thermostat.model.data.*;
 import giuseppe.graziano.thermostat.model.repository.MeasurementRepository;
@@ -249,7 +248,7 @@ public class ThermostatService {
         measurements = getMeasurementsFromSensorId(id, sensor_id, dateStart, dateEnd);
 
 
-        
+
         return measurements;
     }
 
