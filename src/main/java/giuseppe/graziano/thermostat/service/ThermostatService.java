@@ -71,6 +71,7 @@ public class ThermostatService {
         user.setUsername("admin");
         user.setPassword("ciaociao");
         user.setAdmin(true);
+        userRepository.save(user);
         return td;
     }
 
