@@ -32,6 +32,7 @@ public class User {
     @JoinTable(name = "thermostat", joinColumns = @JoinColumn(name = "user_id", referencedColumnName = "id"), inverseJoinColumns = @JoinColumn(name = "thermostat_id", referencedColumnName = "id"))
     private Set<Thermostat> thermostats;
 
+
     public User() {
         super();
     }
