@@ -4,6 +4,7 @@ package giuseppe.graziano.thermostat.controller;
 
 import giuseppe.graziano.thermostat.exception.NotFoundException;
 import giuseppe.graziano.thermostat.model.data.*;
+import giuseppe.graziano.thermostat.security.MyUserPrincipal;
 import giuseppe.graziano.thermostat.service.ThermostatService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
@@ -38,7 +39,7 @@ public class ThermostatRestController {
         return new ResponseEntity<>("ciao", HttpStatus.OK);
     }
 
-
+    @PreAuthorize("hasRole('ADMIN')")
     @PostMapping("user/create")
     public ResponseEntity<Object> createUser(@RequestBody User user){
         try {
@@ -50,6 +51,7 @@ public class ThermostatRestController {
         }
     }
 
+    @PreAuthorize("hasRole('ADMIN')")
     @PostMapping("user/thermostat")
     public ResponseEntity<Object> createUser( @RequestParam(value = "thermostat_id") Long id,  @RequestParam(value = "username") String username){
         try {
@@ -61,13 +63,13 @@ public class ThermostatRestController {
         }
     }
 
-
+    @PreAuthorize("hasRole('ADMIN')")
     @PostMapping("initialize")
     public Thermostat initializeThermostat(){
         return this.thermostatService.initialize();
     }
 
-    @PreAuthorize("hasAuthority(#id)")
+    @PreAuthorize("hasRole('ADMIN')")
     @PostMapping("sensor")
     public ResponseEntity<Object> addSensor(@RequestBody Sensor s, @RequestParam(value = "thermostat_id") Long id) {
 
@@ -81,10 +83,9 @@ public class ThermostatRestController {
 
     }
 
-
     @GetMapping("thermostats")
-    public ResponseEntity<Object> getThermostats(){
-        return  new ResponseEntity<>(this.thermostatService.getThermostats(), HttpStatus.OK);
+    public ResponseEntity<Object> getThermostats(Principal principal){
+        return  new ResponseEntity<>(this.thermostatService.getThermostatsByUser(principal.getName()), HttpStatus.OK);
     }
 
     @PreAuthorize("hasAuthority(#id)")
@@ -99,6 +100,7 @@ public class ThermostatRestController {
         }
     }
 
+    @PreAuthorize("hasAuthority(#id)")
     @PostMapping("thermostat/state")
     public ResponseEntity<Object> setThermostatState(@RequestParam(value = "thermostat_id") Long id, @RequestParam(value = "state") boolean state){
         try {
@@ -110,16 +112,24 @@ public class ThermostatRestController {
         }
     }
 
+    @PreAuthorize("hasAuthority(#id)")
     @GetMapping("sensors")
     public ResponseEntity<Object>  getSensors (@RequestParam(value = "thermostat_id", required = false) Long id){
-        return  new ResponseEntity<>(this.thermostatService.getSensors(id), HttpStatus.OK);
+        try {
+            return  new ResponseEntity<>(this.thermostatService.getSensors(id), HttpStatus.OK);
+
+        }
+        catch (NotFoundException e){
+            return getError(e.getMessage(), HttpStatus.BAD_REQUEST);
+        }
     }
 
+    @PreAuthorize("hasAuthority(#id)")
     @PostMapping("sensor/state")
-    public ResponseEntity<Object> postSensorState (@RequestParam(value = "sensor_id") Long id, @RequestParam(value = "state") boolean state){
+    public ResponseEntity<Object> postSensorState (@RequestParam(value = "thermostat_id") Long id, @RequestParam(value = "sensor_id") Long sensor_id, @RequestParam(value = "state") boolean state){
 
         try {
-            Sensor sensor = this.thermostatService.setSensorState(id, state);
+            Sensor sensor = this.thermostatService.setSensorState(id,sensor_id, state);
             return new ResponseEntity<>(sensor, HttpStatus.OK);
         }
         catch (NotFoundException e){
@@ -128,9 +138,9 @@ public class ThermostatRestController {
 
     }
 
+    @PreAuthorize("hasAuthority(#id)")
     @PostMapping("thermostat/on")
     public ResponseEntity<Object> postThermostatOnOff (@RequestParam(value = "thermostat_id") Long id, @RequestParam(value = "on") boolean state){
-
 
         try {
             Thermostat thermostat = this.thermostatService.turnThermostatOnOff(id, state);
@@ -141,6 +151,7 @@ public class ThermostatRestController {
         }
     }
 
+    @PreAuthorize("hasAuthority(#id)")
     @GetMapping("thermostat/on")
     public ResponseEntity<Object> getThermostatOnOff (@RequestParam(value = "thermostat_id") Long id){
 
@@ -154,6 +165,7 @@ public class ThermostatRestController {
         }
     }
 
+    @PreAuthorize("hasAuthority(#id)")
     @PostMapping("thermostat/temperature")
     public ResponseEntity<Object> postThermostatTemperature(@RequestParam(value = "thermostat_id") Long id, @RequestParam(value = "temperature") float temperature){
 
@@ -167,7 +179,7 @@ public class ThermostatRestController {
         }
     }
 
-
+    @PreAuthorize("hasAuthority(#id)")
     @PostMapping("thermostat/mode")
     public ResponseEntity<Object> postThermostatMode (@RequestParam(value = "thermostat_id") Long id, @RequestParam(value = "mode") String mode){
 
@@ -181,6 +193,7 @@ public class ThermostatRestController {
         }
     }
 
+    @PreAuthorize("hasAuthority(#id)")
     @PostMapping("thermostat/mode/manual")
     public ResponseEntity<Object> postThermostatModeManualCalculateSensor(@RequestParam(value = "thermostat_id") Long id, @RequestParam(value = "avg", required = false) boolean avg, @RequestParam(value = "sensor_id") Long sensorId){
 
@@ -195,6 +208,7 @@ public class ThermostatRestController {
     }
 
 
+    @PreAuthorize("hasAuthority(#id)")
     @GetMapping("measurements/last")
     public ResponseEntity<Object> getMeasurements(@RequestParam(value = "thermostat_id") Long id) {
 
@@ -207,27 +221,40 @@ public class ThermostatRestController {
     }
 
 
+    @PreAuthorize("hasAuthority(#id)")
     @GetMapping("measurements/stats")
-    public ResponseEntity<Object> getMeasurementsStats(@RequestParam(value = "date_start", required = false) String dateStart, @RequestParam(value = "date_end", required = false) String dateEnd, @RequestParam(value = "sensor_id") Long id) {
+    public ResponseEntity<Object> getMeasurementsStats(@RequestParam(value = "thermostat_id") Long id, @RequestParam(value = "date_start", required = false) String dateStart, @RequestParam(value = "date_end", required = false) String dateEnd, @RequestParam(value = "sensor_id") Long sensor_id) {
 
-        SensorStats sensorStats = this.thermostatService.getMeasurementsStats(dateStart, dateEnd, id);
-
-        if(sensorStats == null){
-            getError("", HttpStatus.BAD_REQUEST);
+        try {
+            SensorStats sensorStats = this.thermostatService.getMeasurementsStats(id, sensor_id, dateStart, dateEnd);
+            if(sensorStats == null){
+                return getError("", HttpStatus.BAD_REQUEST);
+            }
+            return new ResponseEntity<>(sensorStats, HttpStatus.OK);
+        }
+        catch (NotFoundException e) {
+            return getError(e.getMessage(), HttpStatus.BAD_REQUEST);
         }
 
-        return new ResponseEntity<>(sensorStats, HttpStatus.OK);
     }
 
+    @PreAuthorize("hasAuthority(#id)")
     @GetMapping("measurements")
-    public ResponseEntity<List<Measurement>> getMeasurements(@RequestParam(value = "date_start", required = false) String dateStart, @RequestParam(value = "date_end", required = false) String dateEnd) {
+    public ResponseEntity<List<Measurement>> getMeasurements(@RequestParam(value = "thermostat_id") Long id, @RequestParam(value = "date_start", required = false) String dateStart, @RequestParam(value = "date_end", required = false) String dateEnd, @RequestParam(value = "sensor_id") Long sensor_id) {
 
-        List<Measurement> measurements = this.thermostatService.getMeasurements(dateStart, dateEnd);
+        List<Measurement> measurements = null;
+        try {
+            measurements = this.thermostatService.getMeasurements(id, sensor_id, dateStart, dateEnd);
+            return new ResponseEntity<>(measurements, HttpStatus.OK);
+        } catch (NotFoundException e) {
+            return getError(e.getMessage(), HttpStatus.BAD_REQUEST);
+        }
 
-        return new ResponseEntity<>(measurements, HttpStatus.OK);
+
     }
 
 
+    @PreAuthorize("hasAuthority(#id)")
     @PostMapping("measurements")
     public ResponseEntity<List<Measurement>> postMeasurement(@RequestParam(value = "thermostat_id") Long id, @RequestBody Map<String, Float> measurement) {
 
@@ -240,12 +267,14 @@ public class ThermostatRestController {
         }
     }
 
+    @PreAuthorize("hasRole('ADMIN')")
     @DeleteMapping("measurements/drop")
     public  ResponseEntity<Object> deleteMeasurement(){
 
         return new ResponseEntity<>(this.thermostatService.cleanMeasurements(), HttpStatus.OK);
     }
 
+    @PreAuthorize("hasRole('ADMIN')")
     @DeleteMapping("drop_all")
     public  ResponseEntity<Object> deleteAll(){
 

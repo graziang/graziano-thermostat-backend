@@ -1,5 +1,6 @@
 package giuseppe.graziano.thermostat.service;
 
+import com.sun.tools.javac.util.ArrayUtils;
 import giuseppe.graziano.thermostat.exception.NotFoundException;
 import giuseppe.graziano.thermostat.model.data.*;
 import giuseppe.graziano.thermostat.model.repository.MeasurementRepository;
@@ -10,6 +11,7 @@ import giuseppe.graziano.thermostat.security.MyUserPrincipal;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.PostConstruct;
@@ -38,6 +40,8 @@ public class ThermostatService {
     MyUserDetailsService userDetailsService;
 
 
+    @Autowired
+    private PasswordEncoder encoder;
 
     private Map<Long, List<Measurement>> recentMeasurements = new HashMap<>();
 
@@ -69,7 +73,7 @@ public class ThermostatService {
 
         User user = new User();
         user.setUsername("admin");
-        user.setPassword("ciaociao");
+        user.setPassword(encoder.encode("ciaociao"));
         user.setAdmin(true);
         userRepository.save(user);
         return td;
@@ -83,6 +87,7 @@ public class ThermostatService {
             throw new UsernameNotFoundException("User already exist");
         }
 
+        user.setPassword(encoder.encode(user.getPassword()));
         return userRepository.save(user);
     }
 
@@ -127,6 +132,13 @@ public class ThermostatService {
 
     }
 
+    public List<Thermostat> getThermostatsByUser(String username){
+
+        MyUserPrincipal userPrincipal = (MyUserPrincipal) this.userDetailsService.loadUserByUsername(username);
+        User user =  userPrincipal.getUser();
+        return new ArrayList<>(user.getThermostats());
+    }
+
     public Thermostat setThermostatState(Long id, boolean state) throws NotFoundException {
 
         Thermostat thermostat = getThermostat(id);
@@ -140,9 +152,9 @@ public class ThermostatService {
         return thermostat;
     }
 
-    public List<Sensor> getSensors(Long id){
+    public List<Sensor> getSensors(Long id) throws NotFoundException {
 
-
+        Thermostat thermostat = getThermostat(id);
         if(id == null){
             return this.sensorRepository.findAll();
         }
@@ -165,9 +177,10 @@ public class ThermostatService {
         return sensor;
     }
 
-    public Sensor setSensorState(Long id, boolean state) throws NotFoundException {
+    public Sensor setSensorState(Long id,Long sensor_id, boolean state) throws NotFoundException {
 
-        Sensor sensor = getSensor(id);
+        Thermostat thermostat = this.getThermostat(id);
+        Sensor sensor = getSensor(sensor_id);
         sensor.setActive(state);
         this.sensorRepository.save(sensor);
         return sensor;
@@ -206,38 +219,47 @@ public class ThermostatService {
         throw new NotFoundException(errorMessage);
     }
 
+    private List<Measurement> getMeasurementsFromSensorId(Long id, Long sensor_id, String dateStart, String dateEnd) throws NotFoundException {
 
-    public List<Measurement> getMeasurements (String dateStart, String dateEnd) {
+        Thermostat thermostat = getThermostat(id);
+
+        if(thermostat.getSensors().contains(getSensor(sensor_id))){
+            return new ArrayList<>();
+        }
 
         List<Measurement> measurements;
-
         if (dateStart != null && dateEnd != null) {
-            measurements = this.measurementRepository.findByDateBetween(new Date(Long.valueOf(dateStart)), new Date(Long.valueOf(dateEnd)));
+            measurements = this.measurementRepository.findByDateBetweenAndSensorId(new Date(Long.valueOf(dateStart)), new Date(Long.valueOf(dateEnd)), sensor_id);
         } else if (dateStart != null) {
-            measurements = this.measurementRepository.findByDateAfter(new Date(Long.valueOf(dateStart)));
+            measurements = this.measurementRepository.findByDateAfterAndSensorId(new Date(Long.valueOf(dateStart)), sensor_id);
         } else if (dateEnd != null) {
-            measurements = this.measurementRepository.findByDateBefore(new Date(Long.valueOf(dateEnd)));
+            measurements = this.measurementRepository.findByDateBeforeAndSensorId(new Date(Long.valueOf(dateEnd)), sensor_id);
         } else {
             measurements = this.measurementRepository.findAll();
         }
-
         return measurements;
     }
 
 
-    public SensorStats getMeasurementsStats (String dateStart, String dateEnd, Long id) {
+    public List<Measurement> getMeasurements (Long id, Long sensor_id, String dateStart, String dateEnd) throws NotFoundException {
 
         List<Measurement> measurements;
 
-        if (dateStart != null && dateEnd != null) {
-            measurements = this.measurementRepository.findByDateBetweenAndSensorId(new Date(Long.valueOf(dateStart)), new Date(Long.valueOf(dateEnd)), id);
-        } else if (dateStart != null) {
-            measurements = this.measurementRepository.findByDateAfterAndSensorId(new Date(Long.valueOf(dateStart)), id);
-        } else if (dateEnd != null) {
-            measurements = this.measurementRepository.findByDateBeforeAndSensorId(new Date(Long.valueOf(dateEnd)), id);
-        } else {
-            measurements = this.measurementRepository.findAll();
-        }
+
+        measurements = getMeasurementsFromSensorId(id, sensor_id, dateStart, dateEnd);
+
+
+        
+        return measurements;
+    }
+
+
+
+
+    public SensorStats getMeasurementsStats (Long id, Long sensor_id, String dateStart, String dateEnd) throws NotFoundException {
+
+
+        List<Measurement> measurements = getMeasurementsFromSensorId(id, sensor_id, dateStart, dateEnd);
 
         if(measurements == null || measurements.size() == 0){
             return null;
