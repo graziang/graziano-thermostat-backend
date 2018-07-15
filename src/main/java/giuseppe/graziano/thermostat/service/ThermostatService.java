@@ -36,10 +36,10 @@ public class ThermostatService {
     public Thermostat initialize(){
         Thermostat td = new Thermostat("Piano superiore", "Piano con camere");
         Sensor s1 = new Sensor("Mamma e Papà", "mamma desc");
-        Sensor s2 = new Sensor("Lorenza", "loo desc");
-        Sensor s3 = new Sensor("Giuseppe", "loo desc");
-        Sensor s4 = new Sensor("Bagno", "loo desc");
-        Sensor s5 = new Sensor("Corridoio", "loo desc");
+        Sensor s2 = new Sensor("Lorenza", "Loo desc");
+        Sensor s3 = new Sensor("Giuseppe", "Giu desc");
+        Sensor s4 = new Sensor("Bagno", "Bagno grande");
+        Sensor s5 = new Sensor("Corridoio", "Corridoio piano di sopra");
 
         s1.setThermostat(td);
         s2.setThermostat(td);
