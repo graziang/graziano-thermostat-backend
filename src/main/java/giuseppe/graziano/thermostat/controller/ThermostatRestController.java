@@ -12,6 +12,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
+import java.security.Principal;
 import java.util.*;
 
 @RestController
@@ -31,7 +32,13 @@ public class ThermostatRestController {
     @Autowired
     ThermostatService thermostatService;
 
-    @PreAuthorize("hasRole('ADMIN')")
+
+    @GetMapping("test")
+    public ResponseEntity<Object> test(Principal user){
+        return new ResponseEntity<>("ciao", HttpStatus.OK);
+    }
+
+
     @PostMapping("user/create")
     public ResponseEntity<Object> createUser(@RequestBody User user){
         try {
@@ -43,7 +50,6 @@ public class ThermostatRestController {
         }
     }
 
-    @PreAuthorize("hasRole('ADMIN')")
     @PostMapping("user/thermostat")
     public ResponseEntity<Object> createUser( @RequestParam(value = "thermostat_id") Long id,  @RequestParam(value = "username") String username){
         try {
@@ -56,7 +62,6 @@ public class ThermostatRestController {
     }
 
 
-    @PreAuthorize("hasRole('ADMIN')")
     @PostMapping("initialize")
     public Thermostat initializeThermostat(){
         return this.thermostatService.initialize();
