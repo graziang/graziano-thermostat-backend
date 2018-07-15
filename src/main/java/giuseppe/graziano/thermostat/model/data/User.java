@@ -1,8 +1,22 @@
 package giuseppe.graziano.thermostat.model.data;
 
-import javax.persistence.*;
+
+import java.util.Set;
+
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
+import javax.persistence.ManyToOne;
+import javax.persistence.Table;
 
 @Entity
+@Table(name = "user_table")
 public class User {
 
     @Id
@@ -14,6 +28,18 @@ public class User {
 
     private String password;
 
+    @ManyToMany(fetch = FetchType.EAGER)
+    @JoinTable(name = "users_privileges", joinColumns = @JoinColumn(name = "user_id", referencedColumnName = "id"), inverseJoinColumns = @JoinColumn(name = "privilege_id", referencedColumnName = "id"))
+    private Set<Thermostat> thermostats;
+
+
+    //
+
+    public User() {
+        super();
+    }
+
+    //
     public Long getId() {
         return id;
     }
@@ -36,5 +62,13 @@ public class User {
 
     public void setPassword(String password) {
         this.password = password;
+    }
+
+    public Set<Thermostat> getThermostats() {
+        return thermostats;
+    }
+
+    public void setThermostats(Set<Thermostat> thermostats) {
+        this.thermostats = thermostats;
     }
 }
