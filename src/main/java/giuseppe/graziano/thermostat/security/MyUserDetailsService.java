@@ -1,6 +1,5 @@
-package giuseppe.graziano.thermostat.service;
+package giuseppe.graziano.thermostat.security;
 
-import giuseppe.graziano.thermostat.model.data.MyUserPrincipal;
 import giuseppe.graziano.thermostat.model.data.User;
 import giuseppe.graziano.thermostat.model.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,9 +14,15 @@ public class MyUserDetailsService implements UserDetailsService {
     @Autowired
     private UserRepository userRepository;
 
+    public MyUserDetailsService() {
+        super();
+    }
+
+    // API
+
     @Override
-    public UserDetails loadUserByUsername(String username) {
-        User user = userRepository.findByUsername(username);
+    public UserDetails loadUserByUsername(final String username) {
+        final User user = userRepository.findByUsername(username);
         if (user == null) {
             throw new UsernameNotFoundException(username);
         }
