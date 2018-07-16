@@ -34,9 +34,9 @@ public class ThermostatRestController {
     ThermostatService thermostatService;
 
 
-    @GetMapping("test")
+    @GetMapping("test/login")
     public ResponseEntity<Object> test(Principal user){
-        return new ResponseEntity<>("ciao", HttpStatus.OK);
+        return new ResponseEntity<>("ok", HttpStatus.OK);
     }
 
     @PreAuthorize("hasRole('ADMIN')")
