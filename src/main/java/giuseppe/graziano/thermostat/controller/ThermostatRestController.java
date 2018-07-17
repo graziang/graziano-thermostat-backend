@@ -98,7 +98,7 @@ public class ThermostatRestController {
         catch (NotFoundException e){
             return getError(e.getMessage(), HttpStatus.BAD_REQUEST);
         }
-        
+
     }
 
     @PreAuthorize("hasAuthority(#id)")
