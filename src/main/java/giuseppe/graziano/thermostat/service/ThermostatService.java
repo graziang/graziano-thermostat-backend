@@ -82,6 +82,7 @@ public class ThermostatService {
 
         Thermostat td1 = new Thermostat("Piano inferiore", "Piano con camere");
         td1.setManualMode(new ManualMode());
+        td1.getSensors().add(s2);
         thermostatRepository.save(td1);
 
         Set<Thermostat> terms = new HashSet<>();
