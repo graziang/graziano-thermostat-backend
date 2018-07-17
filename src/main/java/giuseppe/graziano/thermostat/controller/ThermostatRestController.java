@@ -89,6 +89,19 @@ public class ThermostatRestController {
     }
 
     @PreAuthorize("hasAuthority(#id)")
+    @PostMapping("thermostat/select")
+    public ResponseEntity<Object> setUserThermostatSelected(Principal principal, @RequestParam(value = "thermostat_id") Long id) {
+        try {
+            User user = this.thermostatService.selectUserThermostat(principal.getName(), id);
+            return new ResponseEntity<>(user, HttpStatus.OK);
+        }
+        catch (NotFoundException e){
+            return getError(e.getMessage(), HttpStatus.BAD_REQUEST);
+        }
+        
+    }
+
+    @PreAuthorize("hasAuthority(#id)")
     @GetMapping("thermostat")
     public ResponseEntity<Object> getThermostat(@RequestParam(value = "thermostat_id") Long id){
         try {

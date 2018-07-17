@@ -372,6 +372,17 @@ public class ThermostatService {
         return thermostat;
     }
 
+
+    public User selectUserThermostat(String username, Long id) throws NotFoundException {
+
+        MyUserPrincipal userPrincipal = (MyUserPrincipal) this.userDetailsService.loadUserByUsername(username);
+        Thermostat thermostat = this.getThermostat(id);
+        User user =  userPrincipal.getUser();
+        user.setSelectedThermostatId(thermostat.getId());
+        userRepository.save(user);
+        return user;
+    }
+
     public Thermostat setThermostatCalulateSensor(Long id, boolean avg, Long sensorId) throws NotFoundException{
 
         Thermostat thermostat = this.getThermostat(id);

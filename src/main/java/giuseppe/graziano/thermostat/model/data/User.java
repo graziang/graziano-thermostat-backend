@@ -30,6 +30,8 @@ public class User {
 
     private boolean isAdmin;
 
+    private Long selectedThermostatId;
+
     @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(name = "users_thermostats", joinColumns = @JoinColumn(name = "user_id", referencedColumnName = "id"), inverseJoinColumns = @JoinColumn(name = "thermostat_id", referencedColumnName = "id"))
     private Set<Thermostat> thermostats;
@@ -62,6 +64,14 @@ public class User {
 
     public boolean isAdmin() {
         return isAdmin;
+    }
+
+    public Long getSelectedThermostatId() {
+        return selectedThermostatId;
+    }
+
+    public void setSelectedThermostatId(Long selectedThermostatId) {
+        this.selectedThermostatId = selectedThermostatId;
     }
 
     public void setAdmin(boolean admin) {
