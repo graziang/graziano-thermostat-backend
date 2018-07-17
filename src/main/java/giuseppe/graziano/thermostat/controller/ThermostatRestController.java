@@ -126,6 +126,18 @@ public class ThermostatRestController {
     }
 
     @PreAuthorize("hasAuthority(#id)")
+    @PutMapping("thermostat")
+    public ResponseEntity<Object> updateThermostat(@RequestParam(value = "thermostat_id") Long id, @RequestBody Thermostat thermostat){
+        try {
+            thermostat = this.thermostatService.updateThermostat(id, thermostat);
+            return new ResponseEntity<>(thermostat, HttpStatus.OK);
+        }
+        catch (NotFoundException e){
+            return getError(e.getMessage(), HttpStatus.BAD_REQUEST);
+        }
+    }
+
+    @PreAuthorize("hasAuthority(#id)")
     @PostMapping("thermostat/state")
     public ResponseEntity<Object> setThermostatState(@RequestParam(value = "thermostat_id") Long id, @RequestParam(value = "state") boolean state){
         try {

@@ -45,7 +45,7 @@ public class ThermostatService {
     private Map<Long, List<Measurement>> recentMeasurements = new HashMap<>();
 
 
-    //@PostConstruct
+    @PostConstruct
     public Thermostat initialize(){
         Thermostat td = new Thermostat("Piano superiore", "Piano con camere");
         Sensor s1 = new Sensor("Mamma e Papà", "mamma desc");
@@ -75,6 +75,29 @@ public class ThermostatService {
         user.setPassword(encoder.encode("ciaociao"));
         user.setAdmin(true);
         userRepository.save(user);
+
+
+
+
+
+        Thermostat td1 = new Thermostat("Piano inferiore", "Piano con camere");
+        td1.setManualMode(new ManualMode());
+        thermostatRepository.save(td1);
+
+        Set<Thermostat> terms = new HashSet<>();
+        terms.add(td);
+        terms.add(td1);
+
+        User userPeps = new User();
+        userPeps.setUsername("peps");
+        userPeps.setPassword(encoder.encode("peps"));
+        userPeps.setThermostats(terms);
+        userRepository.save(userPeps);
+
+
+
+
+
         return td;
     }
 
@@ -147,6 +170,23 @@ public class ThermostatService {
         MyUserPrincipal userPrincipal = (MyUserPrincipal) this.userDetailsService.loadUserByUsername(username);
         User user =  userPrincipal.getUser();
         return new ArrayList<>(user.getThermostats());
+    }
+
+    public Thermostat updateThermostat(Long id, Thermostat thermostat) throws NotFoundException {
+
+        Thermostat foundThermostat = getThermostat(id);
+
+        foundThermostat.setActive(thermostat.isActive());
+        foundThermostat.setMode(thermostat.getMode());
+        foundThermostat.setStateOn(thermostat.isStateOn());
+
+        if(!thermostat.isActive()){
+            foundThermostat.setStateOn(false);
+        }
+
+
+        this.thermostatRepository.save(foundThermostat);
+        return thermostat;
     }
 
     public Thermostat setThermostatState(Long id, boolean state) throws NotFoundException {
