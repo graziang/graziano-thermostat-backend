@@ -101,7 +101,7 @@ public class ThermostatRestController {
     }
 
     @PreAuthorize("hasAuthority(#id)")
-    @PostMapping("user/thermostat/select")
+    @PutMapping("user/thermostat/select")
     public ResponseEntity<Object> setUserThermostatSelected(Principal principal, @RequestParam(value = "thermostat_id") Long id) {
         try {
             User user = this.thermostatService.selectUserThermostat(principal.getName(), id);
