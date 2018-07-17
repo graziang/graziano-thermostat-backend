@@ -90,7 +90,7 @@ public class ThermostatService {
 
         User userPeps = new User();
         userPeps.setUsername("peps");
-        userPeps.setPassword(encoder.encode("peps"));
+        userPeps.setPassword(encoder.encode("ciaociao"));
         userPeps.setThermostats(terms);
         userRepository.save(userPeps);
 
