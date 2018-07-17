@@ -78,6 +78,17 @@ public class ThermostatService {
         return td;
     }
 
+    public User getUser(String username) throws NotFoundException {
+
+        User user = userRepository.findByUsername(username);
+
+        if(user == null){
+            throw new NotFoundException("User not found: [username: " + username + "]");
+        }
+
+        return user;
+    }
+
     public User createUser(User user){
 
         User userOld = userRepository.findByUsername(user.getUsername());
