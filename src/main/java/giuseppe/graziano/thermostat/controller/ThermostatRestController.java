@@ -201,7 +201,7 @@ public class ThermostatRestController {
             return getError(e.getMessage(), HttpStatus.BAD_REQUEST);
         }
     }
-    
+
     @GetMapping("thermostat/map")
     public ResponseEntity<Object> getThermostatMap (Principal principal){
 

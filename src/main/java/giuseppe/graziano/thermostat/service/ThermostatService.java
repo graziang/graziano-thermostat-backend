@@ -45,7 +45,7 @@ public class ThermostatService {
     private Map<Long, List<Measurement>> recentMeasurements = new HashMap<>();
 
 
-    @PostConstruct
+    //@PostConstruct
     public Thermostat initialize(){
         Thermostat td = new Thermostat("Piano superiore", "Piano con camere");
         Sensor s1 = new Sensor("Mamma e Papà", "mamma desc");
