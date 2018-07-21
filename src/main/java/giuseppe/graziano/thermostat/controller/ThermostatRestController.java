@@ -201,10 +201,9 @@ public class ThermostatRestController {
             return getError(e.getMessage(), HttpStatus.BAD_REQUEST);
         }
     }
-
-    @PreAuthorize("hasAuthority(#id)")
+    
     @GetMapping("thermostat/map")
-    public ResponseEntity<Object> getThermostatMap (Principal principal, @RequestParam(value = "thermostat_id") Long id){
+    public ResponseEntity<Object> getThermostatMap (Principal principal){
 
 
         try {
