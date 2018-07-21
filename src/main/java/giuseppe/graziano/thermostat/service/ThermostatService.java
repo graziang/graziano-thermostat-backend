@@ -45,7 +45,7 @@ public class ThermostatService {
     private Map<Long, List<Measurement>> recentMeasurements = new HashMap<>();
 
 
-   //@PostConstruct
+    //@PostConstruct
     public Thermostat initialize(){
         Thermostat td = new Thermostat("Piano superiore", "Piano con camere");
         Sensor s1 = new Sensor("Mamma e Papà", "mamma desc");
@@ -82,7 +82,7 @@ public class ThermostatService {
 
         Thermostat td1 = new Thermostat("Piano inferiore", "Piano con camere");
         td1.setManualMode(new ManualMode());
-       // td1.getSensors().add(s2);
+        // td1.getSensors().add(s2);
         thermostatRepository.save(td1);
 
         Set<Thermostat> terms = new HashSet<>();
@@ -96,7 +96,14 @@ public class ThermostatService {
         userRepository.save(userPeps);
 
 
+        terms = new HashSet<>();
+        terms.add(td);
 
+        User userThermostat = new User();
+        userThermostat.setUsername("grazianotermostato");
+        userThermostat.setPassword(encoder.encode("grazianotermostato2018"));
+        userThermostat.setThermostats(terms);
+        userRepository.save(userThermostat);
 
 
         return td;
@@ -263,7 +270,7 @@ public class ThermostatService {
         Thermostat thermostat = getThermostat(id);
 
         if(this.recentMeasurements.containsKey(thermostat.getId())){
-           return this.recentMeasurements.get(thermostat.getId());
+            return this.recentMeasurements.get(thermostat.getId());
         }
 
         String errorMessage = "No recent measurements for thermostat: [id: " + id + "]";
@@ -425,6 +432,26 @@ public class ThermostatService {
         return thermostat;
     }
 
+    public Map<String, Object> getThermostatMap(String username) throws NotFoundException {
+        Map<String, Object> thermostatMap  = new HashMap<>();
+        User user = getUser(username);
+        if(user.getSelectedThermostatId() != null) {
+            Thermostat thermostat = this.thermostatRepository.findThermostatById(user.getSelectedThermostatId());
+            List<String> sensorsIds = new ArrayList<>();
+            if(thermostat.getSensors() != null){
+                for (Sensor sensor: thermostat.getSensors()){
+                    if(sensor.isActive()){
+                        sensorsIds.add(String.valueOf(sensor.getId()));
+                    }
+                }
+                thermostatMap.put("thermostat", String.valueOf(thermostat.getId()));
+                thermostatMap.put("sensors", sensorsIds);
+                thermostatMap.put("state", thermostat.isStateOn());
+            }
+        }
+        return  thermostatMap;
+    }
+
 
     public User selectUserThermostat(String username, Long id) throws NotFoundException {
 
@@ -458,8 +485,8 @@ public class ThermostatService {
         for (Thermostat thermostat: thermostats){
 
             ManualMode manualMode = thermostat.getManualMode();
-            if(thermostat.getMode().equals(Thermostat.MANUAL_MODE)){
-                if(thermostat.isActive()){
+            if(thermostat.isActive()){
+                if(thermostat.getMode().equals(Thermostat.MANUAL_MODE)){
 
                     List<Measurement> measurements = new ArrayList<>();
 

@@ -203,6 +203,20 @@ public class ThermostatRestController {
     }
 
     @PreAuthorize("hasAuthority(#id)")
+    @GetMapping("thermostat/map")
+    public ResponseEntity<Object> getThermostatMap (Principal principal, @RequestParam(value = "thermostat_id") Long id){
+
+
+        try {
+            Map thermostatMap = this.thermostatService.getThermostatMap(principal.getName());
+            return new ResponseEntity<>(thermostatMap, HttpStatus.OK);
+        }
+        catch (NotFoundException e){
+            return getError(e.getMessage(), HttpStatus.BAD_REQUEST);
+        }
+    }
+
+    @PreAuthorize("hasAuthority(#id)")
     @PostMapping("thermostat/temperature")
     public ResponseEntity<Object> postThermostatTemperature(@RequestParam(value = "thermostat_id") Long id, @RequestParam(value = "temperature") float temperature){
 
