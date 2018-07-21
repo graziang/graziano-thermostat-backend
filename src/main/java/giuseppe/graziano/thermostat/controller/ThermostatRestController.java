@@ -6,6 +6,9 @@ import giuseppe.graziano.thermostat.exception.NotFoundException;
 import giuseppe.graziano.thermostat.model.data.*;
 import giuseppe.graziano.thermostat.security.MyUserPrincipal;
 import giuseppe.graziano.thermostat.service.ThermostatService;
+import org.codehaus.jackson.JsonGenerationException;
+import org.codehaus.jackson.map.JsonMappingException;
+import org.codehaus.jackson.map.ObjectMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
@@ -13,6 +16,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
+import java.io.IOException;
 import java.security.Principal;
 import java.util.*;
 
@@ -203,14 +207,15 @@ public class ThermostatRestController {
     }
 
     @GetMapping("thermostat/map")
-    public ResponseEntity<Object> getThermostatMap (Principal principal){
+    public ResponseEntity<String> getThermostatMap (Principal principal){
 
 
         try {
             Map thermostatMap = this.thermostatService.getThermostatMap(principal.getName());
-            return new ResponseEntity<>(thermostatMap, HttpStatus.OK);
+            String json = new ObjectMapper().writeValueAsString(thermostatMap);
+            return new ResponseEntity<>(json, HttpStatus.OK);
         }
-        catch (NotFoundException e){
+        catch (Exception e){
             return getError(e.getMessage(), HttpStatus.BAD_REQUEST);
         }
     }
