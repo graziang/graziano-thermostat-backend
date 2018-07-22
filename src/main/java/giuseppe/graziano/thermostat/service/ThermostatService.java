@@ -483,6 +483,7 @@ public class ThermostatService {
         List<Thermostat> thermostats = getThermostats();
 
         for (Thermostat thermostat: thermostats){
+            thermostat.setStateOn(false);
 
             ManualMode manualMode = thermostat.getManualMode();
             if(thermostat.isActive()){
