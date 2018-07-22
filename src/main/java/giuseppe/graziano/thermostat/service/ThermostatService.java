@@ -186,7 +186,6 @@ public class ThermostatService {
 
         foundThermostat.setActive(thermostat.isActive());
         foundThermostat.setMode(thermostat.getMode());
-        foundThermostat.setStateOn(thermostat.isStateOn());
         foundThermostat.setTemperature(thermostat.getTemperature());
 
         if(!thermostat.isActive()){
