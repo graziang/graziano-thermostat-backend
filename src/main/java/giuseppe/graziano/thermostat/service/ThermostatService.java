@@ -192,8 +192,9 @@ public class ThermostatService {
             foundThermostat.setStateOn(false);
         }
 
-
         this.thermostatRepository.save(foundThermostat);
+        this.calculate();
+
         return thermostat;
     }
 
