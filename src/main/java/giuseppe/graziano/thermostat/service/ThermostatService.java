@@ -105,7 +105,6 @@ public class ThermostatService {
         userThermostat.setThermostats(terms);
         userRepository.save(userThermostat);
 
-
         return td;
     }
 
@@ -193,8 +192,9 @@ public class ThermostatService {
         }
 
         this.thermostatRepository.save(foundThermostat);
-        this.calculate();
-
+        //this.calculate();
+        log.error("" + foundThermostat.isStateOn());
+        log.error("" + thermostat.isStateOn());
         return foundThermostat;
     }
 
