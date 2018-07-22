@@ -95,7 +95,6 @@ public class ThermostatService {
         userPeps.setThermostats(terms);
         userRepository.save(userPeps);
 
-
         terms = new HashSet<>();
         terms.add(td);
 
@@ -192,9 +191,8 @@ public class ThermostatService {
         }
 
         this.thermostatRepository.save(foundThermostat);
-        //this.calculate();
-        log.error("" + foundThermostat.isStateOn());
-        log.error("" + thermostat.isStateOn());
+        this.calculate();
+
         return foundThermostat;
     }
 
@@ -390,7 +388,7 @@ public class ThermostatService {
 
         this.recentMeasurements.put(id, measurements);
 
-        //this.calculate();
+        this.calculate();
 
         Calendar calendar = Calendar.getInstance();
         calendar.setTime(date);
@@ -476,8 +474,8 @@ public class ThermostatService {
     }
 
 
-  //  @Transactional
-  //  @Scheduled(fixedRate = 60 * 1000)
+    @Transactional
+    @Scheduled(fixedRate = 60 * 1000)
     public void calculate(){
 
         List<Thermostat> thermostats = getThermostats();
@@ -512,7 +510,7 @@ public class ThermostatService {
                     if(measurements.size() == 0){
                         thermostat.setStateOn(false);
                     }
-                    if(manualMode.isAvg()){
+                    else if(manualMode.isAvg()){
                         thermostat.setStateOn(avgTemperature < thermostat.getTemperature());
                     }
                     else {
