@@ -195,7 +195,7 @@ public class ThermostatService {
         this.thermostatRepository.save(foundThermostat);
         this.calculate();
 
-        return thermostat;
+        return foundThermostat;
     }
 
     public Thermostat setThermostatState(Long id, boolean state) throws NotFoundException {
