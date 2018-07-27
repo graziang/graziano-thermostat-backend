@@ -139,7 +139,7 @@ public class ThermostatService {
         userRepository.save(user);
         return user;
     }
-    
+
     public Sensor addSensor(Long id, Sensor sensor) throws NotFoundException {
 
         Thermostat thermostat = this.getThermostat(id);

@@ -278,10 +278,10 @@ public class ThermostatRestController {
 
     @PreAuthorize("hasAuthority(#id)")
     @GetMapping("measurements/stats")
-    public ResponseEntity<Object> getMeasurementsStats(@RequestParam(value = "thermostat_id") Long id, @RequestParam(value = "date_start", required = false) String dateStart, @RequestParam(value = "date_end", required = false) String dateEnd, @RequestParam(value = "sensor_id") Long sensor_id) {
+    public ResponseEntity<Object> getMeasurementsStats(@RequestParam(value = "thermostat_id") Long id, @RequestParam(value = "date_from", required = false) String dateFrom, @RequestParam(value = "date_to", required = false) String dateTo, @RequestParam(value = "sensor_id") Long sensor_id) {
 
         try {
-            SensorStats sensorStats = this.thermostatService.getMeasurementsStats(id, sensor_id, dateStart, dateEnd);
+            SensorStats sensorStats = this.thermostatService.getMeasurementsStats(id, sensor_id, dateFrom, dateTo);
             if(sensorStats == null){
                 return getError("", HttpStatus.BAD_REQUEST);
             }
@@ -295,11 +295,11 @@ public class ThermostatRestController {
 
     @PreAuthorize("hasAuthority(#id)")
     @GetMapping("measurements")
-    public ResponseEntity<List<Measurement>> getMeasurements(@RequestParam(value = "thermostat_id") Long id, @RequestParam(value = "date_start", required = false) String dateStart, @RequestParam(value = "date_end", required = false) String dateEnd, @RequestParam(value = "sensor_id") Long sensor_id) {
+    public ResponseEntity<List<Measurement>> getMeasurements(@RequestParam(value = "thermostat_id") Long id, @RequestParam(value = "date_from", required = false) String dateFrom, @RequestParam(value = "date_to", required = false) String dateTo, @RequestParam(value = "sensor_id") Long sensor_id) {
 
         List<Measurement> measurements = null;
         try {
-            measurements = this.thermostatService.getMeasurements(id, sensor_id, dateStart, dateEnd);
+            measurements = this.thermostatService.getMeasurements(id, sensor_id, dateFrom, dateTo);
             return new ResponseEntity<>(measurements, HttpStatus.OK);
         } catch (NotFoundException e) {
             return getError(e.getMessage(), HttpStatus.BAD_REQUEST);
