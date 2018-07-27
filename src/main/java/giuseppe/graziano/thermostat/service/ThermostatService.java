@@ -280,7 +280,7 @@ public class ThermostatService {
 
         Thermostat thermostat = getThermostat(id);
 
-        if(thermostat.getSensors().contains(getSensor(sensor_id))){
+        if(!thermostat.getSensors().contains(getSensor(sensor_id))){
             return new ArrayList<>();
         }
 
@@ -319,7 +319,7 @@ public class ThermostatService {
         List<Measurement> measurements = getMeasurementsFromSensorId(id, sensor_id, dateStart, dateEnd);
 
         if(measurements == null || measurements.size() == 0){
-            return null;
+            throw new UsernameNotFoundException("No measurements found: [sensor_id:%s];" + sensor_id);
         }
 
 
