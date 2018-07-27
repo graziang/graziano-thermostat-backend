@@ -278,7 +278,7 @@ public class ThermostatRestController {
 
     @PreAuthorize("hasAuthority(#id)")
     @GetMapping("measurements/stats")
-    public ResponseEntity<Object> getMeasurementsStats(@RequestParam(value = "thermostat_id") Long id, @RequestParam(value = "date_from", required = false) String dateFrom, @RequestParam(value = "date_to", required = false) String dateTo, @RequestParam(value = "sensor_id") Long sensor_id) {
+    public ResponseEntity<Object> getMeasurementsStats(@RequestParam(value = "thermostat_id") Long id, @RequestParam(value = "sensor_id") Long sensor_id, @RequestParam(value = "date_from", required = false) String dateFrom, @RequestParam(value = "date_to", required = false) String dateTo) {
 
         try {
             SensorStats sensorStats = this.thermostatService.getMeasurementsStats(id, sensor_id, dateFrom, dateTo);

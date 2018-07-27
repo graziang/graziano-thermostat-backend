@@ -319,7 +319,7 @@ public class ThermostatService {
         List<Measurement> measurements = getMeasurementsFromSensorId(id, sensor_id, dateStart, dateEnd);
 
         if(measurements == null || measurements.size() == 0){
-            throw new UsernameNotFoundException("No measurements found: [sensor_id:%s];" + sensor_id);
+            throw new NotFoundException( "No measurements found: [sensor_id:" + sensor_id + "]");
         }
 
 
