@@ -1,5 +1,6 @@
 package giuseppe.graziano.thermostat.service;
 
+import com.sun.deploy.util.OrderedHashSet;
 import giuseppe.graziano.thermostat.exception.NotFoundException;
 import giuseppe.graziano.thermostat.model.data.*;
 import giuseppe.graziano.thermostat.model.repository.MeasurementRepository;
@@ -17,6 +18,7 @@ import org.springframework.util.StringUtils;
 import javax.annotation.PostConstruct;
 import javax.transaction.Transactional;
 import java.util.*;
+import java.util.stream.Collectors;
 
 @Service
 public class ThermostatService {
@@ -111,19 +113,6 @@ public class ThermostatService {
     public User getUser(String username) throws NotFoundException {
 
         User user = userRepository.findByUsername(username);
-
-        Set<Thermostat> thermostatList = user.getThermostats();
-
-        for (Thermostat thermostat: thermostatList){
-            Set<Sensor> sensors = thermostat.getSensors();
-            sensors.stream().sorted(new Comparator<Sensor>() {
-                @Override
-                public int compare(Sensor s1, Sensor s2) {
-                    return s1.getName().compareTo(s2.getName());
-                }
-            });
-            thermostat.setSensors(sensors);
-        }
 
         if(user == null){
             throw new NotFoundException("User not found: [username: " + username + "]");
