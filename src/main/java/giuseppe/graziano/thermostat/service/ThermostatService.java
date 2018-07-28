@@ -12,6 +12,7 @@ import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
+import org.springframework.util.StringUtils;
 
 import javax.annotation.PostConstruct;
 import javax.transaction.Transactional;
@@ -110,6 +111,19 @@ public class ThermostatService {
     public User getUser(String username) throws NotFoundException {
 
         User user = userRepository.findByUsername(username);
+
+        Set<Thermostat> thermostatList = user.getThermostats();
+
+        for (Thermostat thermostat: thermostatList){
+            Set<Sensor> sensors = thermostat.getSensors();
+            sensors.stream().sorted(new Comparator<Sensor>() {
+                @Override
+                public int compare(Sensor s1, Sensor s2) {
+                    return s1.getName().compareTo(s2.getName());
+                }
+            });
+            thermostat.setSensors(sensors);
+        }
 
         if(user == null){
             throw new NotFoundException("User not found: [username: " + username + "]");
