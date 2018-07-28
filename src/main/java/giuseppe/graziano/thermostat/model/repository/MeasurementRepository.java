@@ -21,8 +21,7 @@ public interface MeasurementRepository extends JpaRepository<Measurement, Intege
 
     List<Measurement> findByDateBeforeAndSensorId(Date endDate, Long id);
 
-
-
+    List<Measurement> deleteAllByDateBefore(Date date);
 
     Measurement findFirstBySensorIdOrderByDateDesc(Long id);
 

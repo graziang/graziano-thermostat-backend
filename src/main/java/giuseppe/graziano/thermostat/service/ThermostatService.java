@@ -474,6 +474,15 @@ public class ThermostatService {
     }
 
 
+
+    @Transactional
+    @Scheduled(fixedRate = 60 * 1000)
+    public void cleanLast24HMeasurements() {
+         Long timestampFrom = System.currentTimeMillis() - (1000*60*60*24);
+         measurementRepository.deleteAllByDateBefore(new Date(timestampFrom));
+    }
+
+
     @Transactional
     @Scheduled(fixedRate = 60 * 1000)
     public void calculate(){

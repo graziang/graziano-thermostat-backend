@@ -15,5 +15,6 @@ public class GrazianoThermostatApplication {
 
 		SpringApplication.run(GrazianoThermostatApplication.class, args);
 	}
+
 }
 
