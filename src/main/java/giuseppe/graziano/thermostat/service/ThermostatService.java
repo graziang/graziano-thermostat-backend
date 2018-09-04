@@ -1,6 +1,5 @@
 package giuseppe.graziano.thermostat.service;
 
-import com.sun.deploy.util.OrderedHashSet;
 import giuseppe.graziano.thermostat.exception.NotFoundException;
 import giuseppe.graziano.thermostat.model.data.*;
 import giuseppe.graziano.thermostat.model.repository.MeasurementRepository;
