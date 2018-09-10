@@ -16,6 +16,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
+import javax.annotation.PostConstruct;
 import java.io.IOException;
 import java.security.Principal;
 import java.util.*;
@@ -135,6 +136,54 @@ public class ThermostatRestController {
         try {
             thermostat = this.thermostatService.updateThermostat(id, thermostat);
             return new ResponseEntity<>(thermostat, HttpStatus.OK);
+        }
+        catch (NotFoundException e){
+            return getError(e.getMessage(), HttpStatus.BAD_REQUEST);
+        }
+    }
+
+    @PreAuthorize("hasAuthority(#id)")
+    @GetMapping("programs")
+    public ResponseEntity<Object> getPrograms(@RequestParam(value = "thermostat_id") Long id){
+        try {
+            Set<Program> programs = this.thermostatService.getPrograms(id);
+            return new ResponseEntity<>(programs, HttpStatus.OK);
+        }
+        catch (NotFoundException e){
+            return getError(e.getMessage(), HttpStatus.BAD_REQUEST);
+        }
+    }
+
+    @PreAuthorize("hasAuthority(#id)")
+    @PostMapping("program")
+    public ResponseEntity<Object> createProgram(@RequestParam(value = "thermostat_id") Long id, @RequestBody Program program){
+        try {
+            program = this.thermostatService.addProgram(id, program);
+            return new ResponseEntity<>(program, HttpStatus.OK);
+        }
+        catch (NotFoundException e){
+            return getError(e.getMessage(), HttpStatus.BAD_REQUEST);
+        }
+    }
+
+    @PreAuthorize("hasAuthority(#id)")
+    @PutMapping("program")
+    public ResponseEntity<Object> updateProgram(@RequestParam(value = "thermostat_id") Long id, @RequestBody Program program){
+        try {
+            program = this.thermostatService.updateProgram(id, program);
+            return new ResponseEntity<>(program, HttpStatus.OK);
+        }
+        catch (NotFoundException e){
+            return getError(e.getMessage(), HttpStatus.BAD_REQUEST);
+        }
+    }
+
+    @PreAuthorize("hasAuthority(#id)")
+    @DeleteMapping("program")
+    public ResponseEntity<Object> deleteProgram(@RequestParam(value = "thermostat_id") Long id, @RequestBody Program program){
+        try {
+            program = this.thermostatService.deleteProgram(id, program);
+            return new ResponseEntity<>(program, HttpStatus.OK);
         }
         catch (NotFoundException e){
             return getError(e.getMessage(), HttpStatus.BAD_REQUEST);

@@ -14,6 +14,9 @@ public class Thermostat {
     @JsonIgnore
     public static String MANUAL_MODE = "manual_mode";
 
+    @JsonIgnore
+    public static String PROGRAM_MODE = "program_mode";
+
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private long id;
@@ -36,10 +39,20 @@ public class Thermostat {
     @JoinColumn(name = "manual_mode_id")
     private ManualMode manualMode;
 
+    @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @JoinColumn(name = "program_mode_id")
+    private ProgramMode programMode;
+
 
     @OneToMany(mappedBy = "thermostat", cascade = CascadeType.ALL,  fetch = FetchType.LAZY)
     private Set<Sensor> sensors = new HashSet<>();
 
+    @OneToMany(mappedBy = "thermostat", cascade = CascadeType.ALL,  fetch = FetchType.LAZY)
+    private Set<Source> sources = new HashSet<>();
+
+    @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @JoinColumn(name = "source_id")
+    private Source source;
 
     public Thermostat() {
     }
@@ -114,6 +127,22 @@ public class Thermostat {
         this.sensors = sensors;
     }
 
+    public ProgramMode getProgramMode() {
+        return programMode;
+    }
+
+    public void setProgramMode(ProgramMode programMode) {
+        this.programMode = programMode;
+    }
+
+    public Set<Source> getSources() {
+        return sources;
+    }
+
+    public void setSources(Set<Source> sources) {
+        this.sources = sources;
+    }
+
     public String getMode() {
         return mode;
     }
@@ -128,6 +157,14 @@ public class Thermostat {
 
     public void setManualMode(ManualMode manualMode) {
         this.manualMode = manualMode;
+    }
+
+    public Source getSource() {
+        return source;
+    }
+
+    public void setSource(Source source) {
+        this.source = source;
     }
 
     @Override

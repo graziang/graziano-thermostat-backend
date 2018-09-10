@@ -23,6 +23,8 @@ public class ManualMode implements Serializable {
     @JsonIgnore
     private Thermostat thermostat;
 
+    private long sourceId;
+
     private long sensorId;
 
     private boolean avg;
@@ -49,6 +51,14 @@ public class ManualMode implements Serializable {
 
     public void setThermostat(Thermostat thermostat) {
         this.thermostat = thermostat;
+    }
+
+    public long getSourceId() {
+        return sourceId;
+    }
+
+    public void setSourceId(long sourceId) {
+        this.sourceId = sourceId;
     }
 
     public long getSensorId() {

@@ -2,10 +2,7 @@ package giuseppe.graziano.thermostat.service;
 
 import giuseppe.graziano.thermostat.exception.NotFoundException;
 import giuseppe.graziano.thermostat.model.data.*;
-import giuseppe.graziano.thermostat.model.repository.MeasurementRepository;
-import giuseppe.graziano.thermostat.model.repository.SensorRepository;
-import giuseppe.graziano.thermostat.model.repository.ThermostatRepository;
-import giuseppe.graziano.thermostat.model.repository.UserRepository;
+import giuseppe.graziano.thermostat.model.repository.*;
 import giuseppe.graziano.thermostat.security.MyUserPrincipal;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.scheduling.annotation.Scheduled;
@@ -16,6 +13,9 @@ import org.springframework.util.StringUtils;
 
 import javax.annotation.PostConstruct;
 import javax.transaction.Transactional;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.LocalTime;
 import java.util.*;
 import java.util.stream.Collectors;
 
@@ -38,6 +38,9 @@ public class ThermostatService {
     UserRepository userRepository;
 
     @Autowired
+    SourceRepository sourceRepository;
+
+    @Autowired
     MyUserDetailsService userDetailsService;
 
 
@@ -56,6 +59,12 @@ public class ThermostatService {
         Sensor s4 = new Sensor("Bagno", "Bagno grande");
         Sensor s5 = new Sensor("Corridoio", "Corridoio piano di sopra");
 
+        Source sorgente1 = new Source("Metano");
+        Source sorgente2 = new Source("Pellet");
+
+        sorgente1.setThermostat(td);
+        sorgente2.setThermostat(td);
+
         s1.setThermostat(td);
         s2.setThermostat(td);
         s3.setThermostat(td);
@@ -68,8 +77,12 @@ public class ThermostatService {
         td.getSensors().add(s4);
         td.getSensors().add(s5);
 
+        td.getSources().add(sorgente1);
+        td.getSources().add(sorgente2);
+
 
         td.setManualMode(new ManualMode());
+        td.setProgramMode(new ProgramMode());
         thermostatRepository.save(td);
 
         User user = new User();
@@ -154,6 +167,8 @@ public class ThermostatService {
         return sensor;
     }
 
+
+
     public List<Thermostat> getThermostats(){
         return thermostatRepository.findAll();
     }
@@ -236,6 +251,49 @@ public class ThermostatService {
         return sensor;
     }
 
+    public Set<Program> getPrograms(Long id) throws NotFoundException {
+
+        Thermostat thermostat = this.getThermostat(id);
+
+        return thermostat.getProgramMode().getPrograms();
+    }
+
+    public Program addProgram(Long id, Program program) throws NotFoundException {
+
+        Thermostat thermostat = this.getThermostat(id);
+
+        thermostat.getProgramMode().getPrograms().add(program);
+        this.thermostatRepository.save(thermostat);
+        return program;
+    }
+
+    public Program updateProgram(Long id, Program program) throws NotFoundException {
+
+        Thermostat thermostat = this.getThermostat(id);
+
+        List<Program> programs = new ArrayList(thermostat.getProgramMode().getPrograms());
+        Program oldProgram = programs.get(programs.indexOf(program));
+        oldProgram.setName(program.getName());
+        oldProgram.setDescription(program.getDescription());
+        oldProgram.setActive(program.isActive());
+        oldProgram.setWeekDay(program.getWeekDay());
+        oldProgram.setStartTime(program.getStartTime());
+        oldProgram.setEndTime(program.getEndTime());
+        this.thermostatRepository.save(thermostat);
+
+        return program;
+    }
+
+    public Program deleteProgram(Long id, Program program) throws NotFoundException {
+        Thermostat thermostat = this.getThermostat(id);
+
+        List<Program> programs = new ArrayList(thermostat.getProgramMode().getPrograms());
+        programs.remove(program);
+        this.thermostatRepository.save(thermostat);
+        return program;
+    }
+
+
     public Sensor setSensorState(Long id,Long sensor_id, boolean state) throws NotFoundException {
 
         Thermostat thermostat = this.getThermostat(id);
@@ -306,8 +364,6 @@ public class ThermostatService {
 
 
         measurements = getMeasurementsFromSensorId(id, sensor_id, dateStart, dateEnd);
-
-
 
         return measurements;
     }
@@ -427,7 +483,9 @@ public class ThermostatService {
         if(Thermostat.MANUAL_MODE.equals(mode)){
             thermostat.setMode(Thermostat.MANUAL_MODE);
         }
-
+        if(thermostat.PROGRAM_MODE.equals(mode)){
+            thermostat.setMode(Thermostat.PROGRAM_MODE);
+        }
         this.thermostatRepository.save(thermostat);
         return thermostat;
     }
@@ -529,10 +587,39 @@ public class ThermostatService {
                     }
 
                 }
+
+                else if(thermostat.getMode().equals(Thermostat.PROGRAM_MODE)){
+                    ProgramMode mode = thermostat.getProgramMode();
+
+                    for (Program program: mode.getPrograms()) {
+                        if(isProgramOn(program)){
+                            thermostat.setStateOn(true);
+                            thermostat.setSource(sourceRepository.findSourceById(program.getSourceId()));
+                            program.setSourceOn(true);
+                            break;
+                        }
+                        else {
+                            program.setSourceOn(false);
+                        }
+                    }
+                }
             }
+
             this.thermostatRepository.save(thermostat);
         }
 
     }
 
+
+    private boolean isProgramOn(Program program){
+
+        if (program.isActive()) {
+            LocalTime now = LocalTime.now();
+            boolean isSameDay = LocalDate.now().getDayOfWeek().equals(program.getWeekDay());
+            boolean isAfterStart = now.isAfter(program.getStartTime());
+            boolean isBeforeEnd = now.isBefore(program.getEndTime());
+            return isSameDay && isAfterStart && isBeforeEnd;
+        }
+        return false;
+    }
 }
