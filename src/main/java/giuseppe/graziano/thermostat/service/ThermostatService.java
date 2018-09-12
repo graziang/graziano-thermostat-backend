@@ -52,7 +52,7 @@ public class ThermostatService {
     private int lastMinuteUpdate = 0;
 
 
-    @PostConstruct
+  //  @PostConstruct
     public Thermostat initialize(){
         Thermostat td = new Thermostat("Piano superiore", "Piano con camere");
         Sensor s1 = new Sensor("Mamma e Papà", "mamma desc");
