@@ -403,10 +403,7 @@ public class ThermostatService {
 
         return measurements;
     }
-
-
-
-
+    
     public SensorStats getMeasurementsStats (Long id, Long sensor_id, String dateStart, String dateEnd) throws NotFoundException {
 
 
@@ -415,7 +412,6 @@ public class ThermostatService {
         if(measurements == null || measurements.size() == 0){
             throw new NotFoundException( "No measurements found: [sensor_id:" + sensor_id + "]");
         }
-
 
         Measurement maxM = null;
         Measurement minM = null;
