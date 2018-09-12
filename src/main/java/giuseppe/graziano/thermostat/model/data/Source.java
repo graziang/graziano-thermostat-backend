@@ -23,6 +23,9 @@ public class Source {
     private Thermostat thermostat;
 
 
+    public Source () {
+    }
+
     public Source(String name) {
         this.name = name;
     }

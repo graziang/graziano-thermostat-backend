@@ -38,10 +38,10 @@ public class ThermostatService {
     UserRepository userRepository;
 
     @Autowired
-    SourceRepository sourceRepository;
+    MyUserDetailsService userDetailsService;
 
     @Autowired
-    MyUserDetailsService userDetailsService;
+    SourceRepository sourceRepository;
 
 
     @Autowired
@@ -49,15 +49,23 @@ public class ThermostatService {
 
     private Map<Long, List<Measurement>> recentMeasurements = new HashMap<>();
 
+    private int lastMinuteUpdate = 0;
 
-    //@PostConstruct
+
+    @PostConstruct
     public Thermostat initialize(){
         Thermostat td = new Thermostat("Piano superiore", "Piano con camere");
         Sensor s1 = new Sensor("Mamma e Papà", "mamma desc");
         Sensor s2 = new Sensor("Lorenza", "Loo desc");
+        s2.setDeviceId("28ff9680b21704aa");
+        s2.setActive(true);
         Sensor s3 = new Sensor("Giuseppe", "Giu desc");
         Sensor s4 = new Sensor("Bagno", "Bagno grande");
+        s4.setDeviceId("28ff4b25a31704d1");
+        s4.setActive(true);
         Sensor s5 = new Sensor("Corridoio", "Corridoio piano di sopra");
+        s5.setDeviceId("28ff6a80b217042d");
+        s5.setActive(true);
 
         Source sorgente1 = new Source("Metano");
         Source sorgente2 = new Source("Pellet");
@@ -122,9 +130,68 @@ public class ThermostatService {
         return td;
     }
 
+
+
+    public Set<Program> getPrograms(Long id) throws NotFoundException {
+
+        Thermostat thermostat = this.getThermostat(id);
+
+        return thermostat.getProgramMode().getPrograms();
+    }
+
+    public Program addProgram(Long id, Program program) throws NotFoundException {
+
+        Thermostat thermostat = this.getThermostat(id);
+
+        thermostat.getProgramMode().getPrograms().add(program);
+        this.thermostatRepository.save(thermostat);
+        return program;
+    }
+
+    public Program updateProgram(Long id, Program program) throws NotFoundException {
+
+        Thermostat thermostat = this.getThermostat(id);
+
+        List<Program> programs = new ArrayList(thermostat.getProgramMode().getPrograms());
+        Program oldProgram = programs.get(programs.indexOf(program));
+        oldProgram.setName(program.getName());
+        oldProgram.setDescription(program.getDescription());
+        oldProgram.setActive(program.isActive());
+        oldProgram.setWeekDay(program.getWeekDay());
+        oldProgram.setStartTime(program.getStartTime());
+        oldProgram.setEndTime(program.getEndTime());
+        this.thermostatRepository.save(thermostat);
+
+        return program;
+    }
+
+    public Program deleteProgram(Long id, Program program) throws NotFoundException {
+        Thermostat thermostat = this.getThermostat(id);
+
+        List<Program> programs = new ArrayList(thermostat.getProgramMode().getPrograms());
+        programs.remove(program);
+        this.thermostatRepository.save(thermostat);
+        return program;
+    }
+
+
+
     public User getUser(String username) throws NotFoundException {
 
         User user = userRepository.findByUsername(username);
+
+        Set<Thermostat> thermostatList = user.getThermostats();
+
+        for (Thermostat thermostat: thermostatList){
+            Set<Sensor> sensors = thermostat.getSensors();
+            sensors.stream().sorted(new Comparator<Sensor>() {
+                @Override
+                public int compare(Sensor s1, Sensor s2) {
+                    return s1.getName().compareTo(s2.getName());
+                }
+            });
+            thermostat.setSensors(sensors);
+        }
 
         if(user == null){
             throw new NotFoundException("User not found: [username: " + username + "]");
@@ -166,8 +233,6 @@ public class ThermostatService {
 
         return sensor;
     }
-
-
 
     public List<Thermostat> getThermostats(){
         return thermostatRepository.findAll();
@@ -251,54 +316,20 @@ public class ThermostatService {
         return sensor;
     }
 
-    public Set<Program> getPrograms(Long id) throws NotFoundException {
-
-        Thermostat thermostat = this.getThermostat(id);
-
-        return thermostat.getProgramMode().getPrograms();
-    }
-
-    public Program addProgram(Long id, Program program) throws NotFoundException {
-
-        Thermostat thermostat = this.getThermostat(id);
-
-        thermostat.getProgramMode().getPrograms().add(program);
-        this.thermostatRepository.save(thermostat);
-        return program;
-    }
-
-    public Program updateProgram(Long id, Program program) throws NotFoundException {
-
-        Thermostat thermostat = this.getThermostat(id);
-
-        List<Program> programs = new ArrayList(thermostat.getProgramMode().getPrograms());
-        Program oldProgram = programs.get(programs.indexOf(program));
-        oldProgram.setName(program.getName());
-        oldProgram.setDescription(program.getDescription());
-        oldProgram.setActive(program.isActive());
-        oldProgram.setWeekDay(program.getWeekDay());
-        oldProgram.setStartTime(program.getStartTime());
-        oldProgram.setEndTime(program.getEndTime());
-        this.thermostatRepository.save(thermostat);
-
-        return program;
-    }
-
-    public Program deleteProgram(Long id, Program program) throws NotFoundException {
-        Thermostat thermostat = this.getThermostat(id);
-
-        List<Program> programs = new ArrayList(thermostat.getProgramMode().getPrograms());
-        programs.remove(program);
-        this.thermostatRepository.save(thermostat);
-        return program;
-    }
-
-
     public Sensor setSensorState(Long id,Long sensor_id, boolean state) throws NotFoundException {
 
         Thermostat thermostat = this.getThermostat(id);
         Sensor sensor = getSensor(sensor_id);
         sensor.setActive(state);
+        this.sensorRepository.save(sensor);
+        return sensor;
+    }
+
+    public Sensor setSensorDeviceId(Long id,Long sensor_id, String device_id) throws NotFoundException {
+
+        Thermostat thermostat = this.getThermostat(id);
+        Sensor sensor = getSensor(sensor_id);
+        sensor.setDeviceId(device_id);
         this.sensorRepository.save(sensor);
         return sensor;
     }
@@ -352,7 +383,7 @@ public class ThermostatService {
         } else if (dateEnd != null) {
             measurements = this.measurementRepository.findByDateBeforeAndSensorId(new Date(Long.valueOf(dateEnd)), sensor_id);
         } else {
-            measurements = this.measurementRepository.findAll();
+            measurements = this.measurementRepository.findBySensorId(sensor_id);
         }
         return measurements;
     }
@@ -364,6 +395,8 @@ public class ThermostatService {
 
 
         measurements = getMeasurementsFromSensorId(id, sensor_id, dateStart, dateEnd);
+
+
 
         return measurements;
     }
@@ -432,9 +465,9 @@ public class ThermostatService {
 
         for (Sensor sensor: sensors){
 
-            String stringID = String.valueOf(sensor.getId());
-            if(measurement.containsKey(stringID) && sensor.isActive()) {
-                float temperature = measurement.get(stringID);
+            String stringDeviceID = String.valueOf(sensor.getDeviceId());
+            if(measurement.containsKey(stringDeviceID) && sensor.isActive()) {
+                float temperature = measurement.get(stringDeviceID);
                 Measurement m = new Measurement(sensor, temperature);
                 m.setDate(date);
                 measurements.add(m);
@@ -452,8 +485,9 @@ public class ThermostatService {
         calendar.setTime(date);
         int minutes = calendar.get(Calendar.MINUTE);
 
-        if (minutes % 15 == 0) {
+        if (minutes % 15 == 0 && minutes != lastMinuteUpdate) {
             this.measurementRepository.saveAll(measurements);
+            lastMinuteUpdate = minutes;
         }
         return measurements;
     }
@@ -483,9 +517,7 @@ public class ThermostatService {
         if(Thermostat.MANUAL_MODE.equals(mode)){
             thermostat.setMode(Thermostat.MANUAL_MODE);
         }
-        if(thermostat.PROGRAM_MODE.equals(mode)){
-            thermostat.setMode(Thermostat.PROGRAM_MODE);
-        }
+
         this.thermostatRepository.save(thermostat);
         return thermostat;
     }
@@ -504,6 +536,7 @@ public class ThermostatService {
                 }
                 thermostatMap.put("thermostat", String.valueOf(thermostat.getId()));
                 thermostatMap.put("sensors", sensorsIds);
+                thermostatMap.put("source", String.valueOf(thermostat.getSource().getId()));
                 thermostatMap.put("state", thermostat.isStateOn());
             }
         }
@@ -538,10 +571,9 @@ public class ThermostatService {
     @Transactional
     @Scheduled(fixedRate = 60 * 1000)
     public void cleanLast24HMeasurements() {
-         Long timestampFrom = System.currentTimeMillis() - (1000*60*60*24);
-         measurementRepository.deleteAllByDateBefore(new Date(timestampFrom));
+        Long timestampFrom = System.currentTimeMillis() - (1000*60*60*24);
+        measurementRepository.deleteAllByDateBefore(new Date(timestampFrom));
     }
-
 
     @Transactional
     @Scheduled(fixedRate = 60 * 1000)

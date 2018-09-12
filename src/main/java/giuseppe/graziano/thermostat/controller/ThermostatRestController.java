@@ -229,6 +229,20 @@ public class ThermostatRestController {
     }
 
     @PreAuthorize("hasAuthority(#id)")
+    @PostMapping("sensor/device")
+    public ResponseEntity<Object> postSensorDeviceId (@RequestParam(value = "thermostat_id") Long id, @RequestParam(value = "sensor_id") Long sensor_id, @RequestParam(value = "device_id") String device_id){
+
+        try {
+            Sensor sensor = this.thermostatService.setSensorDeviceId(id,sensor_id, device_id);
+            return new ResponseEntity<>(sensor, HttpStatus.OK);
+        }
+        catch (NotFoundException e){
+            return getError(e.getMessage(), HttpStatus.BAD_REQUEST);
+        }
+
+    }
+
+    @PreAuthorize("hasAuthority(#id)")
     @PostMapping("thermostat/on")
     public ResponseEntity<Object> postThermostatOnOff (@RequestParam(value = "thermostat_id") Long id, @RequestParam(value = "on") boolean state){
 

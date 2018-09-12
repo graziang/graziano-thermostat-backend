@@ -25,6 +25,10 @@ public class Program {
     private long sourceId;
     private boolean sourceOn;
 
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "program_mode_id")
+    private ProgramMode programMode;
+
     public long getId() {
         return id;
     }
@@ -103,6 +107,14 @@ public class Program {
 
     public void setSourceOn(boolean sourceOn) {
         this.sourceOn = sourceOn;
+    }
+
+    public ProgramMode getProgramMode() {
+        return programMode;
+    }
+
+    public void setProgramMode(ProgramMode programMode) {
+        this.programMode = programMode;
     }
 
     @Override
