@@ -52,9 +52,10 @@ public class ThermostatService {
     private int lastMinuteUpdate = 0;
 
 
-  //  @PostConstruct
+    @PostConstruct
     public Thermostat initialize(){
         Thermostat td = new Thermostat("Piano superiore", "Piano con camere");
+        td.setActive(true);
         Sensor s1 = new Sensor("Mamma e Papà", "mamma desc");
         Sensor s2 = new Sensor("Lorenza", "Loo desc");
         s2.setDeviceId("28ff9680b21704aa");
@@ -72,6 +73,8 @@ public class ThermostatService {
 
         sorgente1.setThermostat(td);
         sorgente2.setThermostat(td);
+
+        td.setSource(sorgente1);
 
         s1.setThermostat(td);
         s2.setThermostat(td);
