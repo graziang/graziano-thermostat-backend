@@ -25,6 +25,7 @@ public class Program {
     private long sourceId;
     private boolean sourceOn;
 
+    @JsonIgnore
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "program_mode_id")
     private ProgramMode programMode;

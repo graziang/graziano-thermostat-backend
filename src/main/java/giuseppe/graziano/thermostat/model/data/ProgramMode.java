@@ -21,7 +21,6 @@ public class ProgramMode {
     private Thermostat thermostat;
 
     @OneToMany(mappedBy = "programMode", cascade = CascadeType.ALL,  fetch = FetchType.EAGER)
-    @JsonIgnore
     private Set<Program> programs = new HashSet<>();
 
     public long getId() {

@@ -13,6 +13,7 @@ import org.springframework.util.StringUtils;
 
 import javax.annotation.PostConstruct;
 import javax.transaction.Transactional;
+import java.time.DayOfWeek;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
@@ -51,6 +52,25 @@ public class ThermostatService {
 
     private int lastMinuteUpdate = 0;
 
+
+ //   @PostConstruct
+    public void test(){
+
+
+        Thermostat thermostat = thermostatRepository.findThermostatById(1L);
+
+
+        Program program = new Program();
+        program.setName("testporg");
+        program.setWeekDay(DayOfWeek.FRIDAY);
+        program.setStartTime(LocalTime.now());
+        program.setProgramMode(thermostat.getProgramMode());
+
+        program.setProgramMode(thermostat.getProgramMode());
+        thermostat.getProgramMode().getPrograms().add(program);
+        this.thermostatRepository.save(thermostat);
+
+    }
 
     //@PostConstruct
     public Thermostat initialize(){
