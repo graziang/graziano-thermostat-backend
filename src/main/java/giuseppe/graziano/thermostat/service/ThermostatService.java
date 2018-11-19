@@ -51,6 +51,7 @@ public class ThermostatService {
     private Map<Long, List<Measurement>> recentMeasurements = new HashMap<>();
 
     private int lastMinuteUpdate = 0;
+    private int lastHourUpdate = 0;
 
 
  //   @PostConstruct
@@ -510,12 +511,20 @@ public class ThermostatService {
 
         Calendar calendar = Calendar.getInstance();
         calendar.setTime(date);
-        int minutes = calendar.get(Calendar.MINUTE);
+        //int minutes = calendar.get(Calendar.MINUTE);
+        int hour = calendar.get(Calendar.HOUR_OF_DAY);
 
-        if (minutes % 15 == 0 && minutes != lastMinuteUpdate) {
+        /*if (minutes % 60 == 0 && minutes != lastMinuteUpdate) {
             this.measurementRepository.saveAll(measurements);
             lastMinuteUpdate = minutes;
+        }*/
+
+        if (hour != lastHourUpdate) {
+            this.measurementRepository.saveAll(measurements);
+            lastHourUpdate = hour;
         }
+
+
         return measurements;
     }
 
