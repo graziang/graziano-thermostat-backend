@@ -20,7 +20,7 @@ public class ProgramMode {
     @JsonIgnore
     private Thermostat thermostat;
 
-    @OneToMany(mappedBy = "programMode", cascade = CascadeType.ALL,  fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "programMode", cascade = CascadeType.ALL,  fetch = FetchType.EAGER)
     @JsonIgnore
     private Set<Program> programs = new HashSet<>();
 

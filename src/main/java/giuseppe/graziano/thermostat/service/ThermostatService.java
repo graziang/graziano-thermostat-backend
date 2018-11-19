@@ -146,6 +146,7 @@ public class ThermostatService {
 
         Thermostat thermostat = this.getThermostat(id);
 
+        program.setProgramMode(thermostat.getProgramMode());
         thermostat.getProgramMode().getPrograms().add(program);
         this.thermostatRepository.save(thermostat);
         return program;
