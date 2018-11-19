@@ -156,6 +156,13 @@ public class ThermostatService {
         Thermostat thermostat = this.getThermostat(id);
 
         List<Program> programs = new ArrayList(thermostat.getProgramMode().getPrograms());
+
+        if(programs.indexOf(program) == -1){
+            String errorMessage = "Program id not found: [id: " + id + "]";
+            log.error(errorMessage);
+            throw new NotFoundException(errorMessage);
+        }
+
         Program oldProgram = programs.get(programs.indexOf(program));
         oldProgram.setName(program.getName());
         oldProgram.setDescription(program.getDescription());
@@ -403,7 +410,7 @@ public class ThermostatService {
 
         return measurements;
     }
-    
+
     public SensorStats getMeasurementsStats (Long id, Long sensor_id, String dateStart, String dateEnd) throws NotFoundException {
 
 
