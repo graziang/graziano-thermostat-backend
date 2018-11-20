@@ -294,7 +294,6 @@ public class ThermostatService {
     public Thermostat updateThermostat(Long id, Thermostat thermostat) throws NotFoundException {
 
         Thermostat foundThermostat = getThermostat(id);
-
         foundThermostat.setActive(thermostat.isActive());
         foundThermostat.setMode(thermostat.getMode());
         foundThermostat.setTemperature(thermostat.getTemperature());
