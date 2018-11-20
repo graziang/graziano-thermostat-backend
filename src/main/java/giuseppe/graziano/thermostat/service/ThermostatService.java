@@ -299,6 +299,7 @@ public class ThermostatService {
         foundThermostat.setMode(thermostat.getMode());
         foundThermostat.setTemperature(thermostat.getTemperature());
         foundThermostat.setManualMode(thermostat.getManualMode());
+        foundThermostat.setProgramMode(thermostat.getProgramMode());
 
         if(!thermostat.isActive()){
             foundThermostat.setStateOn(false);
