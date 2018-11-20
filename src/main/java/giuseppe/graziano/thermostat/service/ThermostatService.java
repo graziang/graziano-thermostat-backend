@@ -54,7 +54,7 @@ public class ThermostatService {
     private int lastHourUpdate = 0;
 
 
- //   @PostConstruct
+    //   @PostConstruct
     public void test(){
 
 
@@ -294,11 +294,16 @@ public class ThermostatService {
     public Thermostat updateThermostat(Long id, Thermostat thermostat) throws NotFoundException {
 
         Thermostat foundThermostat = getThermostat(id);
+
         foundThermostat.setActive(thermostat.isActive());
         foundThermostat.setMode(thermostat.getMode());
         foundThermostat.setTemperature(thermostat.getTemperature());
         foundThermostat.setManualMode(thermostat.getManualMode());
         foundThermostat.setProgramMode(thermostat.getProgramMode());
+
+        for (Program program: foundThermostat.getProgramMode().getPrograms()){
+            program.setProgramMode(foundThermostat.getProgramMode());
+        }
 
         if(!thermostat.isActive()){
             foundThermostat.setStateOn(false);
