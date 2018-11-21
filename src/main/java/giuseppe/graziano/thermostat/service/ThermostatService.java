@@ -299,10 +299,13 @@ public class ThermostatService {
         foundThermostat.setMode(thermostat.getMode());
         foundThermostat.setTemperature(thermostat.getTemperature());
         foundThermostat.setManualMode(thermostat.getManualMode());
-        foundThermostat.setProgramMode(thermostat.getProgramMode());
 
-        for (Program program: foundThermostat.getProgramMode().getPrograms()){
-            program.setProgramMode(foundThermostat.getProgramMode());
+        if(thermostat.getProgramMode() != null && thermostat.getProgramMode().getPrograms() != null) {
+            foundThermostat.setProgramMode(thermostat.getProgramMode());
+
+            for (Program program : foundThermostat.getProgramMode().getPrograms()) {
+                program.setProgramMode(foundThermostat.getProgramMode());
+            }
         }
 
         if(!thermostat.isActive()){
