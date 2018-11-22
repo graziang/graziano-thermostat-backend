@@ -308,16 +308,17 @@ public class ThermostatService {
         foundThermostat.setTemperature(thermostat.getTemperature());
         foundThermostat.setManualMode(thermostat.getManualMode());
 
-        if(thermostat.getProgramMode() == null) {
-            ProgramMode programMode = new ProgramMode();
-            programMode.setPrograms(new HashSet<>());
-            foundThermostat.getProgramMode().setPrograms(new HashSet<>());
-        }
-        else {
+        if(thermostat.getProgramMode() != null) {
             foundThermostat.setProgramMode(thermostat.getProgramMode());
             for (Program program : foundThermostat.getProgramMode().getPrograms()) {
                 program.setProgramMode(foundThermostat.getProgramMode());
             }
+        }
+
+        if(foundThermostat.getProgramMode() == null){
+            ProgramMode programMode = new ProgramMode();
+            programMode.setPrograms(new HashSet<>());
+            foundThermostat.getProgramMode().setPrograms(new HashSet<>());
         }
 
 
