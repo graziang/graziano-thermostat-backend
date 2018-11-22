@@ -180,9 +180,9 @@ public class ThermostatRestController {
 
     @PreAuthorize("hasAuthority(#id)")
     @DeleteMapping("program")
-    public ResponseEntity<Object> deleteProgram(@RequestParam(value = "thermostat_id") Long id, @RequestBody Program program){
+    public ResponseEntity<Object> deleteProgram(@RequestParam(value = "thermostat_id") Long id, @RequestParam(value = "program_id") Long programId){
         try {
-            program = this.thermostatService.deleteProgram(id, program);
+            Program program = this.thermostatService.deleteProgram(id, programId);
             return new ResponseEntity<>(program, HttpStatus.OK);
         }
         catch (NotFoundException e){

@@ -197,11 +197,19 @@ public class ThermostatService {
         return program;
     }
 
-    public Program deleteProgram(Long id, Program program) throws NotFoundException {
+    public Program deleteProgram(Long id, Long programId) throws NotFoundException {
         Thermostat thermostat = this.getThermostat(id);
 
         List<Program> programs = new ArrayList(thermostat.getProgramMode().getPrograms());
-        programs.remove(program);
+        Program program = null;
+        for (Program p: programs){
+            if (p.getId() == programId){
+                program = p;
+            }
+        }
+        if(program != null) {
+            programs.remove(program);
+        }
         this.thermostatRepository.save(thermostat);
         return program;
     }
