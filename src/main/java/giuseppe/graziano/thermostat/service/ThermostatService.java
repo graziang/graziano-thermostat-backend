@@ -701,7 +701,7 @@ public class ThermostatService {
     private boolean isProgramOn(Program program){
 
         if (program.isActive()) {
-            LocalTime now = LocalTime.now(ZoneId.of("ETC"));
+            LocalTime now = LocalTime.now(ZoneId.of("CET"));
             boolean isSameDay = LocalDate.now().getDayOfWeek().equals(program.getWeekDay());
             boolean isAfterStart = now.isAfter(program.getStartTime());
             boolean isBeforeEnd = now.isBefore(program.getEndTime());
