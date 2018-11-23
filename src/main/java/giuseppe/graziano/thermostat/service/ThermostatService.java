@@ -318,6 +318,10 @@ public class ThermostatService {
             foundThermostat.getProgramMode().setPrograms(new HashSet<>());
         }
 
+        if(foundThermostat.getSource() == null){
+            foundThermostat.setSource(foundThermostat.getSources().iterator().next());
+        }
+
 
         if(!thermostat.isActive()){
             foundThermostat.setStateOn(false);
