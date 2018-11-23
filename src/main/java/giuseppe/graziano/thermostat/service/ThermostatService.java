@@ -595,7 +595,9 @@ public class ThermostatService {
                 }
                 thermostatMap.put("thermostat", String.valueOf(thermostat.getId()));
                 thermostatMap.put("sensors", sensorsIds);
-                thermostatMap.put("source", String.valueOf(thermostat.getSource().getId()));
+                if(thermostat.getSource() != null) {
+                    thermostatMap.put("source", String.valueOf(thermostat.getSource().getId()));
+                }
                 thermostatMap.put("state", thermostat.isStateOn());
             }
         }
