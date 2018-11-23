@@ -13,10 +13,7 @@ import org.springframework.util.StringUtils;
 
 import javax.annotation.PostConstruct;
 import javax.transaction.Transactional;
-import java.time.DayOfWeek;
-import java.time.LocalDate;
-import java.time.LocalDateTime;
-import java.time.LocalTime;
+import java.time.*;
 import java.util.*;
 import java.util.stream.Collectors;
 
@@ -52,7 +49,7 @@ public class ThermostatService {
 
     private int lastMinuteUpdate = 0;
     private int lastHourUpdate = 0;
-
+    private List<Measurement> measurementsLast;
 
     //   @PostConstruct
     public void test(){
@@ -704,7 +701,7 @@ public class ThermostatService {
     private boolean isProgramOn(Program program){
 
         if (program.isActive()) {
-            LocalTime now = LocalTime.now();
+            LocalTime now = LocalTime.now(ZoneId.of("ETC"));
             boolean isSameDay = LocalDate.now().getDayOfWeek().equals(program.getWeekDay());
             boolean isAfterStart = now.isAfter(program.getStartTime());
             boolean isBeforeEnd = now.isBefore(program.getEndTime());
