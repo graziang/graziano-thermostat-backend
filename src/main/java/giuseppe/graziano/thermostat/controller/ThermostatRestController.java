@@ -271,8 +271,7 @@ public class ThermostatRestController {
 
     @GetMapping("thermostat/map")
     public ResponseEntity<String> getThermostatMap (Principal principal){
-
-
+        
         try {
             Map thermostatMap = this.thermostatService.getThermostatMap(principal.getName());
             String json = new ObjectMapper().writeValueAsString(thermostatMap);
