@@ -173,6 +173,8 @@ programRepository.deleteAll();
         program.setProgramMode(thermostat.getProgramMode());
         thermostat.getProgramMode().getPrograms().add(program);
         this.thermostatRepository.save(thermostat);
+
+        this.calculate();
         return program;
     }
 
@@ -197,6 +199,8 @@ programRepository.deleteAll();
         oldProgram.setEndTime(program.getEndTime());
         this.programRepository.save(oldProgram);
 
+
+        this.calculate();
         return program;
     }
 
@@ -216,6 +220,8 @@ programRepository.deleteAll();
           this.programRepository.delete(program);
         }
         this.thermostatRepository.save(thermostat);
+
+        this.calculate();
         return program;
     }
 
