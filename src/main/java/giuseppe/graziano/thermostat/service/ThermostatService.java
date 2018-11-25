@@ -54,10 +54,10 @@ public class ThermostatService {
     private int lastHourUpdate = 0;
     private List<Measurement> measurementsLast;
 
-    //   @PostConstruct
+       @PostConstruct
     public void test(){
 
-
+/*
         Thermostat thermostat = thermostatRepository.findThermostatById(1L);
 
 
@@ -70,6 +70,9 @@ public class ThermostatService {
         program.setProgramMode(thermostat.getProgramMode());
         thermostat.getProgramMode().getPrograms().add(program);
         this.thermostatRepository.save(thermostat);
+
+        */
+programRepository.deleteAll();
 
     }
 
