@@ -306,7 +306,8 @@ public class ThermostatService {
         foundThermostat.setManualMode(thermostat.getManualMode());
 
         if(thermostat.getProgramMode() != null) {
-            foundThermostat.setProgramMode(thermostat.getProgramMode());
+            foundThermostat.getProgramMode().getPrograms().clear();
+            foundThermostat.getProgramMode().getPrograms().addAll(thermostat.getProgramMode().getPrograms());
             for (Program program : foundThermostat.getProgramMode().getPrograms()) {
                 program.setProgramMode(foundThermostat.getProgramMode());
             }
