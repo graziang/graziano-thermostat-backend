@@ -54,7 +54,7 @@ public class ThermostatService {
     private int lastHourUpdate = 0;
     private List<Measurement> measurementsLast;
 
-      // @PostConstruct
+       @PostConstruct
     public void test(){
 
 /*
