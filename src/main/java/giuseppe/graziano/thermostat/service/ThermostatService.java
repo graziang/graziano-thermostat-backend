@@ -54,7 +54,7 @@ public class ThermostatService {
     private int lastHourUpdate = 0;
     private List<Measurement> measurementsLast;
 
-       @PostConstruct
+      // @PostConstruct
     public void test(){
 
 /*
@@ -195,11 +195,12 @@ programRepository.deleteAll();
         oldProgram.setWeekDay(program.getWeekDay());
         oldProgram.setStartTime(program.getStartTime());
         oldProgram.setEndTime(program.getEndTime());
-        this.thermostatRepository.save(thermostat);
+        this.programRepository.save(oldProgram);
 
         return program;
     }
 
+    @Transactional
     public Program deleteProgram(Long id, Long programId) throws NotFoundException {
         Thermostat thermostat = this.getThermostat(id);
 
@@ -211,6 +212,7 @@ programRepository.deleteAll();
             }
         }
         if(program != null) {
+            thermostat.getProgramMode().getPrograms().remove(program);
           this.programRepository.delete(program);
         }
         this.thermostatRepository.save(thermostat);

@@ -9,5 +9,5 @@ import java.util.List;
 
 public interface ProgramRepository extends JpaRepository<Program, Integer> {
 
-
+    Program deleteById(Long id);
 }
