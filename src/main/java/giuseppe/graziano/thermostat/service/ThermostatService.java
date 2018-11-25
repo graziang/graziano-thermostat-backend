@@ -54,7 +54,7 @@ public class ThermostatService {
     private int lastHourUpdate = 0;
     private List<Measurement> measurementsLast;
 
-       @PostConstruct
+     //  @PostConstruct
     public void test(){
 
 /*
@@ -312,8 +312,7 @@ programRepository.deleteAll();
         foundThermostat.setManualMode(thermostat.getManualMode());
 
         if(thermostat.getProgramMode() != null) {
-            foundThermostat.getProgramMode().getPrograms().clear();
-            foundThermostat.getProgramMode().getPrograms().addAll(thermostat.getProgramMode().getPrograms());
+            foundThermostat.getProgramMode().setPrograms(thermostat.getProgramMode().getPrograms());
             for (Program program : foundThermostat.getProgramMode().getPrograms()) {
                 program.setProgramMode(foundThermostat.getProgramMode());
             }
