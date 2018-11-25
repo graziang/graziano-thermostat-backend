@@ -41,6 +41,9 @@ public class ThermostatService {
     @Autowired
     SourceRepository sourceRepository;
 
+    @Autowired
+    ProgramRepository programRepository;
+
 
     @Autowired
     private PasswordEncoder encoder;
@@ -205,7 +208,7 @@ public class ThermostatService {
             }
         }
         if(program != null) {
-            programs.remove(program);
+          this.programRepository.delete(program);
         }
         this.thermostatRepository.save(thermostat);
         return program;
