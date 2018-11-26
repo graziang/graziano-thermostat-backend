@@ -310,6 +310,7 @@ programRepository.deleteAll();
         return new ArrayList<>(user.getThermostats());
     }
 
+    @Transactional
     public Thermostat updateThermostat(Long id, Thermostat thermostat) throws NotFoundException {
 
         Thermostat foundThermostat = getThermostat(id);
@@ -661,27 +662,30 @@ programRepository.deleteAll();
 
             ManualMode manualMode = thermostat.getManualMode();
             if(thermostat.isActive()){
+
+                List<Measurement> measurements = new ArrayList<>();
+
+                if(this.recentMeasurements.containsKey(thermostat.getId())){
+                    measurements = this.recentMeasurements.get(thermostat.getId());
+                }
+
+                float avgTemperature = 0;
+                float sensorTemperature = 0;
+                for (Measurement measurement: measurements) {
+
+                    if(measurement.getSensor().getId() == manualMode.getSensorId()){
+                        sensorTemperature = measurement.getTemperature();
+                    }
+
+                    avgTemperature += measurement.getTemperature();
+
+                }
+
+                avgTemperature = avgTemperature / ((float) measurements.size());
+
                 if(thermostat.getMode().equals(Thermostat.MANUAL_MODE)){
 
-                    List<Measurement> measurements = new ArrayList<>();
 
-                    if(this.recentMeasurements.containsKey(thermostat.getId())){
-                        measurements = this.recentMeasurements.get(thermostat.getId());
-                    }
-
-                    float avgTemperature = 0;
-                    float sensorTemperature = 0;
-                    for (Measurement measurement: measurements) {
-
-                        if(measurement.getSensor().getId() == manualMode.getSensorId()){
-                            sensorTemperature = measurement.getTemperature();
-                        }
-
-                        avgTemperature += measurement.getTemperature();
-
-                    }
-
-                    avgTemperature = avgTemperature / ((float) measurements.size());
 
                     if(measurements.size() == 0){
                         thermostat.setStateOn(false);
@@ -700,9 +704,16 @@ programRepository.deleteAll();
 
                     for (Program program: mode.getPrograms()) {
                         if(isProgramOn(program)){
-                            thermostat.setStateOn(true);
-                            thermostat.setSource(sourceRepository.findSourceById(program.getSourceId()));
-                            program.setSourceOn(true);
+                            if(manualMode.isAvg()){
+                                thermostat.setStateOn(avgTemperature < thermostat.getTemperature());
+                                thermostat.setSource(sourceRepository.findSourceById(program.getSourceId()));
+                                program.setSourceOn(true);
+                            }
+                            else {
+                                thermostat.setStateOn(sensorTemperature < thermostat.getTemperature());
+                                thermostat.setSource(sourceRepository.findSourceById(program.getSourceId()));
+                                program.setSourceOn(true);
+                            }
                             break;
                         }
                         else {
