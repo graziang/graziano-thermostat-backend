@@ -321,12 +321,21 @@ programRepository.deleteAll();
         foundThermostat.setManualMode(thermostat.getManualMode());
 
         if(thermostat.getProgramMode() != null) {
+
+            if(foundThermostat.getProgramMode() != null) {
+                Set<Program> toDelete = foundThermostat.getProgramMode().getPrograms();
+                toDelete.removeAll(thermostat.getProgramMode().getPrograms());
+                this.programRepository.deleteAll(toDelete);
+            }
+
             foundThermostat.setProgramMode(thermostat.getProgramMode());
             //foundThermostat.getProgramMode().setPrograms(thermostat.getProgramMode().getPrograms());
             for (Program program : foundThermostat.getProgramMode().getPrograms()) {
                 program.setProgramMode(foundThermostat.getProgramMode());
             }
         }
+
+
 
         if(foundThermostat.getProgramMode() == null){
             ProgramMode programMode = new ProgramMode();
