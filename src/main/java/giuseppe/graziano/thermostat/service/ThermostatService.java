@@ -335,8 +335,6 @@ programRepository.deleteAll();
             }
         }
 
-
-
         if(foundThermostat.getProgramMode() == null){
             ProgramMode programMode = new ProgramMode();
             programMode.setPrograms(new HashSet<>());
