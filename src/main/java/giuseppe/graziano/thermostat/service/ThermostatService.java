@@ -321,7 +321,8 @@ programRepository.deleteAll();
         foundThermostat.setManualMode(thermostat.getManualMode());
 
         if(thermostat.getProgramMode() != null) {
-            foundThermostat.getProgramMode().setPrograms(thermostat.getProgramMode().getPrograms());
+            foundThermostat.setProgramMode(thermostat.getProgramMode());
+            //foundThermostat.getProgramMode().setPrograms(thermostat.getProgramMode().getPrograms());
             for (Program program : foundThermostat.getProgramMode().getPrograms()) {
                 program.setProgramMode(foundThermostat.getProgramMode());
             }
