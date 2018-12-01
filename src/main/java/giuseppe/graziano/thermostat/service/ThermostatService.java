@@ -62,6 +62,8 @@ public class ThermostatService {
         Thermostat thermostat = thermostatRepository.findThermostatById(12L);
         thermostat.setActive(true);
         thermostat.setMode(Thermostat.MANUAL_MODE);
+        thermostat.getManualMode().setActive(true);
+        thermostat.getProgramMode().setActive(true);
         thermostatRepository.save(thermostat);
 
       /*     Set terms = new HashSet<>();
