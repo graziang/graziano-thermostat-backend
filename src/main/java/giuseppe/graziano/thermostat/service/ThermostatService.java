@@ -54,25 +54,23 @@ public class ThermostatService {
     private int lastHourUpdate = 0;
     private List<Measurement> measurementsLast;
 
-      // @PostConstruct
+       @PostConstruct
     public void test(){
 
-/*
-        Thermostat thermostat = thermostatRepository.findThermostatById(1L);
+
+        Thermostat thermostat = thermostatRepository.findThermostatById(12L);
+
+           Set terms = new HashSet<>();
+           terms.add(thermostat);
+
+           User userThermostat = new User();
+           userThermostat.setUsername("grazianotermostatopi");
+           userThermostat.setPassword(encoder.encode("grazianotermostato2018"));
+           userThermostat.setThermostats(terms);
+           userThermostat.setSelectedThermostatId(12L);
+           userRepository.save(userThermostat);
 
 
-        Program program = new Program();
-        program.setName("testporg");
-        program.setWeekDay(DayOfWeek.FRIDAY);
-        program.setStartTime(LocalTime.now());
-        program.setProgramMode(thermostat.getProgramMode());
-
-        program.setProgramMode(thermostat.getProgramMode());
-        thermostat.getProgramMode().getPrograms().add(program);
-        this.thermostatRepository.save(thermostat);
-
-        */
-programRepository.deleteAll();
 
     }
 
