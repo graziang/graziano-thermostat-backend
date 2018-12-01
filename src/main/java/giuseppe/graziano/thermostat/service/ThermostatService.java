@@ -54,13 +54,19 @@ public class ThermostatService {
     private int lastHourUpdate = 0;
     private List<Measurement> measurementsLast;
 
-       @PostConstruct
+
+    @PostConstruct
     public void test(){
 
 
         Thermostat thermostat = thermostatRepository.findThermostatById(12L);
+        ProgramMode mode = new ProgramMode();
+        mode.setPrograms(new HashSet<>());
+        mode.setThermostat(thermostat);
+        thermostat.setProgramMode(mode);
+        thermostatRepository.save(thermostat);
 
-           Set terms = new HashSet<>();
+      /*     Set terms = new HashSet<>();
            terms.add(thermostat);
 
            User userThermostat = new User();
@@ -69,7 +75,7 @@ public class ThermostatService {
            userThermostat.setThermostats(terms);
            userThermostat.setSelectedThermostatId(12L);
            userRepository.save(userThermostat);
-
+*/
 
 
     }
