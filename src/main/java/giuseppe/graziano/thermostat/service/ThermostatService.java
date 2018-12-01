@@ -60,10 +60,8 @@ public class ThermostatService {
 
 
         Thermostat thermostat = thermostatRepository.findThermostatById(12L);
-        ProgramMode mode = new ProgramMode();
-        mode.setPrograms(new HashSet<>());
-        mode.setThermostat(thermostat);
-        thermostat.setProgramMode(mode);
+        thermostat.setActive(true);
+        thermostat.setMode(Thermostat.MANUAL_MODE);
         thermostatRepository.save(thermostat);
 
       /*     Set terms = new HashSet<>();
