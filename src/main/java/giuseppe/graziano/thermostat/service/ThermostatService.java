@@ -55,7 +55,7 @@ public class ThermostatService {
     private List<Measurement> measurementsLast;
 
 
-    @PostConstruct
+   // @PostConstruct
     public void test(){
 
 
@@ -346,7 +346,7 @@ public class ThermostatService {
         }
 
         if(foundThermostat.getSource() == null){
-            foundThermostat.setSource(foundThermostat.getSources().iterator().next());
+            //foundThermostat.setSource(foundThermostat.getSources().iterator().next());
         }
 
 
