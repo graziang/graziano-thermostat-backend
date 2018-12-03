@@ -625,7 +625,13 @@ public class ThermostatService {
                 if(thermostat.getSource() != null) {
                     thermostatMap.put("source", String.valueOf(thermostat.getSource().getId()));
                 }
-                thermostatMap.put("state", thermostat.isStateOn());
+                if(thermostat.getId() == 12L) {
+                    thermostatMap.put("state", !thermostat.isStateOn());
+
+                }
+                else {
+                    thermostatMap.put("state", thermostat.isStateOn());
+                }
             }
         }
         return  thermostatMap;
