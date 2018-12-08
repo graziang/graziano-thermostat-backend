@@ -48,11 +48,15 @@ public class ThermostatService {
     @Autowired
     private PasswordEncoder encoder;
 
+    @Autowired
+    private AndroidNotificationsService androidNotificationsService;
+
     private Map<Long, List<Measurement>> recentMeasurements = new HashMap<>();
 
     private int lastMinuteUpdate = 0;
     private int lastHourUpdate = 0;
     private List<Measurement> measurementsLast;
+    private Map<Long, Boolean> thermostatHealtStatusMap = new HashMap<>();
 
 
    // @PostConstruct
@@ -60,13 +64,16 @@ public class ThermostatService {
 
 
         Thermostat thermostat = thermostatRepository.findThermostatById(12L);
+        this.androidNotificationsService.senddVWithSDK("Eccoloooo ", thermostat);
+
+    /*    Thermostat thermostat = thermostatRepository.findThermostatById(12L);
         thermostat.setActive(true);
         thermostat.setMode(Thermostat.MANUAL_MODE);
         thermostat.getManualMode().setActive(true);
         thermostat.getProgramMode().setActive(true);
         thermostatRepository.save(thermostat);
 
-      /*     Set terms = new HashSet<>();
+        Set terms = new HashSet<>();
            terms.add(thermostat);
 
            User userThermostat = new User();
@@ -625,9 +632,10 @@ public class ThermostatService {
                 if(thermostat.getSource() != null) {
                     thermostatMap.put("source", String.valueOf(thermostat.getSource().getId()));
                 }
+
+                //modifica brutta
                 if(thermostat.getId() == 12L) {
                     thermostatMap.put("state", !thermostat.isStateOn());
-
                 }
                 else {
                     thermostatMap.put("state", thermostat.isStateOn());
@@ -676,6 +684,8 @@ public class ThermostatService {
         List<Thermostat> thermostats = getThermostats();
 
         for (Thermostat thermostat: thermostats){
+
+            boolean oldStatus = thermostat.isStateOn();
             thermostat.setStateOn(false);
 
             ManualMode manualMode = thermostat.getManualMode();
@@ -690,6 +700,27 @@ public class ThermostatService {
                 float avgTemperature = 0;
                 float sensorTemperature = 0;
                 for (Measurement measurement: measurements) {
+
+                    //controllo notifica
+                    Long difference = System.currentTimeMillis() - measurement.getDate().getTime();
+                   if(difference > 60 * 1000){
+                       if(thermostatHealtStatusMap.containsKey(thermostat.getId())){
+                           if(thermostatHealtStatusMap.get(thermostat.getId())){
+                               thermostatHealtStatusMap.put(thermostat.getId(), false);
+                               String message = "Il termostato è offline";
+                               this.androidNotificationsService.senddVWithSDK(message, thermostat);
+
+                           }
+                           else {
+                               thermostatHealtStatusMap.put(thermostat.getId(), true);
+                               String message = "Il termostato è online";
+                               this.androidNotificationsService.senddVWithSDK(message, thermostat);
+                           }
+                       }
+                       else {
+                           thermostatHealtStatusMap.put(thermostat.getId(), true);
+                       }
+                   }
 
                     if(measurement.getSensor().getId() == manualMode.getSensorId()){
                         sensorTemperature = measurement.getTemperature();
@@ -739,6 +770,12 @@ public class ThermostatService {
                         }
                     }
                 }
+            }
+
+
+            if(thermostat.isStateOn() && thermostat.isStateOn() != oldStatus) {
+                String message = "Il riscaldamento si è accesso";
+                this.androidNotificationsService.senddVWithSDK(message, thermostat);
             }
 
             this.thermostatRepository.save(thermostat);
