@@ -53,11 +53,10 @@ public class AndroidNotificationsService {
 
     public void senddVWithSDK(String messageText, Thermostat thermostat){
 
-        String title = "TITLE: " + messageText;
-        String body = "BODY: " + messageText;
+        String title = thermostat.getName() + ": " + messageText;
 
         Message message = Message.builder()
-                .setNotification(new Notification(title, body))
+                .setNotification(new Notification(title, ""))
                 .setTopic(String.valueOf(thermostat.getId()))
                 .build();
 

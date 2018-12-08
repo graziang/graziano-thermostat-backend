@@ -59,12 +59,18 @@ public class ThermostatService {
     private Map<Long, Boolean> thermostatHealtStatusMap = new HashMap<>();
 
 
-   // @PostConstruct
+    @PostConstruct
     public void test(){
 
 
         Thermostat thermostat = thermostatRepository.findThermostatById(12L);
-        this.androidNotificationsService.senddVWithSDK("Eccoloooo ", thermostat);
+        thermostat.setName("Piano terra");
+        this.thermostatRepository.save(thermostat);
+
+        thermostatRepository.findThermostatById(1L);
+        thermostat.setName("Primo piano");
+        this.thermostatRepository.save(thermostat);
+      //  this.androidNotificationsService.senddVWithSDK("Eccoloooo ", thermostat);
 
     /*    Thermostat thermostat = thermostatRepository.findThermostatById(12L);
         thermostat.setActive(true);
@@ -697,31 +703,44 @@ public class ThermostatService {
                     measurements = this.recentMeasurements.get(thermostat.getId());
                 }
 
+
+
+                //controllo notifica
+
+                if(measurements.size() > 0) {
+                    Long difference = System.currentTimeMillis() - measurements.get(0).getDate().getTime();
+                    if (difference > 60 * 1000) {
+                        if (thermostatHealtStatusMap.containsKey(thermostat.getId())) {
+                            if (thermostatHealtStatusMap.get(thermostat.getId())) {
+                                thermostatHealtStatusMap.put(thermostat.getId(), false);
+                                String message = "Il termostato è offline";
+                                this.androidNotificationsService.senddVWithSDK(message, thermostat);
+
+
+                            }
+                        } else {
+                            thermostatHealtStatusMap.put(thermostat.getId(), true);
+                        }
+                    }
+                    else {
+                        if (thermostatHealtStatusMap.containsKey(thermostat.getId())) {
+                            if (!thermostatHealtStatusMap.get(thermostat.getId())) {
+                                thermostatHealtStatusMap.put(thermostat.getId(), true);
+                                String message = "Il termostato è online";
+                                this.androidNotificationsService.senddVWithSDK(message, thermostat);
+
+                            }
+                        } else {
+                            thermostatHealtStatusMap.put(thermostat.getId(), true);
+                        }
+                    }
+                }
+
+
+
                 float avgTemperature = 0;
                 float sensorTemperature = 0;
                 for (Measurement measurement: measurements) {
-
-                    //controllo notifica
-                    Long difference = System.currentTimeMillis() - measurement.getDate().getTime();
-                   if(difference > 60 * 1000){
-                       if(thermostatHealtStatusMap.containsKey(thermostat.getId())){
-                           if(thermostatHealtStatusMap.get(thermostat.getId())){
-                               thermostatHealtStatusMap.put(thermostat.getId(), false);
-                               String message = "Il termostato è offline";
-                               this.androidNotificationsService.senddVWithSDK(message, thermostat);
-
-                           }
-                           else {
-                               thermostatHealtStatusMap.put(thermostat.getId(), true);
-                               String message = "Il termostato è online";
-                               this.androidNotificationsService.senddVWithSDK(message, thermostat);
-                           }
-                       }
-                       else {
-                           thermostatHealtStatusMap.put(thermostat.getId(), true);
-                       }
-                   }
-
                     if(measurement.getSensor().getId() == manualMode.getSensorId()){
                         sensorTemperature = measurement.getTemperature();
                     }
@@ -737,6 +756,9 @@ public class ThermostatService {
 
 
                     if(measurements.size() == 0){
+                        thermostatHealtStatusMap.put(thermostat.getId(), false);
+                        String message = "Il termostato è offline";
+                        this.androidNotificationsService.senddVWithSDK(message, thermostat);
                         thermostat.setStateOn(false);
                     }
                     else if(manualMode.isAvg()){
