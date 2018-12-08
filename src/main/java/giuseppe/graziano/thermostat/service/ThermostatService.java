@@ -59,7 +59,7 @@ public class ThermostatService {
     private Map<Long, Boolean> thermostatHealtStatusMap = new HashMap<>();
 
 
-    @PostConstruct
+    //@PostConstruct
     public void test(){
 
 
@@ -756,9 +756,15 @@ public class ThermostatService {
 
 
                     if(measurements.size() == 0){
-                        thermostatHealtStatusMap.put(thermostat.getId(), false);
-                        String message = "Il termostato è offline";
-                        this.androidNotificationsService.senddVWithSDK(message, thermostat);
+                        if (thermostatHealtStatusMap.containsKey(thermostat.getId())) {
+                            if (thermostatHealtStatusMap.get(thermostat.getId())) {
+                                thermostatHealtStatusMap.put(thermostat.getId(), false);
+                                String message = "Il termostato è offline";
+                                this.androidNotificationsService.senddVWithSDK(message, thermostat);
+
+
+                            }
+                        }
                         thermostat.setStateOn(false);
                     }
                     else if(manualMode.isAvg()){
