@@ -59,16 +59,16 @@ public class ThermostatService {
     private Map<Long, Boolean> thermostatHealtStatusMap = new HashMap<>();
 
 
-  //  @PostConstruct
+    @PostConstruct
     public void test(){
 
 
         Thermostat thermostat = thermostatRepository.findThermostatById(12L);
-        thermostat.setName("Piano terra");
+        thermostat.setName("Piano giorno");
         this.thermostatRepository.save(thermostat);
 
         thermostat = thermostatRepository.findThermostatById(1L);
-        thermostat.setName("Primo piano");
+        thermostat.setName("Primo notte");
         this.thermostatRepository.save(thermostat);
       //  this.androidNotificationsService.senddVWithSDK("Eccoloooo ", thermostat);
 
