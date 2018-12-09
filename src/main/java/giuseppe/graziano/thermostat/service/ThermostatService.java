@@ -59,7 +59,7 @@ public class ThermostatService {
     private Map<Long, Boolean> thermostatHealtStatusMap = new HashMap<>();
 
 
-    @PostConstruct
+  //  @PostConstruct
     public void test(){
 
 
