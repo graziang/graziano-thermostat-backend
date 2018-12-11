@@ -68,7 +68,7 @@ public class ThermostatService {
         this.thermostatRepository.save(thermostat);
 
         thermostat = thermostatRepository.findThermostatById(1L);
-        thermostat.setName("Primo notte");
+        thermostat.setName("Piano notte");
         this.thermostatRepository.save(thermostat);
       //  this.androidNotificationsService.senddVWithSDK("Eccoloooo ", thermostat);
 
