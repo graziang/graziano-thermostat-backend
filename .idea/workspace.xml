@@ -2,7 +2,6 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="e8dcb6ad-a08a-4102-b9c1-f5db51f82600" name="Default" comment="bug fix">
-      <change beforePath="$PROJECT_DIR$/.idea/compiler.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/compiler.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/giuseppe/graziano/thermostat/service/ThermostatService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/giuseppe/graziano/thermostat/service/ThermostatService.java" afterDir="false" />
     </list>
@@ -27,11 +26,11 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/main/java/giuseppe/graziano/thermostat/service/ThermostatService.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="525">
-              <caret line="772" column="25" selection-start-line="772" selection-start-column="25" selection-end-line="772" selection-end-column="25" />
+            <state relative-caret-position="498">
+              <caret line="564" column="34" selection-start-line="564" selection-start-column="34" selection-end-line="564" selection-end-column="34" />
               <folding>
-                <element signature="e#8140#8141#0" expanded="true" />
-                <element signature="e#8223#8224#0" expanded="true" />
+                <element signature="e#8142#8143#0" expanded="true" />
+                <element signature="e#8225#8226#0" expanded="true" />
                 <element signature="e#9553#9554#0" expanded="true" />
                 <element signature="e#9606#9607#0" expanded="true" />
               </folding>
@@ -60,8 +59,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/java/giuseppe/graziano/thermostat/controller/ThermostatRestController.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="3366">
-              <caret line="219" selection-start-line="219" selection-end-line="219" />
+            <state relative-caret-position="277">
+              <caret line="378" column="75" selection-start-line="378" selection-start-column="75" selection-end-line="378" selection-end-column="75" />
             </state>
           </provider>
         </entry>
@@ -140,6 +139,8 @@
       <find>&quot;sensor</find>
       <find>grazianotermostato</find>
       <find>setStateOn</find>
+      <find>12</find>
+      <find>&quot;measurement</find>
     </findStrings>
   </component>
   <component name="Git.Settings">
@@ -270,7 +271,7 @@
       <workItem from="1543574520127" duration="2741000" />
       <workItem from="1543823942786" duration="595000" />
       <workItem from="1544541849854" duration="187000" />
-      <workItem from="1545909834313" duration="557000" />
+      <workItem from="1545909834313" duration="1958000" />
     </task>
     <task id="LOCAL-00001" summary="bug fix">
       <created>1542717611571</created>
@@ -321,11 +322,25 @@
       <option name="project" value="LOCAL" />
       <updated>1544541987806</updated>
     </task>
-    <option name="localTasksCounter" value="8" />
+    <task id="LOCAL-00008" summary="bug fix">
+      <created>1545910553719</created>
+      <option name="number" value="00008" />
+      <option name="presentableId" value="LOCAL-00008" />
+      <option name="project" value="LOCAL" />
+      <updated>1545910553719</updated>
+    </task>
+    <task id="LOCAL-00009" summary="bug fix">
+      <created>1545911797821</created>
+      <option name="number" value="00009" />
+      <option name="presentableId" value="LOCAL-00009" />
+      <option name="project" value="LOCAL" />
+      <updated>1545911797821</updated>
+    </task>
+    <option name="localTasksCounter" value="10" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="28942000" />
+    <option name="totallyTimeSpent" value="30343000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-7" y="-7" width="1550" height="838" extended-state="6" />
@@ -371,9 +386,9 @@
     <option name="version" value="1" />
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="bug fix" />
     <MESSAGE value="cambio nome" />
-    <option name="LAST_COMMIT_MESSAGE" value="cambio nome" />
+    <MESSAGE value="bug fix" />
+    <option name="LAST_COMMIT_MESSAGE" value="bug fix" />
   </component>
   <component name="editorHistoryManager">
     <entry file="jar://C:/Program Files (x86)/Java/jdk1.8.0_131/src.zip!/java/time/DayOfWeek.java">
@@ -453,13 +468,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/giuseppe/graziano/thermostat/controller/ThermostatRestController.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="3366">
-          <caret line="219" selection-start-line="219" selection-end-line="219" />
-        </state>
-      </provider>
-    </entry>
     <entry file="jar://C:/Program Files (x86)/Java/jdk1.8.0_131/src.zip!/java/time/LocalTime.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="23171">
@@ -502,13 +510,20 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/giuseppe/graziano/thermostat/controller/ThermostatRestController.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="277">
+          <caret line="378" column="75" selection-start-line="378" selection-start-column="75" selection-end-line="378" selection-end-column="75" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/giuseppe/graziano/thermostat/service/ThermostatService.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="525">
-          <caret line="772" column="25" selection-start-line="772" selection-start-column="25" selection-end-line="772" selection-end-column="25" />
+        <state relative-caret-position="498">
+          <caret line="564" column="34" selection-start-line="564" selection-start-column="34" selection-end-line="564" selection-end-column="34" />
           <folding>
-            <element signature="e#8140#8141#0" expanded="true" />
-            <element signature="e#8223#8224#0" expanded="true" />
+            <element signature="e#8142#8143#0" expanded="true" />
+            <element signature="e#8225#8226#0" expanded="true" />
             <element signature="e#9553#9554#0" expanded="true" />
             <element signature="e#9606#9607#0" expanded="true" />
           </folding>
