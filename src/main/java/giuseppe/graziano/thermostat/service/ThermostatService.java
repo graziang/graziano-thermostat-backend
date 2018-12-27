@@ -59,7 +59,7 @@ public class ThermostatService {
     private Map<Long, Boolean> thermostatHealtStatusMap = new HashMap<>();
 
 
-    @PostConstruct
+   // @PostConstruct
     public void test(){
 
 
@@ -768,10 +768,20 @@ public class ThermostatService {
                         thermostat.setStateOn(false);
                     }
                     else if(manualMode.isAvg()){
-                        thermostat.setStateOn(avgTemperature < thermostat.getTemperature());
+                        if(oldStatus && (thermostat.getTemperature() > avgTemperature)) {
+                            thermostat.setStateOn(true);
+                        }
+                        else if((thermostat.getTemperature() - avgTemperature) >= 0.5){
+                            thermostat.setStateOn(true);
+                        }
                     }
                     else {
-                        thermostat.setStateOn(sensorTemperature < thermostat.getTemperature());
+                        if(oldStatus && (thermostat.getTemperature() > sensorTemperature)) {
+                            thermostat.setStateOn(true);
+                        }
+                        else if((thermostat.getTemperature() - sensorTemperature) >= 0.5){
+                            thermostat.setStateOn(true);
+                        }
                     }
 
                 }
