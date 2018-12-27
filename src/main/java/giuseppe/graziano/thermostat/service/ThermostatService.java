@@ -639,13 +639,15 @@ public class ThermostatService {
                     thermostatMap.put("source", String.valueOf(thermostat.getSource().getId()));
                 }
 
+                thermostatMap.put("state", thermostat.isStateOn());
+/*
                 //modifica brutta
                 if(thermostat.getId() == 12L) {
                     thermostatMap.put("state", !thermostat.isStateOn());
                 }
                 else {
                     thermostatMap.put("state", thermostat.isStateOn());
-                }
+                }*/
             }
         }
         return  thermostatMap;
