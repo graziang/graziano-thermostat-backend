@@ -565,6 +565,9 @@ public class ThermostatService {
                 if(temperature > -100) {
                     measurements.add(m);
                 }
+                else {
+                    return measurements;
+                }
             }
             else {
                 // log.error("Wrong sensor ID: " + stringID);
