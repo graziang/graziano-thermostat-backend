@@ -717,7 +717,7 @@ public class ThermostatService {
 
                 if(measurements.size() > 0) {
                     Long difference = System.currentTimeMillis() - measurements.get(0).getDate().getTime();
-                    if (difference > 60 * 1000) {
+                    if (difference > (5 * 60 * 1000)) {
                         if (thermostatHealtStatusMap.containsKey(thermostat.getId())) {
                             if (thermostatHealtStatusMap.get(thermostat.getId())) {
                                 thermostatHealtStatusMap.put(thermostat.getId(), false);
