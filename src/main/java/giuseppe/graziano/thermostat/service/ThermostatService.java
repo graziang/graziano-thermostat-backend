@@ -576,7 +576,7 @@ public class ThermostatService {
 
         this.recentMeasurements.put(id, measurements);
 
-        this.calculate();
+        this.calculate(thermostatRepository.findThermostatById(id));
 
         Calendar calendar = Calendar.getInstance();
         calendar.setTime(date);
@@ -699,136 +699,141 @@ public class ThermostatService {
 
         for (Thermostat thermostat: thermostats){
 
-            boolean oldStatus = thermostat.isStateOn();
-            thermostat.setStateOn(false);
+            calculate(thermostat);
 
-            ManualMode manualMode = thermostat.getManualMode();
-            if(thermostat.isActive()){
-
-                List<Measurement> measurements = new ArrayList<>();
-
-                if(this.recentMeasurements.containsKey(thermostat.getId())){
-                    measurements = this.recentMeasurements.get(thermostat.getId());
-                }
-
-
-
-                //controllo notifica
-
-                if(measurements.size() > 0) {
-                    Long difference = System.currentTimeMillis() - measurements.get(0).getDate().getTime();
-                    if (difference > (5 * 60 * 1000)) {
-                        if (thermostatHealtStatusMap.containsKey(thermostat.getId())) {
-                            if (thermostatHealtStatusMap.get(thermostat.getId())) {
-                                thermostatHealtStatusMap.put(thermostat.getId(), false);
-                                String message = "Il termostato è offline";
-                                this.androidNotificationsService.senddVWithSDK(message, thermostat);
-
-
-                            }
-                        } else {
-                            thermostatHealtStatusMap.put(thermostat.getId(), true);
-                        }
-                    }
-                    else {
-                        if (thermostatHealtStatusMap.containsKey(thermostat.getId())) {
-                            if (!thermostatHealtStatusMap.get(thermostat.getId())) {
-                                thermostatHealtStatusMap.put(thermostat.getId(), true);
-                                String message = "Il termostato è online";
-                                this.androidNotificationsService.senddVWithSDK(message, thermostat);
-
-                            }
-                        } else {
-                            thermostatHealtStatusMap.put(thermostat.getId(), true);
-                        }
-                    }
-                }
-
-
-
-                float avgTemperature = 0;
-                float sensorTemperature = 0;
-                for (Measurement measurement: measurements) {
-                    if(measurement.getSensor().getId() == manualMode.getSensorId()){
-                        sensorTemperature = measurement.getTemperature();
-                    }
-
-                    avgTemperature += measurement.getTemperature();
-
-                }
-
-                avgTemperature = avgTemperature / ((float) measurements.size());
-
-                if(thermostat.getMode().equals(Thermostat.MANUAL_MODE)){
-
-
-
-                    if(measurements.size() == 0){
-                        if (thermostatHealtStatusMap.containsKey(thermostat.getId())) {
-                            if (thermostatHealtStatusMap.get(thermostat.getId())) {
-                                thermostatHealtStatusMap.put(thermostat.getId(), false);
-                                String message = "Il termostato è offline";
-                                this.androidNotificationsService.senddVWithSDK(message, thermostat);
-
-
-                            }
-                        }
-                        thermostat.setStateOn(false);
-                    }
-                    else if(manualMode.isAvg()){
-                        if(oldStatus && (thermostat.getTemperature() > avgTemperature)) {
-                            thermostat.setStateOn(true);
-                        }
-                        else if(!oldStatus && (thermostat.getTemperature() - avgTemperature) >= 0.5){
-                            thermostat.setStateOn(true);
-                        }
-                    }
-                    else {
-                        if(oldStatus && (thermostat.getTemperature() > sensorTemperature)) {
-                            thermostat.setStateOn(true);
-                        }
-                        else if(!oldStatus && (thermostat.getTemperature() - sensorTemperature) >= 0.5){
-                            thermostat.setStateOn(true);
-                        }
-                    }
-
-                }
-
-                else if(thermostat.getMode().equals(Thermostat.PROGRAM_MODE)){
-                    ProgramMode mode = thermostat.getProgramMode();
-
-                    for (Program program: mode.getPrograms()) {
-                        if(isProgramOn(program)){
-                            if(manualMode.isAvg()){
-                                thermostat.setStateOn(avgTemperature < thermostat.getTemperature());
-                                thermostat.setSource(sourceRepository.findSourceById(program.getSourceId()));
-                                program.setSourceOn(true);
-                            }
-                            else {
-                                thermostat.setStateOn(sensorTemperature < thermostat.getTemperature());
-                                thermostat.setSource(sourceRepository.findSourceById(program.getSourceId()));
-                                program.setSourceOn(true);
-                            }
-                            break;
-                        }
-                        else {
-                            program.setSourceOn(false);
-                        }
-                    }
-                }
-            }
-
-
-            if(thermostat.isStateOn() && !oldStatus) {
-                String message = "Il riscaldamento si è accesso";
-                this.androidNotificationsService.senddVWithSDK(message, thermostat);
-            }
-
-            this.thermostatRepository.save(thermostat);
         }
 
     }
 
+    @Transactional
+    synchronized public void calculate(Thermostat thermostat) {
+        boolean oldStatus = thermostat.isStateOn();
+        thermostat.setStateOn(false);
+
+        ManualMode manualMode = thermostat.getManualMode();
+        if(thermostat.isActive()){
+
+            List<Measurement> measurements = new ArrayList<>();
+
+            if(this.recentMeasurements.containsKey(thermostat.getId())){
+                measurements = this.recentMeasurements.get(thermostat.getId());
+            }
+
+
+
+            //controllo notifica
+
+            if(measurements.size() > 0) {
+                Long difference = System.currentTimeMillis() - measurements.get(0).getDate().getTime();
+                if (difference > (5 * 60 * 1000)) {
+                    if (thermostatHealtStatusMap.containsKey(thermostat.getId())) {
+                        if (thermostatHealtStatusMap.get(thermostat.getId())) {
+                            thermostatHealtStatusMap.put(thermostat.getId(), false);
+                            String message = "Il termostato è offline";
+                            this.androidNotificationsService.senddVWithSDK(message, thermostat);
+
+
+                        }
+                    } else {
+                        thermostatHealtStatusMap.put(thermostat.getId(), true);
+                    }
+                }
+                else {
+                    if (thermostatHealtStatusMap.containsKey(thermostat.getId())) {
+                        if (!thermostatHealtStatusMap.get(thermostat.getId())) {
+                            thermostatHealtStatusMap.put(thermostat.getId(), true);
+                            String message = "Il termostato è online";
+                            this.androidNotificationsService.senddVWithSDK(message, thermostat);
+
+                        }
+                    } else {
+                        thermostatHealtStatusMap.put(thermostat.getId(), true);
+                    }
+                }
+            }
+
+
+
+            float avgTemperature = 0;
+            float sensorTemperature = 0;
+            for (Measurement measurement: measurements) {
+                if(measurement.getSensor().getId() == manualMode.getSensorId()){
+                    sensorTemperature = measurement.getTemperature();
+                }
+
+                avgTemperature += measurement.getTemperature();
+
+            }
+
+            avgTemperature = avgTemperature / ((float) measurements.size());
+
+            if(thermostat.getMode().equals(Thermostat.MANUAL_MODE)){
+
+
+
+                if(measurements.size() == 0){
+                    if (thermostatHealtStatusMap.containsKey(thermostat.getId())) {
+                        if (thermostatHealtStatusMap.get(thermostat.getId())) {
+                            thermostatHealtStatusMap.put(thermostat.getId(), false);
+                            String message = "Il termostato è offline";
+                            this.androidNotificationsService.senddVWithSDK(message, thermostat);
+
+
+                        }
+                    }
+                    thermostat.setStateOn(false);
+                }
+                else if(manualMode.isAvg()){
+                    if(oldStatus && (thermostat.getTemperature() > avgTemperature)) {
+                        thermostat.setStateOn(true);
+                    }
+                    else if(!oldStatus && (thermostat.getTemperature() - avgTemperature) >= 0.5){
+                        thermostat.setStateOn(true);
+                    }
+                }
+                else {
+                    if(oldStatus && (thermostat.getTemperature() > sensorTemperature)) {
+                        thermostat.setStateOn(true);
+                    }
+                    else if(!oldStatus && (thermostat.getTemperature() - sensorTemperature) >= 0.5){
+                        thermostat.setStateOn(true);
+                    }
+                }
+
+            }
+
+            else if(thermostat.getMode().equals(Thermostat.PROGRAM_MODE)){
+                ProgramMode mode = thermostat.getProgramMode();
+
+                for (Program program: mode.getPrograms()) {
+                    if(isProgramOn(program)){
+                        if(manualMode.isAvg()){
+                            thermostat.setStateOn(avgTemperature < thermostat.getTemperature());
+                            thermostat.setSource(sourceRepository.findSourceById(program.getSourceId()));
+                            program.setSourceOn(true);
+                        }
+                        else {
+                            thermostat.setStateOn(sensorTemperature < thermostat.getTemperature());
+                            thermostat.setSource(sourceRepository.findSourceById(program.getSourceId()));
+                            program.setSourceOn(true);
+                        }
+                        break;
+                    }
+                    else {
+                        program.setSourceOn(false);
+                    }
+                }
+            }
+        }
+
+
+        if(thermostat.isStateOn() && !oldStatus) {
+            String message = "Il riscaldamento si è accesso";
+            this.androidNotificationsService.senddVWithSDK(message, thermostat);
+        }
+
+        this.thermostatRepository.save(thermostat);
+    }
 
     private boolean isProgramOn(Program program){
 

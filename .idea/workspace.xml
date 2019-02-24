@@ -16,12 +16,12 @@
     <session id="101323523">
       <usages-collector id="statistics.file.extensions.edit">
         <counts>
-          <entry key="java" value="22" />
+          <entry key="java" value="91" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.edit">
         <counts>
-          <entry key="JAVA" value="22" />
+          <entry key="JAVA" value="91" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.lifecycle.project">
@@ -31,6 +31,16 @@
           <entry key="project.opened" value="1" />
         </counts>
       </usages-collector>
+      <usages-collector id="statistics.file.extensions.open">
+        <counts>
+          <entry key="java" value="1" />
+        </counts>
+      </usages-collector>
+      <usages-collector id="statistics.file.types.open">
+        <counts>
+          <entry key="JAVA" value="1" />
+        </counts>
+      </usages-collector>
     </session>
   </component>
   <component name="FileEditorManager">
@@ -38,14 +48,26 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/main/java/giuseppe/graziano/thermostat/service/ThermostatService.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="653">
-              <caret line="821" column="42" selection-start-line="821" selection-start-column="42" selection-end-line="821" selection-end-column="42" />
+            <state relative-caret-position="493">
+              <caret line="708" column="16" selection-start-line="708" selection-start-column="16" selection-end-line="708" selection-end-column="16" />
               <folding>
                 <element signature="imports" expanded="true" />
                 <element signature="e#8142#8143#0" expanded="true" />
                 <element signature="e#8225#8226#0" expanded="true" />
                 <element signature="e#9555#9556#0" expanded="true" />
                 <element signature="e#9608#9609#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/giuseppe/graziano/thermostat/service/AndroidNotificationsService.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="557">
+              <caret line="53" column="16" selection-start-line="53" selection-start-column="16" selection-end-line="53" selection-end-column="16" />
+              <folding>
+                <element signature="imports" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -72,9 +94,14 @@
       <find>setActive</find>
       <find>&quot;sensor</find>
       <find>grazianotermostato</find>
-      <find>setStateOn</find>
       <find>12</find>
       <find>&quot;measurement</find>
+      <find>Il Risca</find>
+      <find>Il termostato è offline</find>
+      <find>turnThermostatOnOff</find>
+      <find>setStateOn</find>
+      <find>calculate</find>
+      <find>addMeasurement</find>
     </findStrings>
   </component>
   <component name="Git.Settings">
@@ -264,7 +291,7 @@
       <workItem from="1544541849854" duration="187000" />
       <workItem from="1545909834313" duration="2809000" />
       <workItem from="1545992336448" duration="322000" />
-      <workItem from="1551023014428" duration="1639000" />
+      <workItem from="1551023014428" duration="3303000" />
     </task>
     <task id="LOCAL-00001" summary="bug fix">
       <created>1542717611571</created>
@@ -347,13 +374,13 @@
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="33295000" />
+    <option name="totallyTimeSpent" value="34959000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="23" width="1920" height="1012" extended-state="6" />
     <editor active="true" />
     <layout>
-      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.23375931" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.23375931" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Designer" order="2" />
       <window_info id="Image Layers" order="3" />
@@ -461,34 +488,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/giuseppe/graziano/thermostat/service/ThermostatService.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="653">
-          <caret line="821" column="42" selection-start-line="821" selection-start-column="42" selection-end-line="821" selection-end-column="42" />
-          <folding>
-            <element signature="imports" expanded="true" />
-            <element signature="e#8142#8143#0" expanded="true" />
-            <element signature="e#8225#8226#0" expanded="true" />
-            <element signature="e#9555#9556#0" expanded="true" />
-            <element signature="e#9608#9609#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/giuseppe/graziano/thermostat/model/data/Measurement.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="225">
           <caret line="18" column="22" selection-start-line="18" selection-start-column="22" selection-end-line="18" selection-end-column="22" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/giuseppe/graziano/thermostat/service/AndroidNotificationsService.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="615">
-          <caret line="55" column="49" selection-start-line="55" selection-start-column="49" selection-end-line="55" selection-end-column="49" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -531,6 +534,30 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="75">
           <caret line="9" column="13" selection-start-line="9" selection-start-column="13" selection-end-line="9" selection-end-column="13" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/giuseppe/graziano/thermostat/service/AndroidNotificationsService.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="557">
+          <caret line="53" column="16" selection-start-line="53" selection-start-column="16" selection-end-line="53" selection-end-column="16" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/giuseppe/graziano/thermostat/service/ThermostatService.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="493">
+          <caret line="708" column="16" selection-start-line="708" selection-start-column="16" selection-end-line="708" selection-end-column="16" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="e#8142#8143#0" expanded="true" />
+            <element signature="e#8225#8226#0" expanded="true" />
+            <element signature="e#9555#9556#0" expanded="true" />
+            <element signature="e#9608#9609#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
