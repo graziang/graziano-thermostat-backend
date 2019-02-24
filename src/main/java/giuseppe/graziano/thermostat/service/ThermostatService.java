@@ -559,7 +559,7 @@ public class ThermostatService {
             String stringDeviceID = String.valueOf(sensor.getDeviceId());
             if(measurement.containsKey(stringDeviceID) && sensor.isActive()) {
                 float temperature = measurement.get(stringDeviceID);
-                log.info(String.valueOf(measurement.get(stringDeviceID)));
+               // log.info(String.valueOf(measurement.get(stringDeviceID)));
                 Measurement m = new Measurement(sensor, temperature);
                 m.setDate(date);
                 if(temperature > -100) {
