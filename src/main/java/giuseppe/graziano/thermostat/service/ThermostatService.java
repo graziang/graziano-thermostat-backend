@@ -779,7 +779,7 @@ public class ThermostatService {
                         if(oldStatus && (thermostat.getTemperature() > avgTemperature)) {
                             thermostat.setStateOn(true);
                         }
-                        else if((thermostat.getTemperature() - avgTemperature) >= 0.5){
+                        else if(!oldStatus && (thermostat.getTemperature() - avgTemperature) >= 0.5){
                             thermostat.setStateOn(true);
                         }
                     }
@@ -787,7 +787,7 @@ public class ThermostatService {
                         if(oldStatus && (thermostat.getTemperature() > sensorTemperature)) {
                             thermostat.setStateOn(true);
                         }
-                        else if((thermostat.getTemperature() - sensorTemperature) >= 0.5){
+                        else if(!oldStatus && (thermostat.getTemperature() - sensorTemperature) >= 0.5){
                             thermostat.setStateOn(true);
                         }
                     }
@@ -819,7 +819,7 @@ public class ThermostatService {
             }
 
 
-            if(thermostat.isStateOn() && thermostat.isStateOn() != oldStatus) {
+            if(thermostat.isStateOn() && !oldStatus) {
                 String message = "Il riscaldamento si è accesso";
                 this.androidNotificationsService.senddVWithSDK(message, thermostat);
             }
