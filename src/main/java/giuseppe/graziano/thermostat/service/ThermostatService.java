@@ -93,7 +93,7 @@ public class ThermostatService {
 
     }
 
-    @PostConstruct
+   // @PostConstruct
     public Thermostat updatee(){
         Thermostat td = new Thermostat("Casa", "Casa via del borghetto");
         td.setActive(true);
