@@ -35,6 +35,8 @@ public class Thermostat {
 
     private String mode;
 
+    private boolean cold;
+
     @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     @JoinColumn(name = "manual_mode_id")
     private ManualMode manualMode;
@@ -165,6 +167,14 @@ public class Thermostat {
 
     public void setSource(Source source) {
         this.source = source;
+    }
+
+    public boolean isCold() {
+        return cold;
+    }
+
+    public void setCold(boolean cold) {
+        this.cold = cold;
     }
 
     @Override

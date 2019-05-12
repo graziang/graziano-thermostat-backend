@@ -93,6 +93,46 @@ public class ThermostatService {
 
     }
 
+    @PostConstruct
+    public Thermostat updatee(){
+        Thermostat td = new Thermostat("Casa", "Casa via del borghetto");
+        td.setActive(true);
+        Sensor s1 = new Sensor("Camera", "camera");
+
+        Source sorgente1 = new Source("Condizionatore");
+
+        sorgente1.setThermostat(td);
+
+        td.setSource(sorgente1);
+
+        s1.setThermostat(td);
+
+        td.getSensors().add(s1);
+
+        td.getSources().add(sorgente1);
+
+        td.setManualMode(new ManualMode());
+        td.setProgramMode(new ProgramMode());
+        thermostatRepository.save(td);
+
+
+        Set<Thermostat> terms = new HashSet<>();
+        terms.add(td);
+
+        User userPeps = new User();
+        userPeps.setUsername("pisapeps");
+        userPeps.setPassword(encoder.encode("ciaociao"));
+        userPeps.setThermostats(terms);
+        userRepository.save(userPeps);
+
+        terms = new HashSet<>();
+        terms.add(td);
+
+        return td;
+    }
+
+
+
     //@PostConstruct
     public Thermostat initialize(){
         Thermostat td = new Thermostat("Piano superiore", "Piano con camere");
@@ -336,6 +376,7 @@ public class ThermostatService {
         foundThermostat.setMode(thermostat.getMode());
         foundThermostat.setTemperature(thermostat.getTemperature());
         foundThermostat.setManualMode(thermostat.getManualMode());
+        foundThermostat.setCold(thermostat.isCold());
 
         if(thermostat.getProgramMode() != null) {
 
@@ -784,19 +825,40 @@ public class ThermostatService {
                     thermostat.setStateOn(false);
                 }
                 else if(manualMode.isAvg()){
-                    if(oldStatus && (thermostat.getTemperature() > avgTemperature)) {
-                        thermostat.setStateOn(true);
+
+                    if(thermostat.isCold()) {
+                        if (oldStatus && (thermostat.getTemperature() < avgTemperature)) {
+                            thermostat.setStateOn(true);
+                        }
+                        else if (!oldStatus && (avgTemperature - thermostat.getTemperature()) >= 0.5) {
+                            thermostat.setStateOn(true);
+                        }
                     }
-                    else if(!oldStatus && (thermostat.getTemperature() - avgTemperature) >= 0.5){
-                        thermostat.setStateOn(true);
+                    else {
+                        if (oldStatus && (thermostat.getTemperature() > avgTemperature)) {
+                            thermostat.setStateOn(true);
+                        }
+                        else if (!oldStatus && (thermostat.getTemperature() - avgTemperature) >= 0.5) {
+                            thermostat.setStateOn(true);
+                        }
                     }
                 }
                 else {
-                    if(oldStatus && (thermostat.getTemperature() > sensorTemperature)) {
-                        thermostat.setStateOn(true);
+                    if(thermostat.isCold()) {
+                        if (oldStatus && (thermostat.getTemperature() < sensorTemperature)) {
+                            thermostat.setStateOn(true);
+                        }
+                        else if (!oldStatus && (sensorTemperature - thermostat.getTemperature()) >= 0.5) {
+                            thermostat.setStateOn(true);
+                        }
                     }
-                    else if(!oldStatus && (thermostat.getTemperature() - sensorTemperature) >= 0.5){
-                        thermostat.setStateOn(true);
+                    else {
+                        if (oldStatus && (thermostat.getTemperature() > sensorTemperature)) {
+                            thermostat.setStateOn(true);
+                        }
+                        else if (!oldStatus && (thermostat.getTemperature() - sensorTemperature) >= 0.5) {
+                            thermostat.setStateOn(true);
+                        }
                     }
                 }
 
