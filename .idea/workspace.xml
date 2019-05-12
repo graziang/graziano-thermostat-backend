@@ -1,11 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="e8dcb6ad-a08a-4102-b9c1-f5db51f82600" name="Default" comment="bug fix">
+    <list default="true" id="e8dcb6ad-a08a-4102-b9c1-f5db51f82600" name="Default" comment="cold mode">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/giuseppe/graziano/thermostat/model/data/Thermostat.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/giuseppe/graziano/thermostat/model/data/Thermostat.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/giuseppe/graziano/thermostat/service/ThermostatService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/giuseppe/graziano/thermostat/service/ThermostatService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/application.properties" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/target/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -23,8 +22,8 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/main/java/giuseppe/graziano/thermostat/service/ThermostatService.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="615">
-              <caret line="847" column="50" lean-forward="true" selection-start-line="847" selection-start-column="50" selection-end-line="847" selection-end-column="50" />
+            <state relative-caret-position="815">
+              <caret line="911" selection-start-line="911" selection-end-line="911" />
               <folding>
                 <element signature="imports" expanded="true" />
                 <element signature="e#9090#9091#0" expanded="true" />
@@ -48,7 +47,7 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/java/giuseppe/graziano/thermostat/model/data/Thermostat.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="818">
+            <state relative-caret-position="843">
               <caret line="171" column="29" selection-start-line="171" selection-start-column="29" selection-end-line="171" selection-end-column="29" />
               <folding>
                 <element signature="e#3711#3712#0" expanded="true" />
@@ -62,8 +61,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/resources/application.properties">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="75">
-              <caret line="5" column="36" selection-start-line="5" selection-start-column="36" selection-end-line="5" selection-end-column="36" />
+            <state relative-caret-position="240">
+              <caret line="16" lean-forward="true" selection-start-line="16" selection-end-line="16" />
             </state>
           </provider>
         </entry>
@@ -124,8 +123,8 @@
         <option value="$PROJECT_DIR$/src/main/java/giuseppe/graziano/thermostat/model/repository/SourceRepository.java" />
         <option value="$PROJECT_DIR$/src/main/java/giuseppe/graziano/thermostat/model/data/Program.java" />
         <option value="$PROJECT_DIR$/src/main/java/giuseppe/graziano/thermostat/controller/ThermostatRestController.java" />
-        <option value="$PROJECT_DIR$/src/main/java/giuseppe/graziano/thermostat/model/data/Thermostat.java" />
         <option value="$PROJECT_DIR$/src/main/resources/application.properties" />
+        <option value="$PROJECT_DIR$/src/main/java/giuseppe/graziano/thermostat/model/data/Thermostat.java" />
         <option value="$PROJECT_DIR$/src/main/java/giuseppe/graziano/thermostat/service/ThermostatService.java" />
       </list>
     </option>
@@ -318,7 +317,7 @@
       <workItem from="1545992336448" duration="322000" />
       <workItem from="1551023014428" duration="3728000" />
       <workItem from="1551629328799" duration="166000" />
-      <workItem from="1557674069864" duration="1532000" />
+      <workItem from="1557674069864" duration="2435000" />
     </task>
     <task id="LOCAL-00001" summary="bug fix">
       <created>1542717611571</created>
@@ -397,11 +396,25 @@
       <option name="project" value="LOCAL" />
       <updated>1547285003115</updated>
     </task>
-    <option name="localTasksCounter" value="12" />
+    <task id="LOCAL-00012" summary="cold mode">
+      <created>1557675839025</created>
+      <option name="number" value="00012" />
+      <option name="presentableId" value="LOCAL-00012" />
+      <option name="project" value="LOCAL" />
+      <updated>1557675839026</updated>
+    </task>
+    <task id="LOCAL-00013" summary="cold mode">
+      <created>1557676052883</created>
+      <option name="number" value="00013" />
+      <option name="presentableId" value="LOCAL-00013" />
+      <option name="project" value="LOCAL" />
+      <updated>1557676052883</updated>
+    </task>
+    <option name="localTasksCounter" value="14" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="37082000" />
+    <option name="totallyTimeSpent" value="37985000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="23" width="1920" height="1012" extended-state="0" />
@@ -449,7 +462,8 @@
   <component name="VcsManagerConfiguration">
     <MESSAGE value="cambio nome" />
     <MESSAGE value="bug fix" />
-    <option name="LAST_COMMIT_MESSAGE" value="bug fix" />
+    <MESSAGE value="cold mode" />
+    <option name="LAST_COMMIT_MESSAGE" value="cold mode" />
   </component>
   <component name="editorHistoryManager">
     <entry file="jar://C:/Program Files (x86)/Java/jdk1.8.0_131/src.zip!/java/time/DayOfWeek.java" />
@@ -557,9 +571,16 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/resources/application.properties">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="240">
+          <caret line="16" lean-forward="true" selection-start-line="16" selection-end-line="16" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/giuseppe/graziano/thermostat/model/data/Thermostat.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="818">
+        <state relative-caret-position="843">
           <caret line="171" column="29" selection-start-line="171" selection-start-column="29" selection-end-line="171" selection-end-column="29" />
           <folding>
             <element signature="e#3711#3712#0" expanded="true" />
@@ -569,17 +590,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/resources/application.properties">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="75">
-          <caret line="5" column="36" selection-start-line="5" selection-start-column="36" selection-end-line="5" selection-end-column="36" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/giuseppe/graziano/thermostat/service/ThermostatService.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="615">
-          <caret line="847" column="50" lean-forward="true" selection-start-line="847" selection-start-column="50" selection-end-line="847" selection-end-column="50" />
+        <state relative-caret-position="815">
+          <caret line="911" selection-start-line="911" selection-end-line="911" />
           <folding>
             <element signature="imports" expanded="true" />
             <element signature="e#9090#9091#0" expanded="true" />

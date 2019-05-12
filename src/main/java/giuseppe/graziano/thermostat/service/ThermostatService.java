@@ -59,7 +59,7 @@ public class ThermostatService {
     private Map<Long, Boolean> thermostatHealtStatusMap = new HashMap<>();
 
 
-   // @PostConstruct
+    // @PostConstruct
     public void test(){
 
 
@@ -70,7 +70,7 @@ public class ThermostatService {
         thermostat = thermostatRepository.findThermostatById(1L);
         thermostat.setName("Piano notte");
         this.thermostatRepository.save(thermostat);
-      //  this.androidNotificationsService.senddVWithSDK("Eccoloooo ", thermostat);
+        //  this.androidNotificationsService.senddVWithSDK("Eccoloooo ", thermostat);
 
     /*    Thermostat thermostat = thermostatRepository.findThermostatById(12L);
         thermostat.setActive(true);
@@ -274,7 +274,7 @@ public class ThermostatService {
         }
         if(program != null) {
             thermostat.getProgramMode().getPrograms().remove(program);
-          this.programRepository.delete(program);
+            this.programRepository.delete(program);
         }
         this.thermostatRepository.save(thermostat);
 
@@ -376,7 +376,7 @@ public class ThermostatService {
         foundThermostat.setMode(thermostat.getMode());
         foundThermostat.setTemperature(thermostat.getTemperature());
         foundThermostat.setManualMode(thermostat.getManualMode());
-      //  foundThermostat.setCold(thermostat.isCold());
+        foundThermostat.setCold(thermostat.isCold());
 
         if(thermostat.getProgramMode() != null) {
 
@@ -600,7 +600,7 @@ public class ThermostatService {
             String stringDeviceID = String.valueOf(sensor.getDeviceId());
             if(measurement.containsKey(stringDeviceID) && sensor.isActive()) {
                 float temperature = measurement.get(stringDeviceID);
-               // log.info(String.valueOf(measurement.get(stringDeviceID)));
+                // log.info(String.valueOf(measurement.get(stringDeviceID)));
                 Measurement m = new Measurement(sensor, temperature);
                 m.setDate(date);
                 if(temperature > -100) {
@@ -825,19 +825,40 @@ public class ThermostatService {
                     thermostat.setStateOn(false);
                 }
                 else if(manualMode.isAvg()){
-                    if(oldStatus && (thermostat.getTemperature() > avgTemperature)) {
-                        thermostat.setStateOn(true);
+
+                    if(thermostat.isCold()) {
+                        if (oldStatus && (thermostat.getTemperature() < avgTemperature)) {
+                            thermostat.setStateOn(true);
+                        }
+                        else if (!oldStatus && (avgTemperature - thermostat.getTemperature()) >= 0.5) {
+                            thermostat.setStateOn(true);
+                        }
                     }
-                    else if(!oldStatus && (thermostat.getTemperature() - avgTemperature) >= 0.5){
-                        thermostat.setStateOn(true);
+                    else {
+                        if (oldStatus && (thermostat.getTemperature() > avgTemperature)) {
+                            thermostat.setStateOn(true);
+                        }
+                        else if (!oldStatus && (thermostat.getTemperature() - avgTemperature) >= 0.5) {
+                            thermostat.setStateOn(true);
+                        }
                     }
                 }
                 else {
-                    if(oldStatus && (thermostat.getTemperature() > sensorTemperature)) {
-                        thermostat.setStateOn(true);
+                    if(thermostat.isCold()) {
+                        if (oldStatus && (thermostat.getTemperature() < sensorTemperature)) {
+                            thermostat.setStateOn(true);
+                        }
+                        else if (!oldStatus && (sensorTemperature - thermostat.getTemperature()) >= 0.5) {
+                            thermostat.setStateOn(true);
+                        }
                     }
-                    else if(!oldStatus && (thermostat.getTemperature() - sensorTemperature) >= 0.5){
-                        thermostat.setStateOn(true);
+                    else {
+                        if (oldStatus && (thermostat.getTemperature() > sensorTemperature)) {
+                            thermostat.setStateOn(true);
+                        }
+                        else if (!oldStatus && (thermostat.getTemperature() - sensorTemperature) >= 0.5) {
+                            thermostat.setStateOn(true);
+                        }
                     }
                 }
 
