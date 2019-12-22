@@ -1,608 +1,86 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="e8dcb6ad-a08a-4102-b9c1-f5db51f82600" name="Default" comment="cold mode">
+    <list default="true" id="a95545eb-f4ad-435f-8a60-ad59663a0370" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/compiler.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/compiler.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/encodings.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/encodings.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/graziano-thermostat-backend.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/graziano-thermostat-backend.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/modules.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/vcs.xml" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/giuseppe/graziano/thermostat/model/data/Thermostat.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/giuseppe/graziano/thermostat/model/data/Thermostat.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/giuseppe/graziano/thermostat/model/data/Program.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/giuseppe/graziano/thermostat/model/data/Program.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/giuseppe/graziano/thermostat/service/ThermostatService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/giuseppe/graziano/thermostat/service/ThermostatService.java" afterDir="false" />
     </list>
-    <ignored path="$PROJECT_DIR$/target/" />
-    <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
-  <component name="DefaultGradleProjectSettings">
-    <option name="testRunner" value="GRADLE" />
-    <option name="delegatedBuild" value="true" />
-  </component>
-  <component name="FileEditorManager">
-    <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/src/main/java/giuseppe/graziano/thermostat/service/ThermostatService.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="815">
-              <caret line="911" selection-start-line="911" selection-end-line="911" />
-              <folding>
-                <element signature="imports" expanded="true" />
-                <element signature="e#9090#9091#0" expanded="true" />
-                <element signature="e#9173#9174#0" expanded="true" />
-                <element signature="e#9626#9627#0" expanded="true" />
-                <element signature="e#9679#9680#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/giuseppe/graziano/thermostat/model/data/Program.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="750">
-              <caret line="80" column="20" selection-start-line="80" selection-start-column="11" selection-end-line="80" selection-end-column="20" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/giuseppe/graziano/thermostat/model/data/Thermostat.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="843">
-              <caret line="171" column="29" selection-start-line="171" selection-start-column="29" selection-end-line="171" selection-end-column="29" />
-              <folding>
-                <element signature="e#3711#3712#0" expanded="true" />
-                <element signature="e#3752#3753#0" expanded="true" />
-                <element signature="e#3784#3785#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/resources/application.properties">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="240">
-              <caret line="16" lean-forward="true" selection-start-line="16" selection-end-line="16" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/giuseppe/graziano/thermostat/service/AndroidNotificationsService.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="585">
-              <caret line="53" column="16" selection-start-line="53" selection-start-column="16" selection-end-line="53" selection-end-column="16" />
-              <folding>
-                <element signature="imports" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-    </leaf>
-  </component>
-  <component name="FileTemplateManagerImpl">
-    <option name="RECENT_TEMPLATES">
-      <list>
-        <option value="Class" />
-      </list>
-    </option>
-  </component>
-  <component name="FindInProjectRecents">
-    <findStrings>
-      <find>programs;</find>
-      <find>setMode</find>
-      <find>getSensor</find>
-      <find>ArrayList</find>
-      <find>update</find>
-      <find>tran</find>
-      <find>foundThermostat</find>
-      <find>setActive</find>
-      <find>&quot;sensor</find>
-      <find>grazianotermostato</find>
-      <find>12</find>
-      <find>&quot;measurement</find>
-      <find>Il Risca</find>
-      <find>Il termostato è offline</find>
-      <find>turnThermostatOnOff</find>
-      <find>calculate</find>
-      <find>addMeasurement</find>
-      <find>setStateOn\</find>
-      <find>setStateOn</find>
-    </findStrings>
-  </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
-  <component name="IdeDocumentHistory">
-    <option name="CHANGED_PATHS">
-      <list>
-        <option value="$PROJECT_DIR$/src/main/java/giuseppe/graziano/thermostat/model/data/ManualMode.java" />
-        <option value="$PROJECT_DIR$/src/main/java/giuseppe/graziano/thermostat/model/data/ProgramMode.java" />
-        <option value="$PROJECT_DIR$/src/main/java/giuseppe/graziano/thermostat/model/data/Source.java" />
-        <option value="$PROJECT_DIR$/src/main/java/giuseppe/graziano/thermostat/model/repository/SourceRepository.java" />
-        <option value="$PROJECT_DIR$/src/main/java/giuseppe/graziano/thermostat/model/data/Program.java" />
-        <option value="$PROJECT_DIR$/src/main/java/giuseppe/graziano/thermostat/controller/ThermostatRestController.java" />
-        <option value="$PROJECT_DIR$/src/main/resources/application.properties" />
-        <option value="$PROJECT_DIR$/src/main/java/giuseppe/graziano/thermostat/model/data/Thermostat.java" />
-        <option value="$PROJECT_DIR$/src/main/java/giuseppe/graziano/thermostat/service/ThermostatService.java" />
-      </list>
-    </option>
-  </component>
-  <component name="MavenImportPreferences">
-    <option name="importingSettings">
-      <MavenImportingSettings>
-        <option name="importAutomatically" value="true" />
-      </MavenImportingSettings>
-    </option>
-  </component>
-  <component name="MavenProjectNavigator">
-    <treeState>
-      <expand>
-        <path>
-          <item name="" type="16c1761:MavenProjectsStructure$RootNode" />
-          <item name="graziano-thermostat" type="9519ce18:MavenProjectsStructure$ProjectNode" />
-        </path>
-        <path>
-          <item name="" type="16c1761:MavenProjectsStructure$RootNode" />
-          <item name="graziano-thermostat" type="9519ce18:MavenProjectsStructure$ProjectNode" />
-          <item name="Lifecycle" type="58874e2:MavenProjectsStructure$LifecycleNode" />
-        </path>
-      </expand>
-      <select />
-    </treeState>
-  </component>
-  <component name="ProjectFrameBounds">
-    <option name="y" value="23" />
-    <option name="width" value="1920" />
-    <option name="height" value="1012" />
-  </component>
-  <component name="ProjectLevelVcsManager" settingsEditedManually="true">
-    <OptionsSetting value="false" id="Update" />
-  </component>
-  <component name="ProjectView">
-    <navigator proportions="" version="1">
-      <foldersAlwaysOnTop value="true" />
-    </navigator>
-    <panes>
-      <pane id="PackagesPane" />
-      <pane id="ProjectPane">
-        <subPane>
-          <expand>
-            <path>
-              <item name="graziano-thermostat-backend" type="b2602c69:ProjectViewProjectNode" />
-              <item name="graziano-thermostat-backend" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="graziano-thermostat-backend" type="b2602c69:ProjectViewProjectNode" />
-              <item name="graziano-thermostat-backend" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="graziano-thermostat-backend" type="b2602c69:ProjectViewProjectNode" />
-              <item name="graziano-thermostat-backend" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="graziano-thermostat-backend" type="b2602c69:ProjectViewProjectNode" />
-              <item name="graziano-thermostat-backend" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="462c0819:PsiDirectoryNode" />
-              <item name="java" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="graziano-thermostat-backend" type="b2602c69:ProjectViewProjectNode" />
-              <item name="graziano-thermostat-backend" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="462c0819:PsiDirectoryNode" />
-              <item name="java" type="462c0819:PsiDirectoryNode" />
-              <item name="thermostat" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="graziano-thermostat-backend" type="b2602c69:ProjectViewProjectNode" />
-              <item name="graziano-thermostat-backend" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="462c0819:PsiDirectoryNode" />
-              <item name="java" type="462c0819:PsiDirectoryNode" />
-              <item name="thermostat" type="462c0819:PsiDirectoryNode" />
-              <item name="model" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="graziano-thermostat-backend" type="b2602c69:ProjectViewProjectNode" />
-              <item name="graziano-thermostat-backend" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="462c0819:PsiDirectoryNode" />
-              <item name="java" type="462c0819:PsiDirectoryNode" />
-              <item name="thermostat" type="462c0819:PsiDirectoryNode" />
-              <item name="model" type="462c0819:PsiDirectoryNode" />
-              <item name="data" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="graziano-thermostat-backend" type="b2602c69:ProjectViewProjectNode" />
-              <item name="graziano-thermostat-backend" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="462c0819:PsiDirectoryNode" />
-              <item name="java" type="462c0819:PsiDirectoryNode" />
-              <item name="thermostat" type="462c0819:PsiDirectoryNode" />
-              <item name="service" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="graziano-thermostat-backend" type="b2602c69:ProjectViewProjectNode" />
-              <item name="graziano-thermostat-backend" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="462c0819:PsiDirectoryNode" />
-              <item name="resources" type="462c0819:PsiDirectoryNode" />
-            </path>
-          </expand>
-          <select />
-        </subPane>
-      </pane>
-      <pane id="Scope" />
-    </panes>
+  <component name="ProjectId" id="1VLAx1QIJa2T1kDI3LNbfMRrC9L" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showExcludedFiles" value="true" />
+    <option name="showLibraryContents" value="true" />
   </component>
   <component name="PropertiesComponent">
-    <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
+    <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
-    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1542721079857" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
-    <property name="nodejs_interpreter_path.stuck_in_default_project" value="undefined stuck path" />
-    <property name="nodejs_npm_path_reset_for_default_project" value="true" />
-    <property name="settings.editor.selected.configurable" value="reference.projectsettings.compiler.annotationProcessors" />
-  </component>
-  <component name="RunDashboard">
-    <option name="ruleStates">
-      <list>
-        <RuleState>
-          <option name="name" value="ConfigurationTypeDashboardGroupingRule" />
-        </RuleState>
-        <RuleState>
-          <option name="name" value="StatusDashboardGroupingRule" />
-        </RuleState>
-      </list>
-    </option>
   </component>
   <component name="RunManager">
-    <configuration default="true" type="Application" factoryName="Application">
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-    <configuration default="true" type="JUnit" factoryName="JUnit">
-      <option name="TEST_OBJECT" value="class" />
-      <option name="WORKING_DIRECTORY" value="%MODULE_WORKING_DIR%" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
     <configuration name="GrazianoThermostatApplication" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot">
-      <module name="graziano-thermostat" />
+      <module name="graziano-thermostat-backend" />
       <option name="SPRING_BOOT_MAIN_CLASS" value="giuseppe.graziano.thermostat.GrazianoThermostatApplication" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration default="true" type="TestNG">
-      <option name="TEST_OBJECT" value="CLASS" />
-      <option name="WORKING_DIRECTORY" value="%MODULE_WORKING_DIR%" />
-      <properties />
-      <listeners />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
+  </component>
+  <component name="ServiceViewManager">
+    <option name="viewStates">
+      <list>
+        <serviceView>
+          <treeState>
+            <expand />
+            <select />
+          </treeState>
+        </serviceView>
+      </list>
+    </option>
   </component>
   <component name="SvnConfiguration">
     <configuration />
   </component>
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
-      <changelist id="e8dcb6ad-a08a-4102-b9c1-f5db51f82600" name="Default" comment="" />
-      <created>1536584458625</created>
+      <changelist id="a95545eb-f4ad-435f-8a60-ad59663a0370" name="Default Changelist" comment="" />
+      <created>1577022243873</created>
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
-      <updated>1536584458625</updated>
-      <workItem from="1536584463264" duration="12966000" />
-      <workItem from="1536649668759" duration="1278000" />
-      <workItem from="1542704626901" duration="1922000" />
-      <workItem from="1542803092940" duration="878000" />
-      <workItem from="1543237896503" duration="7219000" />
-      <workItem from="1543305233803" duration="599000" />
-      <workItem from="1543574520127" duration="2741000" />
-      <workItem from="1543823942786" duration="595000" />
-      <workItem from="1544541849854" duration="187000" />
-      <workItem from="1545909834313" duration="2809000" />
-      <workItem from="1545992336448" duration="322000" />
-      <workItem from="1551023014428" duration="3728000" />
-      <workItem from="1551629328799" duration="166000" />
-      <workItem from="1557674069864" duration="2435000" />
+      <updated>1577022243873</updated>
+      <workItem from="1577022245390" duration="796000" />
     </task>
-    <task id="LOCAL-00001" summary="bug fix">
-      <created>1542717611571</created>
-      <option name="number" value="00001" />
-      <option name="presentableId" value="LOCAL-00001" />
-      <option name="project" value="LOCAL" />
-      <updated>1542717611571</updated>
-    </task>
-    <task id="LOCAL-00002" summary="bug fix">
-      <created>1542803318138</created>
-      <option name="number" value="00002" />
-      <option name="presentableId" value="LOCAL-00002" />
-      <option name="project" value="LOCAL" />
-      <updated>1542803318138</updated>
-    </task>
-    <task id="LOCAL-00003" summary="bug fix">
-      <created>1543243398967</created>
-      <option name="number" value="00003" />
-      <option name="presentableId" value="LOCAL-00003" />
-      <option name="project" value="LOCAL" />
-      <updated>1543243398967</updated>
-    </task>
-    <task id="LOCAL-00004" summary="bug fix">
-      <created>1543245554995</created>
-      <option name="number" value="00004" />
-      <option name="presentableId" value="LOCAL-00004" />
-      <option name="project" value="LOCAL" />
-      <updated>1543245554995</updated>
-    </task>
-    <task id="LOCAL-00005" summary="bug fix">
-      <created>1543246207266</created>
-      <option name="number" value="00005" />
-      <option name="presentableId" value="LOCAL-00005" />
-      <option name="project" value="LOCAL" />
-      <updated>1543246207266</updated>
-    </task>
-    <task id="LOCAL-00006" summary="bug fix">
-      <created>1543246444792</created>
-      <option name="number" value="00006" />
-      <option name="presentableId" value="LOCAL-00006" />
-      <option name="project" value="LOCAL" />
-      <updated>1543246444792</updated>
-    </task>
-    <task id="LOCAL-00007" summary="cambio nome">
-      <created>1544541987804</created>
-      <option name="number" value="00007" />
-      <option name="presentableId" value="LOCAL-00007" />
-      <option name="project" value="LOCAL" />
-      <updated>1544541987806</updated>
-    </task>
-    <task id="LOCAL-00008" summary="bug fix">
-      <created>1545910553719</created>
-      <option name="number" value="00008" />
-      <option name="presentableId" value="LOCAL-00008" />
-      <option name="project" value="LOCAL" />
-      <updated>1545910553719</updated>
-    </task>
-    <task id="LOCAL-00009" summary="bug fix">
-      <created>1545911797821</created>
-      <option name="number" value="00009" />
-      <option name="presentableId" value="LOCAL-00009" />
-      <option name="project" value="LOCAL" />
-      <updated>1545911797821</updated>
-    </task>
-    <task id="LOCAL-00010" summary="bug fix">
-      <created>1545912519686</created>
-      <option name="number" value="00010" />
-      <option name="presentableId" value="LOCAL-00010" />
-      <option name="project" value="LOCAL" />
-      <updated>1545912519686</updated>
-    </task>
-    <task id="LOCAL-00011" summary="bug fix">
-      <created>1547285003115</created>
-      <option name="number" value="00011" />
-      <option name="presentableId" value="LOCAL-00011" />
-      <option name="project" value="LOCAL" />
-      <updated>1547285003115</updated>
-    </task>
-    <task id="LOCAL-00012" summary="cold mode">
-      <created>1557675839025</created>
-      <option name="number" value="00012" />
-      <option name="presentableId" value="LOCAL-00012" />
-      <option name="project" value="LOCAL" />
-      <updated>1557675839026</updated>
-    </task>
-    <task id="LOCAL-00013" summary="cold mode">
-      <created>1557676052883</created>
-      <option name="number" value="00013" />
-      <option name="presentableId" value="LOCAL-00013" />
-      <option name="project" value="LOCAL" />
-      <updated>1557676052883</updated>
-    </task>
-    <option name="localTasksCounter" value="14" />
     <servers />
-  </component>
-  <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="37985000" />
-  </component>
-  <component name="ToolWindowManager">
-    <frame x="0" y="23" width="1920" height="1012" extended-state="0" />
-    <editor active="true" />
-    <layout>
-      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.23801917" />
-      <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
-      <window_info id="Designer" order="2" />
-      <window_info id="Image Layers" order="3" />
-      <window_info id="UI Designer" order="4" />
-      <window_info id="Favorites" order="5" side_tool="true" />
-      <window_info id="Capture Tool" order="6" />
-      <window_info id="Web" order="7" side_tool="true" />
-      <window_info anchor="bottom" id="Message" order="0" />
-      <window_info anchor="bottom" id="Find" order="1" />
-      <window_info anchor="bottom" id="Run" order="2" />
-      <window_info anchor="bottom" id="Debug" order="3" weight="0.4" />
-      <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
-      <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
-      <window_info anchor="bottom" id="TODO" order="6" />
-      <window_info anchor="bottom" id="Spring" order="7" />
-      <window_info anchor="bottom" id="Terminal" order="8" />
-      <window_info anchor="bottom" id="Event Log" order="9" side_tool="true" weight="0.3286119" />
-      <window_info anchor="bottom" id="Java Enterprise" order="10" />
-      <window_info anchor="bottom" id="Database Changes" order="11" show_stripe_button="false" />
-      <window_info anchor="bottom" id="Version Control" order="12" />
-      <window_info anchor="bottom" id="Docker" order="13" show_stripe_button="false" />
-      <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
-      <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
-      <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
-      <window_info anchor="right" id="Palette" order="3" />
-      <window_info anchor="right" id="Capture Analysis" order="4" />
-      <window_info anchor="right" id="Maven Projects" order="5" weight="0.32995737" />
-      <window_info anchor="right" id="Database" order="6" />
-      <window_info anchor="right" id="Palette&#9;" order="7" />
-      <window_info anchor="right" id="Theme Preview" order="8" />
-      <window_info anchor="right" id="Bean Validation" order="9" />
-      <window_info anchor="right" id="BPMNPalette" order="10" />
-      <window_info anchor="right" id="Maven" order="11" />
-    </layout>
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="1" />
   </component>
-  <component name="VcsManagerConfiguration">
-    <MESSAGE value="cambio nome" />
-    <MESSAGE value="bug fix" />
-    <MESSAGE value="cold mode" />
-    <option name="LAST_COMMIT_MESSAGE" value="cold mode" />
-  </component>
-  <component name="editorHistoryManager">
-    <entry file="jar://C:/Program Files (x86)/Java/jdk1.8.0_131/src.zip!/java/time/DayOfWeek.java" />
-    <entry file="file://$PROJECT_DIR$/src/main/java/giuseppe/graziano/thermostat/model/data/SensorStats.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="34">
-          <caret line="2" column="13" selection-start-line="2" selection-start-column="13" selection-end-line="2" selection-end-column="13" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/giuseppe/graziano/thermostat/model/data/Sensor.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="578">
-          <caret line="47" column="5" lean-forward="true" selection-start-line="47" selection-start-column="5" selection-end-line="47" selection-end-column="5" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/giuseppe/graziano/thermostat/model/data/ManualMode.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="280">
-          <caret line="55" column="31" selection-start-line="55" selection-start-column="31" selection-end-line="55" selection-end-column="31" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/giuseppe/graziano/thermostat/model/repository/SourceRepository.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="102">
-          <caret line="7" column="11" selection-start-line="7" selection-start-column="11" selection-end-line="7" selection-end-column="11" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/giuseppe/graziano/thermostat/model/repository/ThermostatRepository.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="68">
-          <caret line="5" column="38" selection-start-line="5" selection-start-column="38" selection-end-line="9" selection-end-column="1" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar://C:/Program Files (x86)/Java/jdk1.8.0_131/src.zip!/java/time/LocalDateTime.java" />
-    <entry file="file://$PROJECT_DIR$/src/main/java/giuseppe/graziano/thermostat/controller/ThermostatRestController.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="6069">
-          <caret line="378" column="75" selection-start-line="378" selection-start-column="75" selection-end-line="378" selection-end-column="75" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar://C:/Program Files (x86)/Java/jdk1.8.0_131/src.zip!/java/time/LocalTime.java" />
-    <entry file="jar://C:/Program Files (x86)/Java/jdk1.8.0_131/src.zip!/java/time/LocalDate.java" />
-    <entry file="file://$PROJECT_DIR$/src/main/java/giuseppe/graziano/thermostat/model/data/Source.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="442">
-          <caret line="28" column="32" selection-start-line="28" selection-start-column="32" selection-end-line="28" selection-end-column="32" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/giuseppe/graziano/thermostat/model/data/Measurement.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="225">
-          <caret line="18" column="22" selection-start-line="18" selection-start-column="22" selection-end-line="18" selection-end-column="22" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/giuseppe/graziano/thermostat/HeaderRequestInterceptor.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="60">
-          <caret line="10" column="13" selection-start-line="10" selection-start-column="13" selection-end-line="10" selection-end-column="13" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/pom.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1050">
-          <caret line="70" column="21" selection-start-line="70" selection-start-column="21" selection-end-line="70" selection-end-column="21" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/giuseppe/graziano/thermostat/GrazianoThermostatApplication.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="150">
-          <caret line="16" column="44" selection-start-line="16" selection-start-column="44" selection-end-line="16" selection-end-column="44" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/giuseppe/graziano/thermostat/model/data/ProgramMode.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="75">
-          <caret line="9" column="13" selection-start-line="9" selection-start-column="13" selection-end-line="9" selection-end-column="13" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/giuseppe/graziano/thermostat/model/data/Program.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="750">
-          <caret line="80" column="20" selection-start-line="80" selection-start-column="11" selection-end-line="80" selection-end-column="20" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/giuseppe/graziano/thermostat/service/AndroidNotificationsService.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="585">
-          <caret line="53" column="16" selection-start-line="53" selection-start-column="16" selection-end-line="53" selection-end-column="16" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/resources/application.properties">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="240">
-          <caret line="16" lean-forward="true" selection-start-line="16" selection-end-line="16" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/giuseppe/graziano/thermostat/model/data/Thermostat.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="843">
-          <caret line="171" column="29" selection-start-line="171" selection-start-column="29" selection-end-line="171" selection-end-column="29" />
-          <folding>
-            <element signature="e#3711#3712#0" expanded="true" />
-            <element signature="e#3752#3753#0" expanded="true" />
-            <element signature="e#3784#3785#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/giuseppe/graziano/thermostat/service/ThermostatService.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="815">
-          <caret line="911" selection-start-line="911" selection-end-line="911" />
-          <folding>
-            <element signature="imports" expanded="true" />
-            <element signature="e#9090#9091#0" expanded="true" />
-            <element signature="e#9173#9174#0" expanded="true" />
-            <element signature="e#9626#9627#0" expanded="true" />
-            <element signature="e#9679#9680#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
+  <component name="WindowStateProjectService">
+    <state x="533" y="141" key="#com.intellij.ide.util.MemberChooser" timestamp="1577025420468">
+      <screen x="0" y="0" width="1440" height="900" />
+    </state>
+    <state x="533" y="141" key="#com.intellij.ide.util.MemberChooser/0.0.1440.900@0.0.1440.900" timestamp="1577025420468" />
+    <state x="569" y="346" key="#com.intellij.ide.util.projectWizard.JdkChooserPanel.MyDialog" timestamp="1577022404226">
+      <screen x="0" y="0" width="1440" height="900" />
+    </state>
+    <state x="569" y="346" key="#com.intellij.ide.util.projectWizard.JdkChooserPanel.MyDialog/0.0.1440.900@0.0.1440.900" timestamp="1577022404226" />
+    <state x="221" y="52" key="CommitChangelistDialog2" timestamp="1577025872443">
+      <screen x="0" y="0" width="1440" height="900" />
+    </state>
+    <state x="221" y="52" key="CommitChangelistDialog2/0.0.1440.900@0.0.1440.900" timestamp="1577025872443" />
   </component>
 </project>

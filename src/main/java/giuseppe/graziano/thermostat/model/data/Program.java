@@ -24,6 +24,8 @@ public class Program {
     private LocalTime endTime;
     private long sourceId;
     private boolean sourceOn;
+    private float temperature;
+
 
     @JsonIgnore
     @ManyToOne(fetch = FetchType.LAZY)
@@ -116,6 +118,14 @@ public class Program {
 
     public void setProgramMode(ProgramMode programMode) {
         this.programMode = programMode;
+    }
+
+    public float getTemperature() {
+        return temperature;
+    }
+
+    public void setTemperature(float temperature) {
+        this.temperature = temperature;
     }
 
     @Override

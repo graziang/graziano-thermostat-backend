@@ -254,6 +254,7 @@ public class ThermostatService {
         oldProgram.setWeekDay(program.getWeekDay());
         oldProgram.setStartTime(program.getStartTime());
         oldProgram.setEndTime(program.getEndTime());
+        oldProgram.setTemperature(program.getTemperature());
         this.programRepository.save(oldProgram);
 
 
@@ -870,12 +871,12 @@ public class ThermostatService {
                 for (Program program: mode.getPrograms()) {
                     if(isProgramOn(program)){
                         if(manualMode.isAvg()){
-                            thermostat.setStateOn(avgTemperature < thermostat.getTemperature());
+                            thermostat.setStateOn(avgTemperature < program.getTemperature());
                             thermostat.setSource(sourceRepository.findSourceById(program.getSourceId()));
                             program.setSourceOn(true);
                         }
                         else {
-                            thermostat.setStateOn(sensorTemperature < thermostat.getTemperature());
+                            thermostat.setStateOn(sensorTemperature < program.getTemperature());
                             thermostat.setSource(sourceRepository.findSourceById(program.getSourceId()));
                             program.setSourceOn(true);
                         }
