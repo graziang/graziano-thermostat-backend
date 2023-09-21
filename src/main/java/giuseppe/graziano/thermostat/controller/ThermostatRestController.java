@@ -2,13 +2,11 @@ package giuseppe.graziano.thermostat.controller;
 
 
 
+import com.fasterxml.jackson.databind.ObjectMapper;
 import giuseppe.graziano.thermostat.exception.NotFoundException;
 import giuseppe.graziano.thermostat.model.data.*;
 import giuseppe.graziano.thermostat.security.MyUserPrincipal;
 import giuseppe.graziano.thermostat.service.ThermostatService;
-import org.codehaus.jackson.JsonGenerationException;
-import org.codehaus.jackson.map.JsonMappingException;
-import org.codehaus.jackson.map.ObjectMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
@@ -16,8 +14,6 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
-import javax.annotation.PostConstruct;
-import java.io.IOException;
 import java.security.Principal;
 import java.util.*;
 

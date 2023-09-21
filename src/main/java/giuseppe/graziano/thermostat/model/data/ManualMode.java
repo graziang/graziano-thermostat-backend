@@ -2,10 +2,13 @@ package giuseppe.graziano.thermostat.model.data;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
-import javax.persistence.*;
+import jakarta.persistence.*;
+import lombok.Data;
+
 import java.io.Serializable;
 
 @Entity
+@Data
 public class ManualMode implements Serializable {
 
     public ManualMode(){
@@ -29,51 +32,4 @@ public class ManualMode implements Serializable {
 
     private boolean avg;
 
-    public long getId() {
-        return id;
-    }
-
-    public void setId(long id) {
-        this.id = id;
-    }
-
-    public boolean isActive() {
-        return active;
-    }
-
-    public void setActive(boolean active) {
-        this.active = active;
-    }
-
-    public Thermostat getThermostat() {
-        return thermostat;
-    }
-
-    public void setThermostat(Thermostat thermostat) {
-        this.thermostat = thermostat;
-    }
-
-    public long getSourceId() {
-        return sourceId;
-    }
-
-    public void setSourceId(long sourceId) {
-        this.sourceId = sourceId;
-    }
-
-    public long getSensorId() {
-        return sensorId;
-    }
-
-    public void setSensorId(long sensorId) {
-        this.sensorId = sensorId;
-    }
-
-    public boolean isAvg() {
-        return avg;
-    }
-
-    public void setAvg(boolean avg) {
-        this.avg = avg;
-    }
 }

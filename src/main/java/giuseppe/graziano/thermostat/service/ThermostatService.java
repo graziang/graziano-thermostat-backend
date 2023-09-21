@@ -4,15 +4,15 @@ import giuseppe.graziano.thermostat.exception.NotFoundException;
 import giuseppe.graziano.thermostat.model.data.*;
 import giuseppe.graziano.thermostat.model.repository.*;
 import giuseppe.graziano.thermostat.security.MyUserPrincipal;
+import jakarta.annotation.PostConstruct;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.StringUtils;
 
-import javax.annotation.PostConstruct;
-import javax.transaction.Transactional;
 import java.time.*;
 import java.util.*;
 import java.util.stream.Collectors;
@@ -133,7 +133,7 @@ public class ThermostatService {
 
 
 
-    //@PostConstruct
+    @PostConstruct
     public Thermostat initialize(){
         Thermostat td = new Thermostat("Piano superiore", "Piano con camere");
         td.setActive(true);

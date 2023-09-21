@@ -1,0 +1,27 @@
+spring:
+  jpa:
+    hibernate:
+      ddl-auto: validate
+    database-platform: org.hibernate.dialect.H2Dialect
+  datasource:
+    driver-class-name: org.h2.Driver
+    url: jdbc:h2:file:./thermostatdb;DB_CLOSE_DELAY=-1
+    username: thermostat
+    password:
+  h2:
+    console:
+      enabled: true
+    settings:
+      web-allow-others: true
+  jackson:
+    serialization:
+      fail-on-empty-beans: 'false'
+
+
+server:
+  port: '8091'
+
+firebase:
+  server:
+    key: AAAAdMPLI90:APA91bHcT6I49_rxP16akR2k3Eg3Eqx1NYr5Thx0RgZZVv40901kNj1h_Q9b96Iro0M571d7M8eTRui4qou1VJed6pYvH7kVpGga9wP4MkpnHCNNEE1jamoRp1ZKCPpxdjyZrVJY-AK3
+    url: https://fcm.googleapis.com/fcm/send

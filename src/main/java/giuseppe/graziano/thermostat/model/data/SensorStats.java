@@ -1,5 +1,8 @@
 package giuseppe.graziano.thermostat.model.data;
 
+import lombok.Data;
+
+@Data
 public class SensorStats {
 
 
@@ -19,73 +22,4 @@ public class SensorStats {
     private float minTemperature;
 
     private float avgTemperature;
-
-
-
-
-
-    public String getDateStart() {
-        return dateStart;
-    }
-
-    public void setDateStart(String dateStart) {
-        this.dateStart = dateStart;
-    }
-
-    public String getDateEnd() {
-        return dateEnd;
-    }
-
-    public void setDateEnd(String dateEnd) {
-        this.dateEnd = dateEnd;
-    }
-
-    public Sensor getSensor() {
-        return sensor;
-    }
-
-    public void setSensor(Sensor sensor) {
-        this.sensor = sensor;
-    }
-
-    public Measurement getMaxMeasurement() {
-        return maxMeasurement;
-    }
-
-    public void setMaxMeasurement(Measurement maxMeasurement) {
-        this.maxMeasurement = maxMeasurement;
-    }
-
-    public Measurement getMinMeasurement() {
-        return minMeasurement;
-    }
-
-    public void setMinMeasurement(Measurement minMeasurement) {
-        this.minMeasurement = minMeasurement;
-    }
-
-
-    public float getMaxTemperature() {
-        return maxTemperature;
-    }
-
-    public void setMaxTemperature(float maxTemperature) {
-        this.maxTemperature = maxTemperature;
-    }
-
-    public float getMinTemperature() {
-        return minTemperature;
-    }
-
-    public void setMinTemperature(float minTemperature) {
-        this.minTemperature = minTemperature;
-    }
-
-    public float getAvgTemperature() {
-        return avgTemperature;
-    }
-
-    public void setAvgTemperature(float avgTemperature) {
-        this.avgTemperature = avgTemperature;
-    }
 }

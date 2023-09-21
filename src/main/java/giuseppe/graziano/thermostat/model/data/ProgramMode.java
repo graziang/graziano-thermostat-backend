@@ -2,11 +2,14 @@ package giuseppe.graziano.thermostat.model.data;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
-import javax.persistence.*;
+import jakarta.persistence.*;
+import lombok.Data;
+
 import java.util.HashSet;
 import java.util.Set;
 
 @Entity
+@Data
 public class ProgramMode {
 
     @Id
@@ -23,35 +26,5 @@ public class ProgramMode {
     @OneToMany(mappedBy = "programMode", cascade = CascadeType.ALL,  fetch = FetchType.EAGER)
     private Set<Program> programs = new HashSet<>();
 
-    public long getId() {
-        return id;
-    }
 
-    public void setId(long id) {
-        this.id = id;
-    }
-
-    public boolean isActive() {
-        return active;
-    }
-
-    public void setActive(boolean active) {
-        this.active = active;
-    }
-
-    public Thermostat getThermostat() {
-        return thermostat;
-    }
-
-    public void setThermostat(Thermostat thermostat) {
-        this.thermostat = thermostat;
-    }
-
-    public Set<Program> getPrograms() {
-        return programs;
-    }
-
-    public void setPrograms(Set<Program> programs) {
-        this.programs = programs;
-    }
 }

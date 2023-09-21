@@ -1,10 +1,12 @@
 package giuseppe.graziano.thermostat.model.data;
 
-import javax.persistence.*;
-import javax.validation.constraints.NotNull;
+import jakarta.persistence.*;
+import lombok.Data;
+
 import java.io.Serializable;
 import java.util.Date;
 
+@Data
 @Entity
 public class Measurement implements Serializable {
 
@@ -14,7 +16,6 @@ public class Measurement implements Serializable {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private long id;
 
-    @NotNull
     @Temporal(TemporalType.TIMESTAMP)
     private Date date;
 
@@ -29,38 +30,6 @@ public class Measurement implements Serializable {
 
     public Measurement(Sensor sensor, float temperature) {
         this.temperature = temperature;
-        this.sensor = sensor;
-    }
-
-    public long getId() {
-        return id;
-    }
-
-    public void setId(long id) {
-        this.id = id;
-    }
-
-    public Date getDate() {
-        return date;
-    }
-
-    public void setDate(Date date) {
-        this.date = date;
-    }
-
-    public float getTemperature() {
-        return temperature;
-    }
-
-    public void setTemperature(float temperature) {
-        this.temperature = temperature;
-    }
-
-    public Sensor getSensor() {
-        return sensor;
-    }
-
-    public void setSensor(Sensor sensor) {
         this.sensor = sensor;
     }
 }
