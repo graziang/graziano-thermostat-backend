@@ -7,6 +7,7 @@ import giuseppe.graziano.thermostat.security.MyUserPrincipal;
 import jakarta.annotation.PostConstruct;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.scheduling.annotation.Scheduled;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
@@ -133,7 +134,7 @@ public class ThermostatService {
 
 
 
-    @PostConstruct
+  //  @PostConstruct
     public Thermostat initialize(){
         Thermostat td = new Thermostat("Piano superiore", "Piano con camere");
         td.setActive(true);
@@ -397,6 +398,7 @@ public class ThermostatService {
         if(foundThermostat.getProgramMode() == null){
             ProgramMode programMode = new ProgramMode();
             programMode.setPrograms(new HashSet<>());
+            foundThermostat.setProgramMode(programMode);
             foundThermostat.getProgramMode().setPrograms(new HashSet<>());
         }
 
@@ -938,6 +940,19 @@ public class ThermostatService {
             boolean isBeforeEnd = now.isBefore(program.getEndTime());
             return isSameDay && isAfterStart && isBeforeEnd;
         }
+        return false;
+    }
+
+    public boolean hasThermostat(Long thermostatId) {
+
+        final User user = ((MyUserPrincipal) SecurityContextHolder.getContext().getAuthentication().getPrincipal()).getUser();
+
+        for (Thermostat thermostat: user.getThermostats()) {
+            if(thermostat.getId() == thermostatId){
+                return true;
+            }
+        }
+
         return false;
     }
 }

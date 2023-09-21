@@ -32,7 +32,7 @@ public class ThermostatRestController {
 
 
     @Autowired
-    ThermostatService thermostatService;
+    private ThermostatService thermostatService;
 
 
     @GetMapping("test/login")
@@ -101,7 +101,7 @@ public class ThermostatRestController {
         return  new ResponseEntity<>(this.thermostatService.getThermostatsByUser(principal.getName()), HttpStatus.OK);
     }
 
-    @PreAuthorize("hasAuthority(#id)")
+    @PreAuthorize("@thermostatService.hasThermostat(#id)")
     @PutMapping("user/thermostat/select")
     public ResponseEntity<Object> setUserThermostatSelected(Principal principal, @RequestParam(value = "thermostat_id") Long id) {
         try {
@@ -114,7 +114,7 @@ public class ThermostatRestController {
 
     }
 
-    @PreAuthorize("hasAuthority(#id)")
+    @PreAuthorize("@thermostatService.hasThermostat(#id)")
     @GetMapping("thermostat")
     public ResponseEntity<Object> getThermostat(@RequestParam(value = "thermostat_id") Long id){
         try {
@@ -126,7 +126,7 @@ public class ThermostatRestController {
         }
     }
 
-    @PreAuthorize("hasAuthority(#id)")
+    @PreAuthorize("@thermostatService.hasThermostat(#id)")
     @PutMapping("thermostat")
     public ResponseEntity<Object> updateThermostat(@RequestParam(value = "thermostat_id") Long id, @RequestBody Thermostat thermostat){
         try {
@@ -138,7 +138,7 @@ public class ThermostatRestController {
         }
     }
 
-    @PreAuthorize("hasAuthority(#id)")
+    @PreAuthorize("@thermostatService.hasThermostat(#id)")
     @GetMapping("programs")
     public ResponseEntity<Object> getPrograms(@RequestParam(value = "thermostat_id") Long id){
         try {
@@ -150,7 +150,7 @@ public class ThermostatRestController {
         }
     }
 
-    @PreAuthorize("hasAuthority(#id)")
+    @PreAuthorize("@thermostatService.hasThermostat(#id)")
     @PostMapping("program")
     public ResponseEntity<Object> createProgram(@RequestParam(value = "thermostat_id") Long id, @RequestBody Program program){
         try {
@@ -162,7 +162,7 @@ public class ThermostatRestController {
         }
     }
 
-    @PreAuthorize("hasAuthority(#id)")
+    @PreAuthorize("@thermostatService.hasThermostat(#id)")
     @PutMapping("program")
     public ResponseEntity<Object> updateProgram(@RequestParam(value = "thermostat_id") Long id, @RequestBody Program program){
         try {
@@ -174,7 +174,7 @@ public class ThermostatRestController {
         }
     }
 
-    @PreAuthorize("hasAuthority(#id)")
+    @PreAuthorize("@thermostatService.hasThermostat(#id)")
     @DeleteMapping("program")
     public ResponseEntity<Object> deleteProgram(@RequestParam(value = "thermostat_id") Long id, @RequestParam(value = "program_id") Long programId){
         try {
@@ -186,7 +186,7 @@ public class ThermostatRestController {
         }
     }
 
-    @PreAuthorize("hasAuthority(#id)")
+    @PreAuthorize("@thermostatService.hasThermostat(#id)")
     @PostMapping("thermostat/state")
     public ResponseEntity<Object> setThermostatState(@RequestParam(value = "thermostat_id") Long id, @RequestParam(value = "state") boolean state){
         try {
@@ -198,7 +198,7 @@ public class ThermostatRestController {
         }
     }
 
-    @PreAuthorize("hasAuthority(#id)")
+    @PreAuthorize("@thermostatService.hasThermostat(#id)")
     @GetMapping("sensors")
     public ResponseEntity<Object>  getSensors (@RequestParam(value = "thermostat_id", required = false) Long id){
         try {
@@ -210,7 +210,7 @@ public class ThermostatRestController {
         }
     }
 
-    @PreAuthorize("hasAuthority(#id)")
+    @PreAuthorize("@thermostatService.hasThermostat(#id)")
     @PostMapping("sensor/state")
     public ResponseEntity<Object> postSensorState (@RequestParam(value = "thermostat_id") Long id, @RequestParam(value = "sensor_id") Long sensor_id, @RequestParam(value = "state") boolean state){
 
@@ -224,7 +224,7 @@ public class ThermostatRestController {
 
     }
 
-    @PreAuthorize("hasAuthority(#id)")
+    @PreAuthorize("@thermostatService.hasThermostat(#id)")
     @PostMapping("sensor/device")
     public ResponseEntity<Object> postSensorDeviceId (@RequestParam(value = "thermostat_id") Long id, @RequestParam(value = "sensor_id") Long sensor_id, @RequestParam(value = "device_id") String device_id){
 
@@ -238,7 +238,7 @@ public class ThermostatRestController {
 
     }
 
-    @PreAuthorize("hasAuthority(#id)")
+    @PreAuthorize("@thermostatService.hasThermostat(#id)")
     @PostMapping("thermostat/on")
     public ResponseEntity<Object> postThermostatOnOff (@RequestParam(value = "thermostat_id") Long id, @RequestParam(value = "on") boolean state){
 
@@ -251,7 +251,7 @@ public class ThermostatRestController {
         }
     }
 
-    @PreAuthorize("hasAuthority(#id)")
+    @PreAuthorize("@thermostatService.hasThermostat(#id)")
     @GetMapping("thermostat/on")
     public ResponseEntity<Object> getThermostatOnOff (@RequestParam(value = "thermostat_id") Long id){
 
@@ -278,7 +278,7 @@ public class ThermostatRestController {
         }
     }
 
-    @PreAuthorize("hasAuthority(#id)")
+    @PreAuthorize("@thermostatService.hasThermostat(#id)")
     @PostMapping("thermostat/temperature")
     public ResponseEntity<Object> postThermostatTemperature(@RequestParam(value = "thermostat_id") Long id, @RequestParam(value = "temperature") float temperature){
 
@@ -292,7 +292,7 @@ public class ThermostatRestController {
         }
     }
 
-    @PreAuthorize("hasAuthority(#id)")
+    @PreAuthorize("@thermostatService.hasThermostat(#id)")
     @PostMapping("thermostat/mode")
     public ResponseEntity<Object> postThermostatMode (@RequestParam(value = "thermostat_id") Long id, @RequestParam(value = "mode") String mode){
 
@@ -306,7 +306,7 @@ public class ThermostatRestController {
         }
     }
 
-    @PreAuthorize("hasAuthority(#id)")
+    @PreAuthorize("@thermostatService.hasThermostat(#id)")
     @PostMapping("thermostat/mode/manual")
     public ResponseEntity<Object> postThermostatModeManualCalculateSensor(@RequestParam(value = "thermostat_id") Long id, @RequestParam(value = "avg", required = false) boolean avg, @RequestParam(value = "sensor_id") Long sensorId){
 
@@ -321,7 +321,7 @@ public class ThermostatRestController {
     }
 
 
-    @PreAuthorize("hasAuthority(#id)")
+    @PreAuthorize("@thermostatService.hasThermostat(#id)")
     @GetMapping("measurements/last")
     public ResponseEntity<Object> getMeasurements(@RequestParam(value = "thermostat_id") Long id) {
 
@@ -334,7 +334,7 @@ public class ThermostatRestController {
     }
 
 
-    @PreAuthorize("hasAuthority(#id)")
+    @PreAuthorize("@thermostatService.hasThermostat(#id)")
     @GetMapping("measurements/stats")
     public ResponseEntity<Object> getMeasurementsStats(@RequestParam(value = "thermostat_id") Long id, @RequestParam(value = "sensor_id") Long sensor_id, @RequestParam(value = "date_from", required = false) String dateFrom, @RequestParam(value = "date_to", required = false) String dateTo) {
 
@@ -351,7 +351,7 @@ public class ThermostatRestController {
 
     }
 
-    @PreAuthorize("hasAuthority(#id)")
+    @PreAuthorize("@thermostatService.hasThermostat(#id)")
     @GetMapping("measurements")
     public ResponseEntity<List<Measurement>> getMeasurements(@RequestParam(value = "thermostat_id") Long id, @RequestParam(value = "date_from", required = false) String dateFrom, @RequestParam(value = "date_to", required = false) String dateTo, @RequestParam(value = "sensor_id") Long sensor_id) {
 
@@ -367,7 +367,7 @@ public class ThermostatRestController {
     }
 
 
-    @PreAuthorize("hasAuthority(#id)")
+    @PreAuthorize("@thermostatService.hasThermostat(#id)")
     @PostMapping("measurements")
     public ResponseEntity<List<Measurement>> postMeasurement(@RequestParam(value = "thermostat_id") Long id, @RequestBody Map<String, Float> measurement) {
 

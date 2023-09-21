@@ -5,71 +5,11 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="a95545eb-f4ad-435f-8a60-ad59663a0370" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/compiler.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/compiler.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__com_google_api_api_common_1_2_0.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__com_google_api_client_google_api_client_1_23_0.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__com_google_api_client_google_api_client_gson_1_23_0.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__com_google_api_gax_1_23_0.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__com_google_api_gax_grpc_1_23_0.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__com_google_api_gax_httpjson_0_40_0.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__com_google_api_grpc_proto_google_cloud_firestore_v1beta1_0_10_0.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__com_google_api_grpc_proto_google_common_protos_1_9_0.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__com_google_api_grpc_proto_google_iam_v1_0_10_0.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__com_google_apis_google_api_services_storage_v1_rev114_1_23_0.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__com_google_auth_google_auth_library_credentials_0_8_0.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__com_google_auth_google_auth_library_oauth2_http_0_8_0.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__com_google_auto_value_auto_value_1_4.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__com_google_cloud_google_cloud_core_1_27_0.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__com_google_cloud_google_cloud_core_grpc_1_27_0.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__com_google_cloud_google_cloud_core_http_1_27_0.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__com_google_cloud_google_cloud_firestore_0_45_0_beta.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__com_google_cloud_google_cloud_storage_1_27_0.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__com_google_code_findbugs_jsr305_1_3_9.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__com_google_errorprone_error_prone_annotations_2_2_0.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__com_google_firebase_firebase_admin_6_2_0.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__com_google_guava_guava_20_0.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__com_google_http_client_google_http_client_1_23_0.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__com_google_http_client_google_http_client_appengine_1_23_0.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__com_google_http_client_google_http_client_gson_1_23_0.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__com_google_http_client_google_http_client_jackson2_1_23_0.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__com_google_http_client_google_http_client_jackson_1_23_0.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__com_google_oauth_client_google_oauth_client_1_23_0.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__com_google_protobuf_protobuf_java_3_5_1.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__com_google_protobuf_protobuf_java_util_3_5_1.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__io_grpc_grpc_auth_1_10_1.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__io_grpc_grpc_context_1_10_1.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__io_grpc_grpc_core_1_10_1.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__io_grpc_grpc_netty_shaded_1_10_1.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__io_grpc_grpc_protobuf_1_10_1.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__io_grpc_grpc_protobuf_lite_1_10_1.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__io_grpc_grpc_stub_1_10_1.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__io_opencensus_opencensus_api_0_11_1.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__io_opencensus_opencensus_contrib_grpc_metrics_0_11_0.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__io_opencensus_opencensus_contrib_http_util_0_11_1.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_json_json_20160810.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_threeten_threetenbp_1_3_3.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/giuseppe/graziano/thermostat/config/MethodSecurityConfig.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/giuseppe/graziano/thermostat/config/SecurityConfig.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/giuseppe/graziano/thermostat/config/SecurityConfig.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/giuseppe/graziano/thermostat/controller/ThermostatRestController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/giuseppe/graziano/thermostat/controller/ThermostatRestController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/giuseppe/graziano/thermostat/model/data/ManualMode.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/giuseppe/graziano/thermostat/model/data/ManualMode.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/giuseppe/graziano/thermostat/model/data/Measurement.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/giuseppe/graziano/thermostat/model/data/Measurement.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/giuseppe/graziano/thermostat/model/data/Program.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/giuseppe/graziano/thermostat/model/data/Program.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/giuseppe/graziano/thermostat/model/data/ProgramMode.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/giuseppe/graziano/thermostat/model/data/ProgramMode.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/giuseppe/graziano/thermostat/model/data/Sensor.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/giuseppe/graziano/thermostat/model/data/Sensor.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/giuseppe/graziano/thermostat/model/data/SensorStats.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/giuseppe/graziano/thermostat/model/data/SensorStats.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/giuseppe/graziano/thermostat/model/data/Source.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/giuseppe/graziano/thermostat/model/data/Source.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/giuseppe/graziano/thermostat/model/data/Thermostat.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/giuseppe/graziano/thermostat/model/data/Thermostat.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/giuseppe/graziano/thermostat/model/data/User.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/giuseppe/graziano/thermostat/model/data/User.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/giuseppe/graziano/thermostat/security/CustomBasicAuthenticationEntryPoint.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/giuseppe/graziano/thermostat/security/CustomMethodSecurityExpressionHandler.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/giuseppe/graziano/thermostat/security/CustomMethodSecurityExpressionRoot.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/giuseppe/graziano/thermostat/security/MySecurityExpressionRoot.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/giuseppe/graziano/thermostat/service/AndroidNotificationsService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/giuseppe/graziano/thermostat/service/AndroidNotificationsService.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/giuseppe/graziano/thermostat/service/ThermostatService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/giuseppe/graziano/thermostat/service/ThermostatService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/application.yml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -87,12 +27,6 @@
   <component name="JpbToolWindowState">
     <option name="isToolWindowVisible" value="false" />
   </component>
-  <component name="KubernetesApiPersistence">
-    <option name="context" value="docker-desktop" />
-  </component>
-  <component name="MarkdownSettingsMigration">
-    <option name="stateVersion" value="1" />
-  </component>
   <component name="ProjectId" id="1VLAx1QIJa2T1kDI3LNbfMRrC9L" />
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
@@ -104,26 +38,9 @@
     "RequestMappingsPanelOrder1": "1",
     "RequestMappingsPanelWidth0": "75",
     "RequestMappingsPanelWidth1": "75",
-    "WebServerToolWindowFactoryState": "false",
-    "last_opened_file_path": "/Users/ggraziano/code/termostato/graziano-thermostat-backend/src/main/resources",
-    "node.js.detected.package.eslint": "true",
-    "node.js.detected.package.tslint": "true",
-    "node.js.selected.package.eslint": "(autodetect)",
-    "node.js.selected.package.tslint": "(autodetect)",
-    "nodejs_package_manager_path": "npm",
-    "project.structure.last.edited": "SDKs",
-    "project.structure.proportion": "0.15",
-    "project.structure.side.proportion": "0.0",
-    "spring.configuration.checksum": "ff1ca0942c2dd710c926216e23b687eb",
-    "vue.rearranger.settings.migration": "true"
+    "node.js.selected.package.tslint": "(autodetect)"
   }
 }]]></component>
-  <component name="RecentsManager">
-    <key name="CopyFile.RECENT_KEYS">
-      <recent name="$PROJECT_DIR$/src/main/resources" />
-      <recent name="$PROJECT_DIR$" />
-    </key>
-  </component>
   <component name="RunManager">
     <configuration name="GrazianoThermostatApplication" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot">
       <module name="graziano-thermostat" />
@@ -145,7 +62,6 @@
       </list>
     </option>
   </component>
-  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="SvnConfiguration">
     <configuration />
   </component>
@@ -157,25 +73,23 @@
       <option name="presentableId" value="Default" />
       <updated>1577022243873</updated>
       <workItem from="1577022245390" duration="796000" />
-      <workItem from="1692948109251" duration="597000" />
-      <workItem from="1693214423648" duration="598000" />
-      <workItem from="1693233041734" duration="597000" />
-      <workItem from="1693293000498" duration="598000" />
-      <workItem from="1693386560640" duration="599000" />
-      <workItem from="1693425254453" duration="1219000" />
-      <workItem from="1693465727382" duration="598000" />
-      <workItem from="1693553224791" duration="263000" />
-      <workItem from="1693558698398" duration="598000" />
-      <workItem from="1693564795334" duration="598000" />
-      <workItem from="1693832233985" duration="598000" />
-      <workItem from="1693902316438" duration="599000" />
-      <workItem from="1693988007717" duration="593000" />
-      <workItem from="1694070751633" duration="598000" />
-      <workItem from="1695287006652" duration="11156000" />
     </task>
     <servers />
   </component>
-  <component name="TypeScriptGeneratedFilesManager">
-    <option name="version" value="3" />
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/giuseppe/graziano/thermostat/service/ThermostatService.java</url>
+          <line>397</line>
+          <option name="timeStamp" value="1" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/giuseppe/graziano/thermostat/service/ThermostatService.java</url>
+          <line>399</line>
+          <option name="timeStamp" value="2" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
   </component>
 </project>
